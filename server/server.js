@@ -11,6 +11,9 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+///Routes///
+require('./routes/routes')(app)
+
 sequelize
 	.sync()
 	.then(() => {
