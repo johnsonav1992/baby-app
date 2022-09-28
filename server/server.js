@@ -8,6 +8,7 @@ const { sequelize } = require('./database/database')
 
 const app = express()
 
+///Middleware///
 app.use(express.json())
 app.use(cors())
 
@@ -18,7 +19,7 @@ sequelize
 	.sync()
 	.then(() => {
 		app.listen(SERVER_PORT, () =>
-			console.log(`Server running on port ${SERVER_PORT}`.magenta.bold)
+			console.log(`DB synced and server running on port ${SERVER_PORT}`.magenta.bold)
 		)
 	})
 	.catch(err => console.error(err))
