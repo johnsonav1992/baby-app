@@ -14,6 +14,7 @@ module.exports = {
 	register: async (req, res) => {
 		try {
 			const { username, password } = req.body
+
 			const foundUser = await User.findOne({
 				where: { username },
 			})
@@ -71,13 +72,13 @@ module.exports = {
 					const expirationTime = Date.now() + 1000 * 60 * 60 * 24
 
 					res.status(200).send({
-						username: newUser.dataValues.username,
-						userId: newUser.dataValues.id,
+						username: foundUser.dataValues.username,
+						userId: foundUser.dataValues.id,
 						token,
 						expirationTime,
 					})
                     
-				} else res.status(400).send({ errorMessage: 'Cannot log in! Not Authenticated.' })
+				} else res.status(400).send({ errorMessage: 'Cannot log in! Authentication Required.' })
 
 			} else res.status(400).send({ errorMessage: 'User not found!' })
 
