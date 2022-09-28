@@ -3,14 +3,15 @@ const { DataTypes } = require('sequelize')
 const { sequelize } = require('../database/database')
 
 module.exports = {
-    User : sequelize.define('user', {
+    Child : sequelize.define('children', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true
         },
-        username: DataTypes.STRING,
-        hashed_pass: DataTypes.STRING 
+        name: DataTypes.STRING,
+        gender: DataTypes.STRING,
+        age: DataTypes.INTEGER
     })
 }

@@ -3,14 +3,15 @@ const { DataTypes } = require('sequelize')
 const { sequelize } = require('../database/database')
 
 module.exports = {
-    User : sequelize.define('user', {
+    Feeding : sequelize.define('feedings', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true
         },
-        username: DataTypes.STRING,
-        hashed_pass: DataTypes.STRING 
+        feed_type: DataTypes.STRING,
+        food: DataTypes.STRING,
+        amount: DataTypes.STRING
     })
 }

@@ -3,14 +3,13 @@ const { DataTypes } = require('sequelize')
 const { sequelize } = require('../database/database')
 
 module.exports = {
-    User : sequelize.define('user', {
+    Changing : sequelize.define('changings', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true
         },
-        username: DataTypes.STRING,
-        hashed_pass: DataTypes.STRING 
+        type: DataTypes.STRING
     })
 }

@@ -5,6 +5,11 @@ const colors = require('colors')
 const { SERVER_PORT } = process.env
 
 const { sequelize } = require('./database/database')
+const { User } = require('./models/user')
+const { Child } = require('./models/child')
+const { Sleep } = require('./models/sleep')
+const { Feeding } = require('./models/feeding')
+const { Changing } = require('./models/changing')
 
 const app = express()
 
@@ -12,7 +17,17 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-///Routes///
+///DB relations///
+User.hasMany(Child)
+Child.belongsTo(User) 
+Child.hasMany(Sleep)
+Sleep.belongsTo(Child)
+Child.hasMany(Feeding)
+Feeding.belongsTo(Child) 
+Child.hasMany(Changing)
+Changing.belongsTo(Child)
+
+///Routes/// 
 require('./routes/routes')(app)
 
 sequelize

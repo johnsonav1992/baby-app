@@ -3,14 +3,19 @@ const { DataTypes } = require('sequelize')
 const { sequelize } = require('../database/database')
 
 module.exports = {
-    User : sequelize.define('user', {
+    Sleep : sequelize.define('sleeps', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true
         },
-        username: DataTypes.STRING,
-        hashed_pass: DataTypes.STRING 
+        start_time: {
+            type: 'TIMESTAMP'
+        },
+        end_time: {
+            type: 'TIMESTAMP'
+        },
+        duration: DataTypes.TIME
     })
 }
