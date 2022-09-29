@@ -1,4 +1,5 @@
 const colors = require('colors')
+const { Child } = require('../models/child')
 const { Sleep } = require('../models/sleep')
 
 const calculateTimeDifference = (startTime, endTime) => {
@@ -26,6 +27,11 @@ module.exports = {
 				where: {
 					childId: +childId,
 				},
+                include: [{
+                    model: Child,
+                    required: true,
+                    attributes: ['name']
+                }]
 			})
 			res.status(200).send(sleeps)
 		} catch (err) {
@@ -45,7 +51,7 @@ module.exports = {
 				end_time: endTime,
 				duration: calculatedDuration,
 				childId: +childId,
-			})
+            })
 			res.status(200).send(newSleep)
 		} catch (err) {
 			console.log(err)
@@ -57,7 +63,7 @@ module.exports = {
 		const { startTime, endTime } = req.body
 
         const calculatedDuration = calculateTimeDifference(startTime, endTime)
-        
+
 		try {
 			const updatedSleep = await Sleep.update(
 				{

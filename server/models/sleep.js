@@ -12,6 +12,6 @@ module.exports = {
         },
         start_time: DataTypes.TIME,
         end_time: DataTypes.TIME,
-        duration: DataTypes.NUMBER
+        duration: DataTypes.INTEGER
     })
 }

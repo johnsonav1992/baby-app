@@ -29,7 +29,7 @@ module.exports = app => {
     app.delete('/changings/:childId', deleteChanging)
 
     //sleep
-    app.post('/sleeps/:sleepId', addSleep)
+    app.post('/sleeps/:childId', addSleep)
     app.get('/sleeps/:childId', getAllSleeps)
     app.put('/sleeps/:sleepId', editSleep)
     app.delete('/sleeps/:childId', deleteSleep)
