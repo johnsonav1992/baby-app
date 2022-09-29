@@ -1,5 +1,4 @@
 const colors = require('colors')
-const { User } = require('../models/user')
 const { Child } = require('../models/child')
 
 module.exports = {
@@ -40,22 +39,22 @@ module.exports = {
 			const updatedChild = await Child.update(
 				{
 					name,
-                    gender,
-                    age	
+					gender,
+					age,
 				},
 				{
 					where: {
-                        name: childName, 
+						name: childName,
 						userId: +userId,
 					},
-                    returning: true
+					returning: true,
 				}
 			)
 
-            res.status(200).send(updatedChild[1][0].dataValues)
+			res.status(200).send(updatedChild[1][0].dataValues)
 		} catch (err) {
-            console.log(err)
-        }
+			console.log(err)
+		}
 	},
 
 	deleteChild: async (req, res) => {
