@@ -1,8 +1,8 @@
 const { register, login } = require('../controllers/auth')
-const { addChanging } = require('../controllers/changings')
 const { getAllChildren, addChild, editChild, deleteChild } = require('../controllers/children')
 const { addFeeding, getAllFeedings, editFeeding, deleteFeeding } = require('../controllers/feedings')
 const { addChanging, getAllChangings, editChanging, deleteChanging } = require('../controllers/changings')
+const { addSleep, getAllSleeps, editSleep, deleteSleep } = require('../controllers/sleeps')
 const { isAuthenticated } = require('../middleware/isAuthenticated')
 
 module.exports = app => {
@@ -27,5 +27,11 @@ module.exports = app => {
     app.get('/changings/:childId', getAllChangings)
     app.put('/changings/:changingId', editChanging)
     app.delete('/changings/:childId', deleteChanging)
+
+    //sleep
+    app.post('/sleeps/:sleepId', addSleep)
+    app.get('/sleeps/:childId', getAllSleeps)
+    app.put('/sleeps/:sleepId', editSleep)
+    app.delete('/sleeps/:childId', deleteSleep)
 
 }

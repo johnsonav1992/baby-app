@@ -10,12 +10,8 @@ module.exports = {
             allowNull: false,
             primaryKey: true
         },
-        start_time: {
-            type: 'TIMESTAMP'
-        },
-        end_time: {
-            type: 'TIMESTAMP'
-        },
-        duration: DataTypes.TIME
+        start_time: DataTypes.TIME,
+        end_time: DataTypes.TIME,
+        duration: DataTypes.NUMBER
     })
 }
