@@ -15,19 +15,23 @@ module.exports = {
 		try {
 			const { username, password } = req.body
 
+			if (username === '' || password === '') {
+				throw 'Please provide a username and password'
+			}
+
 			const foundUser = await User.findOne({
 				where: { username },
 			})
 
 			if (foundUser) {
-				res.status(400).send({ errorMessage: 'User already exists' })
+				throw 'User already exists'
 			} else {
 				const salt = bcrypt.genSaltSync(10)
 				const hash = bcrypt.hashSync(password, salt)
 
 				const newUser = await User.create({
 					username,
-					hashedPass: hash,
+					hashed_pass: hash,
 				})
 
 				const token = createToken(
@@ -45,8 +49,8 @@ module.exports = {
 				})
 			}
 		} catch (err) {
-			console.error('ERROR in register', err)
-			res.sendStatus(400)
+			console.error('Error in register: ', err)
+			res.status(400).send(err)
 		}
 	},
 
@@ -77,14 +81,11 @@ module.exports = {
 						token,
 						expirationTime,
 					})
-                    
-				} else res.status(400).send({ errorMessage: 'Cannot log in! Authentication Required.' })
-
-			} else res.status(400).send({ errorMessage: 'User not found!' })
-
+				} else throw 'Cannot log in! Please try again.'
+			} else throw 'Cannot log in. User not found.'
 		} catch (err) {
 			console.error('ERROR in login', err)
-			res.sendStatus(400)
-        }
+			res.status(400).send(err)
+		}
 	},
 }
