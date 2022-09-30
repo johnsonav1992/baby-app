@@ -5,7 +5,8 @@ import classes from './LoginForm.module.css'
 import axios from 'axios'
 
 const LoginForm = () => {
-    const [error, setError] = useState('')
+	const [error, setError] = useState('')
+	const [register, setRegister] = useState(false)
 
 	const url = 'http://localhost:4000'
 
@@ -14,19 +15,25 @@ const LoginForm = () => {
 		password: '',
 	}
 
-	const handleSubmit = async (values) => {
-        try {
-            const response = await axios.post(`${url}/register`, values)
-            console.log(response.data)
-        } catch (err) {
-            console.log(err)
-            setError(err.response.data)
-        }
+	const handleSubmit = async values => {
+		try {
+			const response = await axios.post(
+				register ? `${url}/register` : `${url}/login`,
+				values
+			)
+			console.log(response.data)
+		} catch (err) {
+			console.log(err)
+			setError(err.response.data)
+			setTimeout(() => {
+				setError('')
+			}, 2000)
+		}
 	}
 
 	return (
 		<div className={classes['outer-form-wrapper']}>
-			<h1>Login</h1>
+			<h1>{!register ? 'Login' : 'Register for an account'}</h1>
 
 			<Formik
 				initialValues={initialValues}
@@ -56,15 +63,23 @@ const LoginForm = () => {
 						/>
 					</div>
 					<div className={classes['switch-option-wrapper']}>
-						<p className={classes.option}>No Account?</p>
-						<button className={classes['action-btn']} type="button">
-							Register here.
+						<p className={classes.option}>
+							{register ? 'Need to log in?' : 'No Account?'}
+						</p>
+						<button
+							className={classes['action-btn']}
+							type="button"
+							onClick={() => setRegister(!register)}
+						>
+							{register ? 'Login here.' : 'Register here.'}
 						</button>
 					</div>
-					<BlueButton type={'submit'}>Login</BlueButton>
+					<BlueButton type={'submit'}>
+						{!register ? 'Login' : 'Register'}
+					</BlueButton>
 				</Form>
 			</Formik>
-            <p>{error}</p>
+			<p>{error}</p>
 		</div>
 	)
 }
