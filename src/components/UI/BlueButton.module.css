@@ -11,6 +11,7 @@
 
 .disabled {
     background-color: #6ac4f7;
+    pointer-events: none;
 }
 
 .btn:hover {

@@ -48,7 +48,7 @@ const LoginForm = () => {
 					resetForm({ values: '' })
 				}}
 			>
-				{({ isSubmitting, dirty, isValid }) => (
+				{({ isSubmitting, dirty }) => (
 					<Form className={classes.form} action="">
 						<div className={classes['inner-form-wrapper']}>
 							<label className={classes.label} htmlFor="username">
