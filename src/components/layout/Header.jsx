@@ -9,7 +9,7 @@ const Header = () => {
 		<header className={classes['main-header']}>
 			<div className={classes['title-wrapper']}>
 				<div className={classes['image-wrapper']}>
-					<img src={logo} alt="bb-logo" className="logo" />
+					<img className={classes.img} src={logo} alt="bb-logo" />
 				</div>
 				<h1 className={classes['title']}>BabyBright</h1>
 			</div>
