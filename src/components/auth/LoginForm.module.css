@@ -38,12 +38,16 @@
     gap: .75rem;
 }
 
+.option {
+    font-size: .75rem;
+}
+
 .action-btn {
     background-color: transparent;
     border: none;
     color: var(--bold-light-blue);
     font-weight: bold;
-    font-size: 1rem;
+    font-size: .75rem;
 }
 
 .action-btn:hover {

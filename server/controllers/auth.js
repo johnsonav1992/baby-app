@@ -71,7 +71,7 @@ module.exports = {
 			if (foundUser) {
 				const isAuthenticated = bcrypt.compareSync(
 					password,
-					foundUser.hashedPass
+					foundUser.hashed_pass
 				)
 
 				if (isAuthenticated) {
