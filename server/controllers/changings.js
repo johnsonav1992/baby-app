@@ -9,6 +9,11 @@ module.exports = {
 				where: {
 					childId: +childId,
 				},
+				include: [{
+                    model: Child,
+                    required: true,
+                    attributes: ['name']
+                }]
 			})
 			res.status(200).send(changings)
 		} catch (err) {
@@ -17,11 +22,13 @@ module.exports = {
 	},
 
 	addChanging: async (req, res) => {
-		const { type } = req.body
+		const { type, day, time } = req.body
 		const { childId } = req.params
 		try {
 			const newChanging = await Changing.create({
 				type,
+				day,
+				time,
 				childId: +childId,
 			})
 			res.status(200).send(newChanging)
@@ -32,10 +39,10 @@ module.exports = {
 
 	editChanging: async (req, res) => {
 		const { changingId } = req.params
-		const { type } = req.body
+		const { type, day, time } = req.body
 		try {
 			const updatedChanging = await Changing.update(
-				{ type },
+				{ type, day, time },
 				{
 					where: {
 						id: +changingId,

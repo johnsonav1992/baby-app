@@ -9,6 +9,11 @@ module.exports = {
 				where: {
 					childId: +childId,
 				},
+				include: [{
+                    model: Child,
+                    required: true,
+                    attributes: ['name']
+                }]
 			})
 			res.status(200).send(feedings)
 		} catch (err) {
@@ -17,13 +22,15 @@ module.exports = {
 	},
 
 	addFeeding: async (req, res) => {
-		const { type, food, amount } = req.body
+		const { type, food, amount, day, time } = req.body
 		const { childId } = req.params
 		try {
 			const newFeeding = await Feeding.create({
 				feed_type: type,
 				food,
 				amount,
+				day, 
+				time,
 				childId: +childId,
 			})
 			res.status(200).send(newFeeding)
@@ -34,13 +41,15 @@ module.exports = {
 
 	editFeeding: async (req, res) => {
 		const { feedingId } = req.params
-		const { type, food, amount } = req.body
+		const { type, food, amount, day, time } = req.body
 		try {
 			const updatedFeeding = await Feeding.update(
 				{
 					feed_type: type,
 					food,
 					amount,
+					day,
+					time
 				},
 				{
 					where: {

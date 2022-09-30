@@ -12,5 +12,5 @@ module.exports = {
         },
         username: DataTypes.STRING,
         hashed_pass: DataTypes.STRING 
-    })
+    }) 
 }

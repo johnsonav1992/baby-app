@@ -10,6 +10,7 @@ module.exports = {
             allowNull: false,
             primaryKey: true
         },
+        day: DataTypes.DATEONLY,
         start_time: DataTypes.TIME,
         end_time: DataTypes.TIME,
         duration: DataTypes.INTEGER

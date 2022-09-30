@@ -10,6 +10,8 @@ module.exports = {
             allowNull: false,
             primaryKey: true
         },
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        day: DataTypes.DATEONLY,
+        time: DataTypes.TIME
     })
-}
+} 

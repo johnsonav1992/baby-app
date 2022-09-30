@@ -12,6 +12,8 @@ module.exports = {
         },
         feed_type: DataTypes.STRING,
         food: DataTypes.STRING,
-        amount: DataTypes.STRING
+        amount: DataTypes.STRING,
+        day: DataTypes.DATEONLY,
+        time: DataTypes.TIME
     })
 }
