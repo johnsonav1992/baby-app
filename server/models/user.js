@@ -10,7 +10,13 @@ module.exports = {
             allowNull: false,
             primaryKey: true
         },
-        username: DataTypes.STRING,
-        hashed_pass: DataTypes.STRING 
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        hashed_pass: {
+            type: DataTypes.STRING,
+            allowNull: false
+        } 
     }) 
 }

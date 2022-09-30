@@ -10,8 +10,17 @@ module.exports = {
             allowNull: false,
             primaryKey: true
         },
-        name: DataTypes.STRING,
-        gender: DataTypes.STRING,
-        age: DataTypes.INTEGER
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }, 
+        gender: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }, 
+        age: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        }, 
     })
 }

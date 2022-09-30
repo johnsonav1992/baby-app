@@ -10,10 +10,25 @@ module.exports = {
             allowNull: false,
             primaryKey: true
         },
-        feed_type: DataTypes.STRING,
-        food: DataTypes.STRING,
-        amount: DataTypes.STRING,
-        day: DataTypes.DATEONLY,
-        time: DataTypes.TIME
+        feed_type: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }, 
+        food: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }, 
+        amount: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }, 
+        day: {
+            type: DataTypes.DATEONLY,
+            allowNull: false
+        }, 
+        time: {
+            type: DataTypes.TIME,
+            allowNull: false
+        }
     })
 }

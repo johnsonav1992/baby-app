@@ -10,8 +10,17 @@ module.exports = {
             allowNull: false,
             primaryKey: true
         },
-        type: DataTypes.STRING,
-        day: DataTypes.DATEONLY,
-        time: DataTypes.TIME
+        type: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }, 
+        day: {
+            type: DataTypes.DATEONLY,
+            allowNull: false
+        }, 
+        time: {
+            type: DataTypes.TIME,
+            allowNull: false
+        } 
     })
 } 
