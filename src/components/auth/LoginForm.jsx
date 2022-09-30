@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import BlueButton from '../UI/BlueButton'
 import classes from './LoginForm.module.css'
 import axios from 'axios'
 
 const LoginForm = () => {
+    const [error, setError] = useState('')
+
 	const url = 'http://localhost:4000'
 
 	const initialValues = {
@@ -12,9 +14,14 @@ const LoginForm = () => {
 		password: '',
 	}
 
-	const handleSubmit = values => {
-        axios.post(`${url}/register`, values)
-        .then(res => console.log(res.data))
+	const handleSubmit = async (values) => {
+        try {
+            const response = await axios.post(`${url}/register`, values)
+            console.log(response.data)
+        } catch (err) {
+            console.log(err)
+            setError(err.response.data)
+        }
 	}
 
 	return (
@@ -57,6 +64,7 @@ const LoginForm = () => {
 					<BlueButton type={'submit'}>Login</BlueButton>
 				</Form>
 			</Formik>
+            <p>{error}</p>
 		</div>
 	)
 }
