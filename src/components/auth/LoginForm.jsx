@@ -4,22 +4,28 @@ import BlueButton from '../UI/BlueButton'
 import classes from './LoginForm.module.css'
 
 const LoginForm = () => {
-    const url = 'http://localhost:4000/'
+	const url = 'http://localhost:4000/'
 
 	const initialValues = {
 		username: '',
 		password: '',
 	}
 
-    const handleSubmit = (values) => {
-        console.log(values)
-    }
+	const handleSubmit = values => {
+		console.log(values)
+	}
 
 	return (
 		<div className={classes['outer-form-wrapper']}>
 			<h1>Login</h1>
 
-			<Formik initialValues={initialValues} onSubmit={(values, {resetForm}) => {handleSubmit(values); resetForm({values: ''})}}>
+			<Formik
+				initialValues={initialValues}
+				onSubmit={(values, { resetForm }) => {
+					handleSubmit(values)
+					resetForm({ values: '' })
+				}}
+			>
 				<Form className={classes.form} action="">
 					<div className={classes['inner-form-wrapper']}>
 						<label className={classes.label} htmlFor="username">
