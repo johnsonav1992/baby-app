@@ -25,7 +25,6 @@ module.exports = {
 				throw 'Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one digit, and one special character.'
 			}
 
-
 			const foundUser = await User.findOne({
 				where: { username },
 			})
@@ -57,6 +56,7 @@ module.exports = {
 			}
 		} catch (err) {
 			console.error('Error in register: ', err)
+			// err.errors[0].message <-- will need this for username error display
 			res.status(400).send(err)
 		}
 	},

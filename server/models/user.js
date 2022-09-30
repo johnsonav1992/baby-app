@@ -12,7 +12,13 @@ module.exports = {
         },
         username: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                len: {
+                    args: [4, 50],
+                    msg: 'Username must be between 4 and 50 characters long.'
+                }
+            }
         },
         hashed_pass: {
             type: DataTypes.STRING,
