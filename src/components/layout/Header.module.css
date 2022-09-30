@@ -1,0 +1,19 @@
+@import '../../../src/App.css';
+
+.main-header {
+    background-color: var(--light-blue);
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title-wrapper {
+    margin-left: 1rem;
+}
+
+.title {
+    margin: 0;
+    color: var(--purple);
+}
