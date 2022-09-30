@@ -2,9 +2,10 @@ import React from 'react'
 import { Formik, Form, Field } from 'formik'
 import BlueButton from '../UI/BlueButton'
 import classes from './LoginForm.module.css'
+import axios from 'axios'
 
 const LoginForm = () => {
-	const url = 'http://localhost:4000/'
+	const url = 'http://localhost:4000'
 
 	const initialValues = {
 		username: '',
@@ -12,7 +13,8 @@ const LoginForm = () => {
 	}
 
 	const handleSubmit = values => {
-		console.log(values)
+        axios.post(`${url}/register`, values)
+        .then(res => console.log(res.data))
 	}
 
 	return (
