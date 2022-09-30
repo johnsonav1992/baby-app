@@ -19,6 +19,13 @@ module.exports = {
 				throw 'Please provide a username and password'
 			}
 
+			const passRegex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')
+
+			if(!passRegex.test(password)) {
+				throw 'Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one digit, and one special character.'
+			}
+
+
 			const foundUser = await User.findOne({
 				where: { username },
 			})
