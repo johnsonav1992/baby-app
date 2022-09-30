@@ -10,7 +10,20 @@
 }
 
 .title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     margin-left: 1rem;
+}
+
+.image-wrapper {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    max-width: 70%;
 }
 
 .title {

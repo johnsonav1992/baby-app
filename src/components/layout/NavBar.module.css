@@ -17,3 +17,8 @@ a {
     text-decoration: none;
     color: var(--purple);
 }
+
+a:hover, .active {
+    font-weight: 600;
+    color: #c77ffd;
+}
