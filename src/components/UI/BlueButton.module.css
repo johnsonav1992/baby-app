@@ -9,6 +9,10 @@
     font-weight: bold;
 }
 
+.disabled {
+    background-color: #6ac4f7;
+}
+
 .btn:hover {
     cursor: pointer;
     background-color: #60c4fe;

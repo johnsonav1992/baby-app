@@ -25,9 +25,15 @@ const LoginForm = () => {
 		} catch (err) {
 			console.log(err)
 			setError(err.response.data)
-			setTimeout(() => {
-				setError('')
-			}, 2000)
+			if (register) {
+				setTimeout(() => {
+					setError('')
+				}, 8000)
+			} else {
+				setTimeout(() => {
+					setError('')
+				}, 2000)
+			}
 		}
 	}
 
@@ -42,44 +48,50 @@ const LoginForm = () => {
 					resetForm({ values: '' })
 				}}
 			>
-				<Form className={classes.form} action="">
-					<div className={classes['inner-form-wrapper']}>
-						<label className={classes.label} htmlFor="username">
-							Username
-						</label>
-						<Field
-							className={classes.input}
-							name="username"
-							placeholder="Email or username"
-						/>
-						<label className={classes.label} htmlFor="password">
-							Password
-						</label>
-						<Field
-							className={classes.input}
-							type="password"
-							name="password"
-							placeholder="Password"
-						/>
-					</div>
-					<div className={classes['switch-option-wrapper']}>
-						<p className={classes.option}>
-							{register ? 'Need to log in?' : 'No Account?'}
-						</p>
-						<button
-							className={classes['action-btn']}
-							type="button"
-							onClick={() => setRegister(!register)}
+				{({ isSubmitting, dirty, isValid }) => (
+					<Form className={classes.form} action="">
+						<div className={classes['inner-form-wrapper']}>
+							<label className={classes.label} htmlFor="username">
+								Username
+							</label>
+							<Field
+								className={classes.input}
+								name="username"
+								placeholder="Email or username"
+							/>
+							<label className={classes.label} htmlFor="password">
+								Password
+							</label>
+							<Field
+								className={classes.input}
+								type="password"
+								name="password"
+								placeholder="Password"
+							/>
+						</div>
+						<div className={classes['switch-option-wrapper']}>
+							<p className={classes.option}>
+								{register ? 'Need to log in?' : 'No Account?'}
+							</p>
+							<button
+								className={classes['action-btn']}
+								type="button"
+								onClick={() => setRegister(!register)}
+							>
+								{register ? 'Login here.' : 'Register here.'}
+							</button>
+						</div>
+						<BlueButton
+							loading={isSubmitting}
+							disabled={!dirty}
+							type={'submit'}
 						>
-							{register ? 'Login here.' : 'Register here.'}
-						</button>
-					</div>
-					<BlueButton type={'submit'}>
-						{!register ? 'Login' : 'Register'}
-					</BlueButton>
-				</Form>
+							{!register ? 'Login' : 'Register'}
+						</BlueButton>
+					</Form>
+				)}
 			</Formik>
-			<p>{error}</p>
+			<p className={classes.error}>{error}</p>
 		</div>
 	)
 }

@@ -35,7 +35,7 @@
 
 .switch-option-wrapper {
     display: flex;
-    gap: .75rem;
+    gap: .5rem;
 }
 
 .option {
@@ -53,5 +53,12 @@
 .action-btn:hover {
     cursor: pointer;
     color: #60c4fe;
+}
+
+.error {
+    color: red;
+    font-size: .75rem;
+    text-align: center;
+    width: 40%;
 }
 
