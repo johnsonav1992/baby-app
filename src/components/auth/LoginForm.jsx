@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
 
 import BlueButton from '../UI/BlueButton'
@@ -12,6 +12,7 @@ const LoginForm = () => {
 	const [error, setError] = useState('')
 	const [register, setRegister] = useState(false)
 	const dispatch = useDispatch()
+	const authState = useSelector(state => state.auth)
 
 	const url = 'http://localhost:4000'
 
@@ -48,6 +49,8 @@ const LoginForm = () => {
 			}
 		}
 	}
+
+	console.log(authState)
 
 	return (
 		<div className={classes['outer-form-wrapper']}>
