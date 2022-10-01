@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
+
 import BlueButton from '../UI/BlueButton'
 import classes from './LoginForm.module.css'
+import { authActions } from '../../store/authSlice'
+
 import axios from 'axios'
 
 const LoginForm = () => {
 	const [error, setError] = useState('')
 	const [register, setRegister] = useState(false)
+	const dispatch = useDispatch()
 
 	const url = 'http://localhost:4000'
 
@@ -21,7 +26,14 @@ const LoginForm = () => {
 				register ? `${url}/register` : `${url}/login`,
 				values
 			)
-			console.log(response.data)
+			const data = response.data
+			dispatch(
+				authActions.login({
+					token: data.token,
+					sessionExp: data.expirationTime,
+					userId: data.userId
+				})
+			)
 		} catch (err) {
 			console.log(err)
 			setError(err.response.data)
