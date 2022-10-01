@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { Formik, Form, Field } from 'formik'
 
 import BlueButton from '../UI/BlueButton'
@@ -13,6 +14,7 @@ const LoginForm = () => {
 	const [register, setRegister] = useState(false)
 	const dispatch = useDispatch()
 	const authState = useSelector(state => state.auth)
+	const navigate = useNavigate()
 
 	const url = 'http://localhost:4000'
 
@@ -35,6 +37,7 @@ const LoginForm = () => {
 					userId: data.userId
 				})
 			)
+			navigate('/dashboard')
 		} catch (err) {
 			console.log(err)
 			setError(err.response.data)

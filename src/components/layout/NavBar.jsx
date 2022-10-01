@@ -14,11 +14,18 @@ const NavBar = () => {
 		<nav className={classes['main-nav']}>
 			<ul className={classes['nav-list']}>
 				{token && (
-					<li className={classes['nav-item']}>
-						<NavLink className={styleActiveLink} to="/account">
-							Account
-						</NavLink>
-					</li>
+					<>
+						<li className={classes['nav-item']}>
+							<NavLink className={styleActiveLink} to="/dashboard">
+								Dashboard
+							</NavLink>
+						</li>
+						<li className={classes['nav-item']}>
+							<NavLink className={styleActiveLink} to="/account">
+								Account
+							</NavLink>
+						</li>
+					</>
 				)}
 				<li className={classes['nav-item']}>
 					<NavLink className={styleActiveLink} to="/login">
