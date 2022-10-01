@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-// & INITIAL STATE AND TIMER //
+//^ INITIAL STATE AND TIMER //
 const initialState = {
 	token: '',
 	userId: '',
@@ -8,7 +8,7 @@ const initialState = {
 
 let logoutTimer
 
-// & TIME CALCULATOR //
+//& TIME CALCULATOR //
 const calculateRemainingTime = exp => {
 	const currentTime = new Date().getTime()
 	const expTime = exp
@@ -16,7 +16,7 @@ const calculateRemainingTime = exp => {
 	return remainingTime
 }
 
-// & LOCAL DATA HELPER //
+//& LOCAL DATA HELPER //
 const getLocalData = () => {
 	const storedToken = localStorage.getItem('token')
 	const storedExp = localStorage.getItem('exp')
@@ -45,7 +45,7 @@ if (localData) {
     initialState.userId = localData.userId
 }
 
-// & AUTH SLICE //
+//* AUTH SLICE //
 const authSlice = createSlice({
 	name: 'auth',
 	initialState,

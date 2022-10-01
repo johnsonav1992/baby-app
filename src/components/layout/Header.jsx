@@ -1,5 +1,6 @@
 import React from 'react'
 import classes from './Header.module.css'
+import { Link } from 'react-router-dom'
 
 import NavBar from './NavBar.jsx'
 import logo from '../../assets/logo.svg'
@@ -7,12 +8,14 @@ import logo from '../../assets/logo.svg'
 const Header = () => {
 	return (
 		<header className={classes['main-header']}>
-			<div className={classes['title-wrapper']}>
-				<div className={classes['image-wrapper']}>
-					<img className={classes.img} src={logo} alt="bb-logo" />
+			<Link to="/">
+				<div className={classes['title-wrapper']}>
+					<div className={classes['image-wrapper']}>
+						<img className={classes.img} src={logo} alt="bb-logo" />
+					</div>
+					<h1 className={classes['title']}>BabyBright</h1>
 				</div>
-				<h1 className={classes['title']}>BabyBright</h1>
-			</div>
+			</Link>
 			<NavBar />
 		</header>
 	)
