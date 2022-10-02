@@ -53,8 +53,6 @@ const LoginForm = () => {
 		}
 	}
 
-	console.log(authState)
-
 	return (
 		<div className={classes['outer-form-wrapper']}>
 			<h1>{!register ? 'Login' : 'Register for an account'}</h1>
