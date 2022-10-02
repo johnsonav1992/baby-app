@@ -1,15 +1,17 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import classes from './NavBar.module.css'
+import PurpleButton from '../UI/PurpleButton'
 import { authActions } from '../../store/authSlice'
 
 const NavBar = () => {
 	const token = useSelector(state => state.auth.token)
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 
-	const styleActiveLink = ({ isActive }) => 
+	const styleActiveLink = ({ isActive }) =>
 		isActive ? classes.active : classes.inactive
 
 	return (
@@ -39,13 +41,15 @@ const NavBar = () => {
 						</NavLink>
 					</li>
 				) : (
-					<NavLink
-						className={styleActiveLink}
-						onClick={() => dispatch(authActions.logout())}
-						to="/login"
+					<PurpleButton
+						type={'button'}
+						onClick={() => {
+							dispatch(authActions.logout())
+							navigate('/login')
+						}}
 					>
 						Logout
-					</NavLink>
+					</PurpleButton>
 				)}
 			</ul>
 		</nav>
