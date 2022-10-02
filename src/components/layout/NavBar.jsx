@@ -1,13 +1,15 @@
 import React from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 import classes from './NavBar.module.css'
+import { authActions } from '../../store/authSlice'
 
 const NavBar = () => {
 	const token = useSelector(state => state.auth.token)
+	const dispatch = useDispatch()
 
-	const styleActiveLink = ({ isActive }) =>
+	const styleActiveLink = ({ isActive }) => 
 		isActive ? classes.active : classes.inactive
 
 	return (
@@ -16,7 +18,10 @@ const NavBar = () => {
 				{token && (
 					<>
 						<li className={classes['nav-item']}>
-							<NavLink className={styleActiveLink} to="/dashboard">
+							<NavLink
+								className={styleActiveLink}
+								to="/dashboard"
+							>
 								Dashboard
 							</NavLink>
 						</li>
@@ -27,11 +32,21 @@ const NavBar = () => {
 						</li>
 					</>
 				)}
-				<li className={classes['nav-item']}>
-					<NavLink className={styleActiveLink} to="/login">
-						Login
+				{!token ? (
+					<li className={classes['nav-item']}>
+						<NavLink className={styleActiveLink} to="/login">
+							Login or Register
+						</NavLink>
+					</li>
+				) : (
+					<NavLink
+						className={styleActiveLink}
+						onClick={() => dispatch(authActions.logout())}
+						to="/login"
+					>
+						Logout
 					</NavLink>
-				</li>
+				)}
 			</ul>
 		</nav>
 	)
