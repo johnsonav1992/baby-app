@@ -2,7 +2,6 @@ const express = require('express')
 const cors = require('cors')
 require('dotenv').config()
 const colors = require('colors')
-const { SERVER_PORT } = process.env
 
 const { sequelize } = require('./database/database')
 const { User } = require('./models/user')
@@ -30,11 +29,13 @@ Changing.belongsTo(Child)
 ///Routes/// 
 require('./routes/routes')(app)
 
+const port = process.env.PORT || 4000
+
 sequelize
 	.sync()
 	.then(() => {
-		app.listen(SERVER_PORT, () =>
-			console.log(`DB synced and server running on port ${SERVER_PORT}`.magenta.bold)
+		app.listen(port, () =>
+			console.log(`DB synced and server running on port ${port}`.magenta.bold)
 		)
 	})
 	.catch(err => console.error(err))
