@@ -11,14 +11,13 @@ import axios from 'axios'
 
 const LoginForm = () => {
 	const [error, setError] = useState('')
-	const [register, setRegister] = useState(false)
+	const register = useSelector(state => state.auth.isRegister)
 	const dispatch = useDispatch()
-	const authState = useSelector(state => state.auth)
 	const navigate = useNavigate()
 
 	const url = 'http://localhost:4000'
 
-	const initialValues = {
+	const formInitialValues = {
 		username: '',
 		password: '',
 	}
@@ -58,7 +57,7 @@ const LoginForm = () => {
 			<h1>{!register ? 'Login' : 'Register for an account'}</h1>
 
 			<Formik
-				initialValues={initialValues}
+				initialValues={formInitialValues}
 				onSubmit={(values, { resetForm }) => {
 					handleSubmit(values)
 					resetForm({ values: '' })
@@ -92,7 +91,7 @@ const LoginForm = () => {
 							<button
 								className={classes['action-link']}
 								type="button"
-								onClick={() => setRegister(!register)}
+								onClick={() => dispatch(authActions.toggleRegister())}
 							>
 								{register ? 'Login here.' : 'Register here.'}
 							</button>

@@ -1,14 +1,19 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
+import { authActions } from '../../store/authSlice'
 import classes from './WelcomePage.module.css'
 import PurpleButton from '../UI/PurpleButton'
 
 const WelcomePage = () => {
+  const dispatch = useDispatch()
 	const navigate = useNavigate()
 
 	const getStartedHandler = () => {
 		console.log('get started')
+    dispatch(authActions.setRegister())
+    navigate('/login')
 	}
 
 	return (

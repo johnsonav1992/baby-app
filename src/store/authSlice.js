@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
 	token: '',
 	userId: '',
+	isRegister: false
 }
 
 let logoutTimer
@@ -63,7 +64,7 @@ const authSlice = createSlice({
 
 			logoutTimer = setTimeout(authSlice.caseReducers.logout, remainingTime)
 		},
-		logout(state, action) {
+		logout(state) {
 			state.token = null
 			state.userId = null
 
@@ -75,6 +76,12 @@ const authSlice = createSlice({
                 clearTimeout(logoutTimer)
             }
 		},
+		setRegister(state) {
+			state.isRegister = true
+		},
+		toggleRegister(state) {
+			state.isRegister = !state.isRegister
+		}
 	},
 })
 
