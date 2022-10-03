@@ -1,9 +1,9 @@
 import React from 'react'
 import classes from './PurpleButton.module.css'
 
-const PurpleButton = () => {
+const PurpleButton = ({children, type, onClick}) => {
     return (
-        <button className={classes.btn} type={type} >{children}</button>
+        <button className={classes.btn} type={type} onClick={onClick}>{children}</button>
       )
 }
 

@@ -42,7 +42,7 @@
     font-size: .75rem;
 }
 
-.action-btn {
+.action-link {
     background-color: transparent;
     border: none;
     color: var(--bold-light-blue);
@@ -50,7 +50,7 @@
     font-size: .75rem;
 }
 
-.action-btn:hover {
+.action-link:hover {
     cursor: pointer;
     color: #60c4fe;
 }

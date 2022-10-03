@@ -90,7 +90,7 @@ const LoginForm = () => {
 								{register ? 'Need to log in?' : 'No Account?'}
 							</p>
 							<button
-								className={classes['action-btn']}
+								className={classes['action-link']}
 								type="button"
 								onClick={() => setRegister(!register)}
 							>
