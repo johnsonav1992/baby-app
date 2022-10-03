@@ -3,13 +3,17 @@ import Card from '../UI/Card'
 import EditButton from '../UI/EditButton'
 import RedDeleteButton from '../UI/RedDeleteButton'
 import classes from './SleepCard.module.css'
-import sleep from '../../assets/sleep.svg'
+import sleepIcon from '../../assets/sleep.svg'
 
 const SleepCard = () => {
 	return (
 		<Card>
 			<div className={classes.container}>
-				<img className={classes.icon} src={sleep} alt="sleep icon" />
+				<img
+					className={classes.icon}
+					src={sleepIcon}
+					alt="sleep icon"
+				/>
 				<div className={classes['info-wrapper']}>
 					<div className={classes.times}>
 						<div className={classes['time-container']}>
