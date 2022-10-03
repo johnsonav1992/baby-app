@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import classes from './NavBar.module.css'
-import PurpleButton from '../UI/PurpleButton'
+import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import { authActions } from '../../store/authSlice'
 
 const NavBar = () => {
@@ -41,7 +41,7 @@ const NavBar = () => {
 						</NavLink>
 					</li>
 				) : (
-					<PurpleButton
+					<PurpleButtonSmall
 						type={'button'}
 						onClick={() => {
 							dispatch(authActions.logout())
@@ -49,7 +49,7 @@ const NavBar = () => {
 						}}
 					>
 						Logout
-					</PurpleButton>
+					</PurpleButtonSmall>
 				)}
 			</ul>
 		</nav>
