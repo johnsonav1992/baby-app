@@ -76,8 +76,8 @@ const authSlice = createSlice({
                 clearTimeout(logoutTimer)
             }
 		},
-		setRegister(state) {
-			state.isRegister = true
+		setRegister(state, action) {
+			state.isRegister = action.payload
 		},
 		toggleRegister(state) {
 			state.isRegister = !state.isRegister

@@ -41,3 +41,8 @@
     color: var(--purple);
     font-weight: bold;
 }
+
+.action-link:hover {
+    cursor: pointer;
+    color: #e14aff;
+}

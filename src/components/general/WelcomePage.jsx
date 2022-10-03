@@ -11,7 +11,7 @@ const WelcomePage = () => {
 	const navigate = useNavigate()
 
 	const getStartedHandler = () => {
-		dispatch(authActions.setRegister())
+		dispatch(authActions.setRegister(true))
 		navigate('/login')
 	}
 
@@ -27,7 +27,10 @@ const WelcomePage = () => {
 					Already have an account?{' '}
 					<button
 						className={classes['action-link']}
-						onClick={() => navigate('/login')}
+						onClick={() => {
+							dispatch(authActions.setRegister(false))
+							navigate('/login')
+						}}
 					>
 						Login here.
 					</button>

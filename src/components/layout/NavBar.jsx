@@ -36,7 +36,13 @@ const NavBar = () => {
 				)}
 				{!token ? (
 					<li className={classes['nav-item']}>
-						<NavLink className={styleActiveLink} to="/login">
+						<NavLink
+							className={styleActiveLink}
+							to="/login"
+							onClick={() =>
+								dispatch(authActions.setRegister(false))
+							}
+						>
 							Login or Register
 						</NavLink>
 					</li>
