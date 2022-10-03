@@ -7,13 +7,12 @@ import classes from './WelcomePage.module.css'
 import PurpleButton from '../UI/PurpleButton'
 
 const WelcomePage = () => {
-  const dispatch = useDispatch()
+	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
 	const getStartedHandler = () => {
-		console.log('get started')
-    dispatch(authActions.setRegister())
-    navigate('/login')
+		dispatch(authActions.setRegister())
+		navigate('/login')
 	}
 
 	return (
