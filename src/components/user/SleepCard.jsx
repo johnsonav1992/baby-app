@@ -5,7 +5,10 @@ import RedDeleteButton from '../UI/RedDeleteButton'
 import classes from './SleepCard.module.css'
 import sleepIcon from '../../assets/sleep.svg'
 
-const SleepCard = () => {
+const SleepCard = ({ startTime, endTime, day, duration }) => {
+
+	duration = duration / 60 / 1000
+
 	return (
 		<Card>
 			<div className={classes.container}>
@@ -18,16 +21,16 @@ const SleepCard = () => {
 					<div className={classes.times}>
 						<div className={classes['time-container']}>
 							<h3 className={classes.heading}>Start:</h3>
-							<time className={classes.time}>9:00am</time>
+							<time className={classes.time}>{startTime}</time>
 						</div>
 						<div className={classes['time-container']}>
 							<h3 className={classes.heading}>End:</h3>
-							<time className={classes.time}>10:00am</time>
+							<time className={classes.time}>{endTime}</time>
 						</div>
 					</div>
 					<div className={classes['day-duration']}>
-						<p>Monday, October 3</p>
-						<p>60min.</p>
+						<p>{day}</p>
+						<p>{duration} min.</p>
 					</div>
 				</div>
 				<div className={classes['btn-container']}>

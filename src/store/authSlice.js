@@ -65,8 +65,8 @@ const authSlice = createSlice({
 			logoutTimer = setTimeout(authSlice.caseReducers.logout, remainingTime)
 		},
 		logout(state) {
-			state.token = null
-			state.userId = null
+			state.token = ''
+			state.userId = ''
 
 			localStorage.removeItem('exp')
 			localStorage.removeItem('token')
