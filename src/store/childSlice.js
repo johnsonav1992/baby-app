@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 //^ INITIAL STATE //
 const initialState = {
+	childId: '',
 	feedings: [],
 	sleeps: [],
 	changings: []
@@ -12,10 +13,15 @@ const childSlice = createSlice({
 	name: 'child',
 	initialState,
 	reducers: {
-        add(state, action) {
-           const { type, newEntry } = action.payload
-            state[type].push(newEntry)
-        }
+		setChildId(state, action) {
+			state.childId = action.payload
+		},
+        setFeedings(state, action) {
+           state.feedings = action.payload
+        },
+		setSleeps(state, action) {
+			state.sleeps = action.payload
+		}
     }
 })
 
