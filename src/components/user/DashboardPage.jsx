@@ -10,9 +10,13 @@ let isInitial = true
 
 const DashBoard = () => {
 	const [children, setChildren] = useState([])
-	const sleeps = useSelector(state => state.child.sleeps)
-	const childId = useSelector(state => state.child.childId)
 	const dispatch = useDispatch()
+
+	const sleeps = useSelector(state => state.child.sleeps)
+	// const feedings = useSelector(state => state.child.feedings)
+	// const changings = useSelector(state => state.child.changings)
+	const childId = useSelector(state => state.child.childId)
+
 	const userId = useSelector(state => state.auth.userId)
 	const token = useSelector(state => state.auth.token)
 
@@ -41,33 +45,44 @@ const DashBoard = () => {
 		isInitial = false
 	}
 
-	const getSleeps = () => {
-		axios
-			.get(`${url}/sleeps/${childId}`, {
-				headers: {
-					authorization: token,
-				},
-			})
-			.then(({ data }) => {
-				dispatch(childActions.setSleeps(data))
-			})
-	}
-
 	useEffect(() => {
+		
+
 		if (isInitial) {
 			return
 		} else {
-			axios
-			.get(`${url}/sleeps/${childId}`, {
+			const sleepsReq = axios.get(`${url}/sleeps/${childId}`, {
 				headers: {
 					authorization: token,
 				},
 			})
-			.then(({ data }) => {
-				dispatch(childActions.setSleeps(data))
+			const feedingsReq = axios.get(`${url}/feedings/${childId}`, {
+				headers: {
+					authorization: token,
+				},
 			})
+			const changingsReq = axios.get(`${url}/changings/${childId}`, {
+				headers: {
+					authorization: token,
+				},
+			})
+			axios.all([sleepsReq, feedingsReq, changingsReq]).then(
+				axios.spread((...responses) => {
+					const sleeps = responses[0].data
+					const feedings = responses[1].data
+					const changings = responses[2].data
+
+					console.log('sleeps: ', sleeps)
+					console.log('feedings: ', feedings)
+					console.log('changings: ', changings)
+
+					dispatch(childActions.setSleeps(sleeps))
+					dispatch(childActions.setFeedings(feedings))
+					dispatch(childActions.setChangings(changings))
+				})
+			)
 		}
-	}, [childId, dispatch, token])
+	}, [childId, token, dispatch])
 
 	return (
 		<main className={classes.main}>

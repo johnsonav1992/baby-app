@@ -21,6 +21,9 @@ const childSlice = createSlice({
         },
 		setSleeps(state, action) {
 			state.sleeps = action.payload
+		},
+		setChangings(state, action) {
+			state.changings = action.payload
 		}
     }
 })

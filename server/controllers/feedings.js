@@ -1,5 +1,6 @@
 const colors = require('colors')
 const { Feeding } = require('../models/feeding')
+const { Child } = require('../models/child')
 
 module.exports = {
 	getAllFeedings: async (req, res) => {
