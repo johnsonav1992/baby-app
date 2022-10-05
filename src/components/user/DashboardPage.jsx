@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import classes from './DashboardPage.module.css'
 import axios from 'axios'
 
-import { childActions } from '../../store/childSlice'
+import { childActions, getChildData } from '../../store/childSlice'
 import SleepCard from './SleepCard'
 
 let isInitial = true
@@ -46,41 +46,10 @@ const DashBoard = () => {
 	}
 
 	useEffect(() => {
-		
-
 		if (isInitial) {
 			return
 		} else {
-			const sleepsReq = axios.get(`${url}/sleeps/${childId}`, {
-				headers: {
-					authorization: token,
-				},
-			})
-			const feedingsReq = axios.get(`${url}/feedings/${childId}`, {
-				headers: {
-					authorization: token,
-				},
-			})
-			const changingsReq = axios.get(`${url}/changings/${childId}`, {
-				headers: {
-					authorization: token,
-				},
-			})
-			axios.all([sleepsReq, feedingsReq, changingsReq]).then(
-				axios.spread((...responses) => {
-					const sleeps = responses[0].data
-					const feedings = responses[1].data
-					const changings = responses[2].data
-
-					console.log('sleeps: ', sleeps)
-					console.log('feedings: ', feedings)
-					console.log('changings: ', changings)
-
-					dispatch(childActions.setSleeps(sleeps))
-					dispatch(childActions.setFeedings(feedings))
-					dispatch(childActions.setChangings(changings))
-				})
-			)
+			dispatch(getChildData(childId, token))
 		}
 	}, [childId, token, dispatch])
 
