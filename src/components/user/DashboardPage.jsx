@@ -47,6 +47,16 @@ const DashBoard = () => {
 		isInitial = false
 	}
 
+	const filterChangeHandler = () => {
+		console.log('filter')
+	}
+
+	const filterOptions =[
+		{id: 1, name: 'Feedings'},
+		{id: 2, name: 'Sleep'},
+		{id: 3, name: 'Diapers'}
+	]
+
 	useEffect(() => {
 		if (isInitial) {
 			return
@@ -62,16 +72,38 @@ const DashBoard = () => {
 					<h1>Dashboard</h1>
 					<DropDown
 						name={'child'}
-						value={'Select a child'}
+						value={'select child'}
 						onChange={childChangeHandler}
 						data={children}
 					/>
 				</div>
 				<div className={classes['btn-container']}>
-					<BlueButton type={'button'} addClass={'small'} disabled={false}>Add Child</BlueButton>
+					<BlueButton
+						type={'button'}
+						addClass={'small'}
+						disabled={false}
+					>
+						Add Child
+					</BlueButton>
 				</div>
 			</section>
-			<section className={classes.bottom}></section>
+			<section className={classes.bottom}>
+				<div className={classes['log-container']}>
+					<div className={classes['log-title-container']}>
+						<h2>Log</h2>
+						<DropDown
+						name={'filter'}
+						value={'filter'}
+						onChange={filterChangeHandler}
+						data={filterOptions}
+						addClass={'small'}
+					/>
+					</div>
+					{sleeps && sleeps.map(sleep => {
+						return <SleepCard startTime={sleep.start_time} endTime={sleep.end_time} day={sleep.day} duration={sleep.duration}/>
+					})}
+				</div>
+			</section>
 		</main>
 	)
 }

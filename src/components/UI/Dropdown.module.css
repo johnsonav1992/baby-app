@@ -2,8 +2,13 @@
     padding: .25rem .5rem;
     border: 1px solid black;
     border-radius: .25rem;
+    max-height: 30px;
 }
 
 .dropdown:hover {
     cursor: pointer;
+}
+
+.small {
+    max-width: 80px;
 }

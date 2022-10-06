@@ -1,11 +1,11 @@
 import React from 'react'
 import classes from './Dropdown.module.css'
 
-const Dropdown = ({ name, value, onChange, data }) => {
+const Dropdown = ({ name, value, onChange, data, addClass }) => {
 	return (
-		<select className={classes.dropdown} name={name} onChange={onChange}>
-			<option value={value} selected disabled>
-				Select a {name}
+		<select className={`${classes.dropdown} ${classes[addClass]}`} name={name} onChange={onChange}>
+			<option selected disabled>
+				{value}
 			</option>
 			{data.map(dataObj => {
 				return (
