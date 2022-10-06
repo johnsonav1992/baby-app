@@ -9,9 +9,13 @@
     font-weight: bold;
 }
 
+.small {
+    padding: .75rem 1.5rem;
+}
 .disabled {
     background-color: #6ac4f7;
     pointer-events: none;
+    cursor: not-allowed;
 }
 
 .btn:hover {

@@ -5,6 +5,8 @@ import axios from 'axios'
 
 import { childActions, getChildData } from '../../store/childSlice'
 import SleepCard from './SleepCard'
+import DropDown from '../UI/Dropdown'
+import BlueButton from '../UI/BlueButton'
 
 let isInitial = true
 
@@ -13,8 +15,8 @@ const DashBoard = () => {
 	const dispatch = useDispatch()
 
 	const sleeps = useSelector(state => state.child.sleeps)
-	// const feedings = useSelector(state => state.child.feedings)
-	// const changings = useSelector(state => state.child.changings)
+	const feedings = useSelector(state => state.child.feedings)
+	const changings = useSelector(state => state.child.changings)
 	const childId = useSelector(state => state.child.childId)
 
 	const userId = useSelector(state => state.auth.userId)
@@ -55,29 +57,21 @@ const DashBoard = () => {
 
 	return (
 		<main className={classes.main}>
-			<select name="child" onChange={childChangeHandler}>
-				<option value="Select a child" selected disabled>
-					Select a child
-				</option>
-				{children.map(child => {
-					return (
-						<option key={child.id} id={child.id} value={child.name}>
-							{child.name}
-						</option>
-					)
-				})}
-			</select>
-			{sleeps.map(sleep => {
-				return (
-					<SleepCard
-						key={sleep.id}
-						startTime={sleep.start_time}
-						endTime={sleep.end_time}
-						day={sleep.day}
-						duration={sleep.duration}
+			<section className={classes.top}>
+				<div className={classes['child-select']}>
+					<h1>Dashboard</h1>
+					<DropDown
+						name={'child'}
+						value={'Select a child'}
+						onChange={childChangeHandler}
+						data={children}
 					/>
-				)
-			})}
+				</div>
+				<div className={classes['btn-container']}>
+					<BlueButton type={'button'} addClass={'small'} disabled={false}>Add Child</BlueButton>
+				</div>
+			</section>
+			<section className={classes.bottom}></section>
 		</main>
 	)
 }

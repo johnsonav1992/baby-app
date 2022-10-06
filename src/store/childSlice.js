@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { useSelector } from 'react-redux'
 import axios from 'axios'
 
 //^ INITIAL STATE //
@@ -30,9 +31,29 @@ const childSlice = createSlice({
 })
 
 // * THUNKS //
+const url = 'http://localhost:4000'
+// const userId = useSelector(state => state.auth.userId)
+
+// export const getChildren = () => {
+// 	return (dispatch) => {
+// 		axios
+// 			.get(`${url}/children/${userId}`, {
+// 				headers: {
+// 					authorization: token,
+// 				},
+// 			})
+// 			.then(({ data }) => {
+// 				setChildren(data)
+// 			})
+// 			.catch(err => {
+// 				console.log(err)
+// 			})
+// 	}
+// }
+
+
 export const getChildData = (childId, token) => {
 	return (dispatch) => {
-		const url = 'http://localhost:4000'
 
 		const sleepsReq = axios.get(`${url}/sleeps/${childId}`, {
 			headers: {
@@ -50,12 +71,12 @@ export const getChildData = (childId, token) => {
 			},
 		})
 		axios.all([sleepsReq, feedingsReq, changingsReq]).then(
-			axios.spread(({data: sleepsData}, {data: feedingsData}, {data: changingsData}) => {
-				console.log(sleepsData, feedingsData, changingsData)
+			axios.spread(({data: sleeps}, {data: feedings}, {data: changings}) => {
+				console.log(sleeps, feedings, changings)
 
-				dispatch(childActions.setSleeps(sleepsData))
-				dispatch(childActions.setFeedings(feedingsData))
-				dispatch(childActions.setChangings(changingsData))
+				dispatch(childActions.setSleeps(sleeps))
+				dispatch(childActions.setFeedings(feedings))
+				dispatch(childActions.setChangings(changings))
 			})
 		).catch(errors => {
 			console.log(errors)

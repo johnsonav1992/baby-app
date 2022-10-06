@@ -40,6 +40,7 @@ const getLocalData = () => {
 }
 
 const localData = getLocalData()
+console.log('LOCAL DATA', localData)
 
 if (localData) {
     initialState.token = localData.token

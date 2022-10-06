@@ -1,0 +1,9 @@
+.dropdown {
+    padding: .25rem .5rem;
+    border: 1px solid black;
+    border-radius: .25rem;
+}
+
+.dropdown:hover {
+    cursor: pointer;
+}
