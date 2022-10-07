@@ -7,6 +7,7 @@ import { childActions, getChildData } from '../../store/childSlice'
 import SleepCard from './SleepCard'
 import DropDown from '../UI/Dropdown'
 import BlueButton from '../UI/BlueButton'
+import LogContainer from '../user/LogContainer'
 
 let isInitial = true
 
@@ -51,10 +52,10 @@ const DashBoard = () => {
 		console.log('filter')
 	}
 
-	const filterOptions =[
-		{id: 1, name: 'Feedings'},
-		{id: 2, name: 'Sleep'},
-		{id: 3, name: 'Diapers'}
+	const filterOptions = [
+		{ id: 1, name: 'Feedings' },
+		{ id: 2, name: 'Sleep' },
+		{ id: 3, name: 'Diapers' },
 	]
 
 	useEffect(() => {
@@ -92,16 +93,18 @@ const DashBoard = () => {
 					<div className={classes['log-title-container']}>
 						<h2>Log</h2>
 						<DropDown
-						name={'filter'}
-						value={'filter'}
-						onChange={filterChangeHandler}
-						data={filterOptions}
-						addClass={'small'}
-					/>
+							name={'filter'}
+							value={'filter'}
+							onChange={filterChangeHandler}
+							data={filterOptions}
+							addClass={'small'}
+						/>
+						<input type="date" name="date" id="date" />
 					</div>
-					{sleeps && sleeps.map(sleep => {
+					<LogContainer></LogContainer>
+					{/* {sleeps && sleeps.map(sleep => {
 						return <SleepCard startTime={sleep.start_time} endTime={sleep.end_time} day={sleep.day} duration={sleep.duration}/>
-					})}
+					})} */}
 				</div>
 			</section>
 		</main>

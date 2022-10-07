@@ -44,7 +44,7 @@ const localData = getLocalData()
 if (localData) {
     initialState.token = localData.token
     initialState.userId = localData.userId
-}
+} 
 
 //* AUTH SLICE //
 const authSlice = createSlice({
