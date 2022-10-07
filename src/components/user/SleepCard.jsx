@@ -4,9 +4,9 @@ import EditButton from '../UI/EditButton'
 import RedDeleteButton from '../UI/RedDeleteButton'
 import classes from './SleepCard.module.css'
 import sleepIcon from '../../assets/sleep.svg'
+import { timeConverter } from '../../helper-functions/helperFunctions'
 
 const SleepCard = ({ startTime, endTime, day, duration }) => {
-
 	duration = duration / 60 / 1000
 
 	return (
@@ -21,11 +21,11 @@ const SleepCard = ({ startTime, endTime, day, duration }) => {
 					<div className={classes.times}>
 						<div className={classes['time-container']}>
 							<h3 className={classes.heading}>Start:</h3>
-							<time className={classes.time}>{startTime}</time>
+							<time className={classes.time}>{timeConverter(startTime)}</time>
 						</div>
 						<div className={classes['time-container']}>
 							<h3 className={classes.heading}>End:</h3>
-							<time className={classes.time}>{endTime}</time>
+							<time className={classes.time}>{timeConverter(endTime)}</time>
 						</div>
 					</div>
 					<div className={classes['day-duration']}>

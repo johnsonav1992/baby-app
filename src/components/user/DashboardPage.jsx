@@ -15,13 +15,13 @@ const DashBoard = () => {
 	const [date, setDate] = useState(new Date(Date.now()).toISOString().split('T')[0])
 	const dispatch = useDispatch()
 
+	const childId = useSelector(state => state.child.childId)
+	const userId = useSelector(state => state.auth.userId)
+	const token = useSelector(state => state.auth.token)
+
 	const sleeps = useSelector(state => state.child.sleeps)
 	const feedings = useSelector(state => state.child.feedings)
 	const changings = useSelector(state => state.child.changings)
-	const childId = useSelector(state => state.child.childId)
-
-	const userId = useSelector(state => state.auth.userId)
-	const token = useSelector(state => state.auth.token)
 
 	const url = 'http://localhost:4000'
 
@@ -52,7 +52,7 @@ const DashBoard = () => {
 		console.log('filter')
 	}
 
-	const handleDateChange = (e) => {
+	const dateChangeHandler = (e) => {
 		setDate(e.target.value)
 	}
 
@@ -104,7 +104,7 @@ const DashBoard = () => {
 							data={filterOptions}
 							addClass={'small'}
 						/>
-						<input className={classes['date-picker']} type="date" name="date" id="date" value={date}onChange={handleDateChange}/>
+						<input className={classes['date-picker']} type="date" name="date" id="date" value={date}onChange={dateChangeHandler}/>
 					</div>
 					<LogContainer selectedDate={date}></LogContainer>
 					{/* {sleeps && sleeps.map(sleep => {
