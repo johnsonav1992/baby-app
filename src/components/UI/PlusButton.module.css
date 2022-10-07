@@ -1,0 +1,47 @@
+@import '../../../src/App.css';
+
+.btn {
+  background-color: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  font-weight: 200;
+  font-size: 30px;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+.plus {
+  height: 50%;
+  filter: invert(100%) sepia(0%) saturate(7499%) hue-rotate(258deg) brightness(103%) contrast(102%);
+}
+
+.purple {
+  background-color: var(--purple);
+}
+
+.purple:hover {
+  cursor: pointer;
+  background-color: #c477ff;
+}
+
+.blue {
+  background-color: var(--bold-light-blue);
+}
+
+.blue:hover {
+  cursor: pointer;
+  background-color: #60c4fe;
+}
+
+.orange {
+  background-color: var(--light-orange);
+}
+
+.orange:hover {
+  cursor: pointer;
+  background-color: #fcb0b0;
+}
