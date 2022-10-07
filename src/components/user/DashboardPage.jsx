@@ -4,7 +4,6 @@ import classes from './DashboardPage.module.css'
 import axios from 'axios'
 
 import { childActions, getChildData } from '../../store/childSlice'
-import SleepCard from './SleepCard'
 import DropDown from '../UI/Dropdown'
 import BlueButton from '../UI/BlueButton'
 import LogContainer from '../user/LogContainer'
@@ -13,6 +12,7 @@ let isInitial = true
 
 const DashBoard = () => {
 	const [children, setChildren] = useState([])
+	const [date, setDate] = useState(new Date(Date.now()).toISOString().split('T')[0])
 	const dispatch = useDispatch()
 
 	const sleeps = useSelector(state => state.child.sleeps)
@@ -52,6 +52,10 @@ const DashBoard = () => {
 		console.log('filter')
 	}
 
+	const handleDateChange = (e) => {
+		setDate(e.target.value)
+	}
+
 	const filterOptions = [
 		{ id: 1, name: 'Feedings' },
 		{ id: 2, name: 'Sleep' },
@@ -62,7 +66,8 @@ const DashBoard = () => {
 		if (isInitial) {
 			return
 		} else {
-			dispatch(getChildData(childId, token))
+			dispatch(getChildData(childId, token, date))
+			console.log(sleeps)
 		}
 	}, [childId, token, dispatch])
 
@@ -99,9 +104,9 @@ const DashBoard = () => {
 							data={filterOptions}
 							addClass={'small'}
 						/>
-						<input type="date" name="date" id="date" />
+						<input className={classes['date-picker']} type="date" name="date" id="date" value={date}onChange={handleDateChange}/>
 					</div>
-					<LogContainer></LogContainer>
+					<LogContainer selectedDate={date}></LogContainer>
 					{/* {sleeps && sleeps.map(sleep => {
 						return <SleepCard startTime={sleep.start_time} endTime={sleep.end_time} day={sleep.day} duration={sleep.duration}/>
 					})} */}

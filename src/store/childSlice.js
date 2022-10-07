@@ -54,7 +54,6 @@ const url = 'http://localhost:4000'
 
 export const getChildData = (childId, token) => {
 	return (dispatch) => {
-
 		const sleepsReq = axios.get(`${url}/sleeps/${childId}`, {
 			headers: {
 				authorization: token,
@@ -72,8 +71,6 @@ export const getChildData = (childId, token) => {
 		})
 		axios.all([sleepsReq, feedingsReq, changingsReq]).then(
 			axios.spread(({data: sleeps}, {data: feedings}, {data: changings}) => {
-				console.log(sleeps, feedings, changings)
-
 				dispatch(childActions.setSleeps(sleeps))
 				dispatch(childActions.setFeedings(feedings))
 				dispatch(childActions.setChangings(changings))

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
+import React from 'react'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import Header from './components/layout/Header.jsx'
@@ -12,7 +12,6 @@ import './App.css'
 
 function App() {
 	const token = useSelector(state => state.auth.token)
-	const navigate = useNavigate()
 
 	return (
 		<>
