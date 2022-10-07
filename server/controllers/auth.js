@@ -7,7 +7,7 @@ const { User } = require('../models/user')
 const { SECRET } = process.env
 
 const createToken = (username, id) => {
-	return jwt.sign({ username, id }, SECRET, { expiresIn: '1d' })
+	return jwt.sign({ username, id }, SECRET, { expiresIn: '1h' })
 }
 
 module.exports = {
@@ -45,7 +45,7 @@ module.exports = {
 					newUser.dataValues.id
 				)
 
-				const expirationTime = Date.now() + 1000 * 60 * 60 * 24
+				const expirationTime = Date.now() + 1000 * 60 * 60
 
 				res.status(200).send({
 					username: newUser.dataValues.username,
@@ -80,7 +80,7 @@ module.exports = {
 						foundUser.dataValues.id
 					)
 
-					const expirationTime = Date.now() + 1000 * 60 * 60 * 24
+					const expirationTime = Date.now() + 1000 * 60 * 60
 
 					res.status(200).send({
 						username: foundUser.dataValues.username,
