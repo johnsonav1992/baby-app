@@ -7,11 +7,13 @@ import { childActions, getChildData } from '../../store/childSlice'
 import DropDown from '../UI/Dropdown'
 import BlueButton from '../UI/BlueButton'
 import LogContainer from '../user/LogContainer'
+import CreateChildModal from './CreateChildModal'
 
 let isInitial = true
 
 const DashBoard = () => {
 	const [children, setChildren] = useState([])
+	const [showChildModal, setShowChildModal] = useState(false)
 	const [date, setDate] = useState(
 		new Date(Date.now()).toISOString().split('T')[0]
 	)
@@ -54,6 +56,13 @@ const DashBoard = () => {
 		setDate(e.target.value)
 	}
 
+	const addChildHandler = () => {
+		setShowChildModal(!showChildModal)
+		// axios.post('')
+		// .then()
+		// .catch()
+	}
+
 	const filterOptions = [
 		{ id: 1, name: 'Feedings' },
 		{ id: 2, name: 'Sleep' },
@@ -69,6 +78,8 @@ const DashBoard = () => {
 	}, [childId, token, date, dispatch])
 
 	return (
+		<>
+		{showChildModal && <CreateChildModal add={addChildHandler}></CreateChildModal>}
 		<main className={classes.main}>
 			<section className={classes.top}>
 				<div className={classes['child-select']}>
@@ -85,6 +96,7 @@ const DashBoard = () => {
 						type={'button'}
 						addClass={'small'}
 						disabled={false}
+						onClick={() => setShowChildModal(!showChildModal)}
 					>
 						Add Child
 					</BlueButton>
@@ -114,6 +126,7 @@ const DashBoard = () => {
 				</div>
 			</section>
 		</main>
+		</>
 	)
 }
 

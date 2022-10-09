@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './BlueButton.module.css'
 
-const BlueButton = ({ children, type, disabled, addClass }) => {
+const BlueButton = ({ children, type, disabled, addClass, onClick }) => {
 	return (
 		<button
 			className={
@@ -11,6 +11,7 @@ const BlueButton = ({ children, type, disabled, addClass }) => {
 			}
 			type={type}
 			disabled={disabled}
+			onClick={onClick}
 		>
 			{children}
 		</button>
