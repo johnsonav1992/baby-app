@@ -38,6 +38,10 @@ const LogContainer = ({ selectedDate }) => {
 					There are no entries today!
 				</p>
 			)}
+			<p>More stuff...</p>
+			<p>More stuff...</p>
+			<p>More stuff...</p>
+			<p>More stuff...</p>
 		</section>
 	)
 }
