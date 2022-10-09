@@ -17,13 +17,13 @@ module.exports = app => {
     app.delete('/children/:userId', isAuthenticated, deleteChild)
 
     //feedings
-    app.post('/feedings/:feedingId', isAuthenticated, addFeeding)
+    app.post('/feedings/:childId', isAuthenticated, addFeeding)
     app.get('/feedings/:childId', isAuthenticated, getAllFeedings)
     app.put('/feedings/:feedingId', isAuthenticated, editFeeding)
     app.delete('/feedings/:childId', isAuthenticated, deleteFeeding)
 
     //changings
-    app.post('/changings/:changingId', isAuthenticated, addChanging)
+    app.post('/changings/:childId', isAuthenticated, addChanging)
     app.get('/changings/:childId', isAuthenticated, getAllChangings)
     app.put('/changings/:changingId', isAuthenticated, editChanging)
     app.delete('/changings/:childId', isAuthenticated, deleteChanging)

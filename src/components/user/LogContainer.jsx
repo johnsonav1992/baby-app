@@ -6,22 +6,32 @@ import { longDateCreator, shortDateCreator } from '../../helper-functions/helper
 
 const LogContainer = ({ selectedDate }) => {
 	const sleeps = useSelector(state => state.child.sleeps)
+	const feedings = useSelector(state => state.child.feedings)
+	const changings = useSelector(state => state.child.changings)
 
-	const logData = sleeps.map(sleep => {
-		return (
+	const combinedData = [...sleeps, ...feedings, ...changings]
+
+	const filtered = combinedData.filter(entry => entry.day === selectedDate)
+	console.log('filtered', filtered)
+	const loadData = filtered.sort((a, b) => a.time - b.time)
+	console.log('sorted', loadData)
+
+	const logData = loadData.map(entry => {
+		return (entry.category === 'sleep' ?
 			<SleepCard
-				startTime={sleep.start_time}
-				endTime={sleep.end_time}
-				day={shortDateCreator(sleep.day)}
-				duration={sleep.duration}
+				key={entry.id}
+				startTime={entry.start_time}
+				endTime={entry.end_time}
+				day={shortDateCreator(entry.day)}
+				duration={entry.duration}
 			></SleepCard>
-		)
+		: <p>This is some other entry...</p>)
 	})
 
 	return (
 		<section className={classes.container}>
 			<p className={classes.date}>{longDateCreator(selectedDate)}</p>
-			{logData ? (
+			{logData.length > 0 ? (
 				logData
 			) : (
 				<p className={classes['no-entries']}>

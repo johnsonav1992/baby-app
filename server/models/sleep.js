@@ -10,10 +10,18 @@ module.exports = {
             allowNull: false,
             primaryKey: true
         },
+        category: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         day: {
             type: DataTypes.DATEONLY,
             allowNull: false
-        }, 
+        },
+        time: {
+            type: DataTypes.TIME,
+            allowNull: false
+        },
         start_time: {
             type: DataTypes.TIME,
             allowNull: false
@@ -21,7 +29,7 @@ module.exports = {
         end_time: {
             type: DataTypes.TIME,
             allowNull: false
-        }, 
+        },
         duration: {
             type: DataTypes.INTEGER,
             allowNull: false

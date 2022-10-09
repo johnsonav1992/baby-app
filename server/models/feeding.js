@@ -10,6 +10,10 @@ module.exports = {
             allowNull: false,
             primaryKey: true
         },
+        category: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         feed_type: {
             type: DataTypes.STRING,
             allowNull: false

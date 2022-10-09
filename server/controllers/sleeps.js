@@ -48,10 +48,11 @@ module.exports = {
 		try {
 			const newSleep = await Sleep.create({
 				day,
+				time: startTime,
 				start_time: startTime,
 				end_time: endTime,
 				duration: calculatedDuration,
-				childId: +childId,
+				childId: +childId, 
             })
 			res.status(200).send(newSleep)
 		} catch (err) {

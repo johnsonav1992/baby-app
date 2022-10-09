@@ -12,16 +12,14 @@ let isInitial = true
 
 const DashBoard = () => {
 	const [children, setChildren] = useState([])
-	const [date, setDate] = useState(new Date(Date.now()).toISOString().split('T')[0])
+	const [date, setDate] = useState(
+		new Date(Date.now()).toISOString().split('T')[0]
+	)
 	const dispatch = useDispatch()
 
 	const childId = useSelector(state => state.child.childId)
 	const userId = useSelector(state => state.auth.userId)
 	const token = useSelector(state => state.auth.token)
-
-	const sleeps = useSelector(state => state.child.sleeps)
-	const feedings = useSelector(state => state.child.feedings)
-	const changings = useSelector(state => state.child.changings)
 
 	const url = 'http://localhost:4000'
 
@@ -52,7 +50,7 @@ const DashBoard = () => {
 		console.log('filter')
 	}
 
-	const dateChangeHandler = (e) => {
+	const dateChangeHandler = e => {
 		setDate(e.target.value)
 	}
 
@@ -67,9 +65,8 @@ const DashBoard = () => {
 			return
 		} else {
 			dispatch(getChildData(childId, token, date))
-			console.log(sleeps)
 		}
-	}, [childId, token, dispatch])
+	}, [childId, token, date, dispatch])
 
 	return (
 		<main className={classes.main}>
@@ -104,12 +101,16 @@ const DashBoard = () => {
 							data={filterOptions}
 							addClass={'small'}
 						/>
-						<input className={classes['date-picker']} type="date" name="date" id="date" value={date}onChange={dateChangeHandler}/>
+						<input
+							className={classes['date-picker']}
+							type="date"
+							name="date"
+							id="date"
+							value={date}
+							onChange={dateChangeHandler}
+						/>
 					</div>
-					<LogContainer selectedDate={date}></LogContainer>
-					{/* {sleeps && sleeps.map(sleep => {
-						return <SleepCard startTime={sleep.start_time} endTime={sleep.end_time} day={sleep.day} duration={sleep.duration}/>
-					})} */}
+					<LogContainer selectedDate={date} />
 				</div>
 			</section>
 		</main>
