@@ -64,7 +64,7 @@ const LoginForm = () => {
 				}}
 			>
 				{({ isSubmitting, dirty }) => (
-					<Form className={classes.form} action="">
+					<Form className={classes.form}>
 						<div className={classes['inner-form-wrapper']}>
 							<label className={classes.label} htmlFor="username">
 								Username

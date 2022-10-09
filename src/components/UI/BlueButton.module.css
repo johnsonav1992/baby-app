@@ -22,3 +22,7 @@
     cursor: pointer;
     background-color: #60c4fe;
 }
+
+.modal-btn {
+    align-self: flex-end;
+}
