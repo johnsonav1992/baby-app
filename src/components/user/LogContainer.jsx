@@ -2,7 +2,12 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import classes from './LogContainer.module.css'
 import SleepCard from './SleepCard'
-import { longDateCreator, shortDateCreator } from '../../helper-functions/helperFunctions'
+import FeedingCard from './FeedingCard'
+import ChangingCard from './ChangingCard'
+import {
+	longDateCreator,
+	shortDateCreator,
+} from '../../helper-functions/helperFunctions'
 
 const LogContainer = ({ selectedDate }) => {
 	const sleeps = useSelector(state => state.child.sleeps)
@@ -17,7 +22,7 @@ const LogContainer = ({ selectedDate }) => {
 	console.log('sorted', loadData)
 
 	const logData = loadData.map(entry => {
-		return (entry.category === 'sleep' ?
+		return entry.category === 'sleep' ? (
 			<SleepCard
 				key={entry.id}
 				startTime={entry.start_time}
@@ -25,7 +30,21 @@ const LogContainer = ({ selectedDate }) => {
 				day={shortDateCreator(entry.day)}
 				duration={entry.duration}
 			></SleepCard>
-		: <p>This is some other entry...</p>)
+		) : entry.category === 'feeding' ? (
+			<FeedingCard
+				type={entry.feed_type}
+				food={entry.food}
+				amount={entry.amount}
+				day={shortDateCreator(entry.day)}
+				time={entry.time}
+			/>
+		) : (
+			<ChangingCard
+				type={entry.type}
+				day={shortDateCreator(entry.day)}
+				time={entry.time}
+			/>
+		)
 	})
 
 	return (

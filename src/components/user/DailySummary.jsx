@@ -7,7 +7,8 @@ import sleepMoon from '../../assets/sleep.svg'
 import diaper from '../../assets/diaper.svg'
 import classes from './DailySummary.module.css'
 
-const DailySummary = () => {
+const DailySummary = ({ sleeps, feedings, changings }) => {
+
 	return (
 		<Card addClass='daily-summary'>
 			<div className={classes.container}>
@@ -18,7 +19,7 @@ const DailySummary = () => {
 					</div>
 					<div className={classes.text}>
 						<p>Feedings</p>
-						<p>-</p>
+						<p>{feedings ? feedings : '-'}</p>
 					</div>
 					<PlusButton color="blue" />
 				</div>
@@ -28,7 +29,7 @@ const DailySummary = () => {
 					</div>
 					<div className={classes.text}>
 						<p>Sleep</p>
-						<p>-</p>
+						<p>{sleeps ? sleeps : '-'}</p>
 					</div>
 					<PlusButton color="purple" />
 				</div>
@@ -38,7 +39,7 @@ const DailySummary = () => {
 					</div>
 					<div className={classes.text}>
 						<p>Diapers</p>
-						<p>-</p>
+						<p>{changings ? changings : '-'}</p>
 					</div>
 					<PlusButton color="orange" />
 				</div>

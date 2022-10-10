@@ -7,22 +7,22 @@ import diaperIcon from '../../assets/diaper.svg'
 import { timeConverter } from '../../helper-functions/helperFunctions'
 
 const ChangingCard = ({ type, day, time }) => {
-  time = '23:00:00'
-
 	return (
-		<Card>
+		<Card addClass="entry">
 			<div className={classes.container}>
-				<img
-					className={classes.icon}
-					src={diaperIcon}
-					alt="diaper icon"
-				/>
+				<div className={classes['img-wrapper']}>
+					<img
+						className={classes.icon}
+						src={diaperIcon}
+						alt="diaper icon"
+					/>
+				</div>
 				<div className={classes['info-wrapper']}>
 					<div className={classes.type}>
-						<h3 className={classes.heading}>{type}Wet</h3>
+						<h3 className={classes.heading}>{type}</h3>
 					</div>
 					<div className={classes['day-time']}>
-						<p>{day}Day here at </p>
+						<p>{day}</p>
 						<p>{timeConverter(time)}</p>
 					</div>
 				</div>

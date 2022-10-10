@@ -6,24 +6,24 @@ import classes from './FeedingCard.module.css'
 import bottleIcon from '../../assets/bottle.svg'
 import { timeConverter } from '../../helper-functions/helperFunctions'
 
-const FeedingCard = ({ food, amount, day, time }) => {
-  time = '23:00:00'
-
+const FeedingCard = ({ type, food, amount, day, time }) => {
 	return (
-		<Card>
+		<Card addClass="entry">
 			<div className={classes.container}>
-				<img
-					className={classes.icon}
-					src={bottleIcon}
-					alt="bottle icon"
-				/>
+				<div className={classes['img-wrapper']}>
+					<img
+						className={classes.icon}
+						src={bottleIcon}
+						alt="bottle icon"
+					/>
+				</div>
 				<div className={classes['info-wrapper']}>
 					<div className={classes.type}>
-						<h3 className={classes.heading}>{food}Formula</h3>
-						<h3 className={classes.heading}>{amount}4oz</h3>
+						<h3 className={classes.heading}>{type} - {food}</h3>
+						<h3 className={classes.heading}>{amount}</h3>
 					</div>
 					<div className={classes['day-time']}>
-						<p>{day}Day here at </p>
+						<p>{day}</p>
 						<p>{timeConverter(time)}</p>
 					</div>
 				</div>

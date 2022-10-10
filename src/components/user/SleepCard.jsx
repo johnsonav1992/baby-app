@@ -10,22 +10,28 @@ const SleepCard = ({ startTime, endTime, day, duration }) => {
 	duration = duration / 60 / 1000
 
 	return (
-		<Card>
+		<Card addClass="entry">
 			<div className={classes.container}>
-				<img
-					className={classes.icon}
-					src={sleepIcon}
-					alt="sleep icon"
-				/>
+				<div className={classes['img-wrapper']}>
+					<img
+						className={classes.icon}
+						src={sleepIcon}
+						alt="sleep icon"
+					/>
+				</div>
 				<div className={classes['info-wrapper']}>
 					<div className={classes.times}>
 						<div className={classes['time-container']}>
 							<h3 className={classes.heading}>Start:</h3>
-							<time className={classes.time}>{timeConverter(startTime)}</time>
+							<time className={classes.time}>
+								{timeConverter(startTime)}
+							</time>
 						</div>
 						<div className={classes['time-container']}>
 							<h3 className={classes.heading}>End:</h3>
-							<time className={classes.time}>{timeConverter(endTime)}</time>
+							<time className={classes.time}>
+								{timeConverter(endTime)}
+							</time>
 						</div>
 					</div>
 					<div className={classes['day-duration']}>

@@ -21,3 +21,7 @@
     width: 50%;
     height: min-content;
 }
+
+.entry {
+    width: 100%;
+}

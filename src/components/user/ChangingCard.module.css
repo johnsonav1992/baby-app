@@ -6,9 +6,17 @@
   gap: 1.5rem;
 }
 
+.img-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+}
+
 .info-wrapper {
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: .5rem;
 }
 
