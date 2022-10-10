@@ -1,10 +1,12 @@
 import React from 'react'
-import PlusButton from '../UI/PlusButton'
+import FeedingCard from './FeedingCard'
 
 const AccountPage = () => {
   return (
+    <>
     <div>Account Page</div>
-    
+    <FeedingCard />
+    </>
   )
 }
 

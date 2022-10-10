@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  gap: 1.5rem;
+}
+
+.info-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.time-container {
+  display: flex;
+  gap: .75rem;
+}
+
+.type {
+  display: flex;
+  gap: 1rem;
+}
+
+.day-time {
+  display: flex;
+  gap: 2rem;
+}
+
+.day-time p {
+  margin: 0;
+}
+
+.heading {
+  display: flex;
+  align-items: flex-end;
+  margin: 0;
+  padding: 0;
+}
+
+.time {
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+.btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .25rem;
+}
