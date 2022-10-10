@@ -27,7 +27,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    width: 400px;
+    width: 50%;
     min-width: min-content;
 }
 
@@ -43,4 +43,11 @@
     border: 1px solid black;
     border-radius: .25rem;
     max-height: 30px;
+}
+
+.bottom {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    height: 500px;
 }

@@ -16,3 +16,8 @@
     gap: 1.5rem;
     padding: 2rem;
 }
+
+.daily-summary {
+    width: 50%;
+    height: min-content;
+}

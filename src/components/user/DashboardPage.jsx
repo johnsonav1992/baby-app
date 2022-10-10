@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import classes from './DashboardPage.module.css'
 import axios from 'axios'
 
+import classes from './DashboardPage.module.css'
 import { childActions, getChildData } from '../../store/childSlice'
 import DropDown from '../UI/Dropdown'
 import BlueButton from '../UI/BlueButton'
 import LogContainer from '../user/LogContainer'
 import CreateChildModal from './CreateChildModal'
+import DailySummary from './DailySummary'
 
 let isInitial = true
 
@@ -124,6 +125,7 @@ const DashBoard = () => {
 						</div>
 						<LogContainer selectedDate={date} />
 					</div>
+					<DailySummary />
 				</section>
 			</main>
 		</>
