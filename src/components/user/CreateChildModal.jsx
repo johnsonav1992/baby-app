@@ -1,6 +1,8 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+import axios from 'axios'
 
 import FormModal from '../general/FormModal'
 import Error from '../UI/Error'
@@ -9,6 +11,9 @@ import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import classes from './CreateChildModal.module.css'
 
 const CreateChildModal = ({ toggle }) => {
+	const userId = useSelector(state => state.auth.userId)
+	const token = useSelector(state => state.auth.token)
+
 	const formInitialValues = {
 		name: '',
 		age: '',
@@ -24,11 +29,24 @@ const CreateChildModal = ({ toggle }) => {
 			.max(13, 'Age must be less than 13.')
 			.required('You must input an age'),
 		birthday: Yup.date().required('You must input a birthday.'),
-		gender: Yup.string().required('You must input a gender'),
 	})
 
 	const handleSubmit = values => {
 		console.log(values)
+		const birthday = new Date(values.birthday)
+		const age = Math.floor((Date.now() - birthday.getTime()) / 31556952000)
+		axios
+			.post(
+				`http://localhost:4000/children/${userId}`,
+				{ age: age, name: values.name, gender: values.gender },
+				{
+					headers: {
+						authorization: token,
+					},
+				}
+			)
+			.then()
+			.catch(err => console.log(err))
 	}
 
 	return (
@@ -42,7 +60,7 @@ const CreateChildModal = ({ toggle }) => {
 					toggle()
 				}}
 			>
-				{({ errors, touched }) => (
+				{({ errors, touched, values }) => (
 					<Form action="submit" className={classes.form}>
 						<h1>Add new child</h1>
 						<div className={classes['group-container']}>
@@ -70,13 +88,7 @@ const CreateChildModal = ({ toggle }) => {
 										name="gender"
 										className={classes.input}
 									>
-										<option
-											value="select"
-											disabled
-											selected
-										>
-											Select gender
-										</option>
+										<option>Select gender</option>
 										<option value="male">Male</option>
 										<option value="female">Female</option>
 									</Field>
@@ -104,7 +116,7 @@ const CreateChildModal = ({ toggle }) => {
 									<Field
 										type="number"
 										name="age"
-										min="1"
+										min="0"
 										max="13"
 										className={`${classes.input} ${
 											touched.age && errors.age

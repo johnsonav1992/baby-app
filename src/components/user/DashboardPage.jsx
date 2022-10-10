@@ -26,19 +26,20 @@ const DashBoard = () => {
 	const url = 'http://localhost:4000'
 
 	useEffect(() => {
-		axios
-			.get(`${url}/children/${userId}`, {
-				headers: {
-					authorization: token,
-				},
-			})
-			.then(({ data }) => {
-				setChildren(data)
-			})
-			.catch(err => {
-				console.log(err)
-			})
-	}, [token, userId])
+		console.log('getting child data')
+			axios
+				.get(`${url}/children/${userId}`, {
+					headers: {
+						authorization: token,
+					},
+				})
+				.then(({ data }) => {
+					setChildren(data)
+				})
+				.catch(err => {
+					console.log(err)
+				})
+	}, [token, userId, showChildModal])
 
 	const childChangeHandler = e => {
 		const selectedChild = e.target.value
@@ -56,11 +57,8 @@ const DashBoard = () => {
 		setDate(e.target.value)
 	}
 
-	const addChildHandler = () => {
+	const toggleModal = () => {
 		setShowChildModal(!showChildModal)
-		// axios.post('')
-		// .then()
-		// .catch()
 	}
 
 	const filterOptions = [
@@ -79,53 +77,55 @@ const DashBoard = () => {
 
 	return (
 		<>
-		{showChildModal && <CreateChildModal toggle={addChildHandler}></CreateChildModal>}
-		<main className={classes.main}>
-			<section className={classes.top}>
-				<div className={classes['child-select']}>
-					<h1>Dashboard</h1>
-					<DropDown
-						name={'child'}
-						value={'select child'}
-						onChange={childChangeHandler}
-						data={children}
-					/>
-				</div>
-				<div className={classes['btn-container']}>
-					<BlueButton
-						type={'button'}
-						addClass={'small'}
-						disabled={false}
-						onClick={() => setShowChildModal(!showChildModal)}
-					>
-						Add Child
-					</BlueButton>
-				</div>
-			</section>
-			<section className={classes.bottom}>
-				<div className={classes['log-container']}>
-					<div className={classes['log-title-container']}>
-						<h2>Log</h2>
+			{showChildModal && (
+				<CreateChildModal toggle={toggleModal}></CreateChildModal>
+			)}
+			<main className={classes.main}>
+				<section className={classes.top}>
+					<div className={classes['child-select']}>
+						<h1>Dashboard</h1>
 						<DropDown
-							name={'filter'}
-							value={'filter'}
-							onChange={filterChangeHandler}
-							data={filterOptions}
-							addClass={'small'}
-						/>
-						<input
-							className={classes['date-picker']}
-							type="date"
-							name="date"
-							id="date"
-							value={date}
-							onChange={dateChangeHandler}
+							name={'child'}
+							value={'select child'}
+							onChange={childChangeHandler}
+							data={children}
 						/>
 					</div>
-					<LogContainer selectedDate={date} />
-				</div>
-			</section>
-		</main>
+					<div className={classes['btn-container']}>
+						<BlueButton
+							type={'button'}
+							addClass={'small'}
+							disabled={false}
+							onClick={() => setShowChildModal(!showChildModal)}
+						>
+							Add Child
+						</BlueButton>
+					</div>
+				</section>
+				<section className={classes.bottom}>
+					<div className={classes['log-container']}>
+						<div className={classes['log-title-container']}>
+							<h2>Log</h2>
+							<DropDown
+								name={'filter'}
+								value={'filter'}
+								onChange={filterChangeHandler}
+								data={filterOptions}
+								addClass={'small'}
+							/>
+							<input
+								className={classes['date-picker']}
+								type="date"
+								name="date"
+								id="date"
+								value={date}
+								onChange={dateChangeHandler}
+							/>
+						</div>
+						<LogContainer selectedDate={date} />
+					</div>
+				</section>
+			</main>
 		</>
 	)
 }
