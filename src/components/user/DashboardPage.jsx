@@ -79,7 +79,7 @@ const DashBoard = () => {
 
 	return (
 		<>
-		{showChildModal && <CreateChildModal add={addChildHandler}></CreateChildModal>}
+		{showChildModal && <CreateChildModal toggle={addChildHandler}></CreateChildModal>}
 		<main className={classes.main}>
 			<section className={classes.top}>
 				<div className={classes['child-select']}>
