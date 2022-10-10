@@ -8,23 +8,25 @@ import {
 	longDateCreator,
 	shortDateCreator,
 } from '../../helper-functions/helperFunctions'
+import { useEffect } from 'react'
 
-const LogContainer = ({ selectedDate }) => {
+const LogContainer = ({ selectedDate, sendData }) => {
 	const sleeps = useSelector(state => state.child.sleeps)
 	const feedings = useSelector(state => state.child.feedings)
 	const changings = useSelector(state => state.child.changings)
 
 	const combinedData = [...sleeps, ...feedings, ...changings]
-
 	const filtered = combinedData.filter(entry => entry.day === selectedDate)
-	console.log('filtered', filtered)
 	const loadData = filtered.sort((a, b) => a.time - b.time)
-	console.log('sorted', loadData)
+
+	useEffect(() => {
+		sendData(loadData)
+	}, [])
 
 	const logData = loadData.map(entry => {
 		return entry.category === 'sleep' ? (
 			<SleepCard
-				key={entry.id}
+				key={entry.category + entry.id}
 				startTime={entry.start_time}
 				endTime={entry.end_time}
 				day={shortDateCreator(entry.day)}
@@ -32,6 +34,7 @@ const LogContainer = ({ selectedDate }) => {
 			></SleepCard>
 		) : entry.category === 'feeding' ? (
 			<FeedingCard
+				key={entry.category + entry.id}
 				type={entry.feed_type}
 				food={entry.food}
 				amount={entry.amount}
@@ -40,6 +43,7 @@ const LogContainer = ({ selectedDate }) => {
 			/>
 		) : (
 			<ChangingCard
+				key={entry.category + entry.id}
 				type={entry.type}
 				day={shortDateCreator(entry.day)}
 				time={entry.time}

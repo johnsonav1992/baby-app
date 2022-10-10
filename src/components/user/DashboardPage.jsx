@@ -18,6 +18,7 @@ const DashBoard = () => {
 	const [date, setDate] = useState(
 		new Date(Date.now()).toISOString().split('T')[0]
 	)
+	const [entryNums, setEntryNums] = useState({})
 	const dispatch = useDispatch()
 
 	const childId = useSelector(state => state.child.childId)
@@ -28,18 +29,18 @@ const DashBoard = () => {
 
 	useEffect(() => {
 		console.log('getting child data')
-			axios
-				.get(`${url}/children/${userId}`, {
-					headers: {
-						authorization: token,
-					},
-				})
-				.then(({ data }) => {
-					setChildren(data)
-				})
-				.catch(err => {
-					console.log(err)
-				})
+		axios
+			.get(`${url}/children/${userId}`, {
+				headers: {
+					authorization: token,
+				},
+			})
+			.then(({ data }) => {
+				setChildren(data)
+			})
+			.catch(err => {
+				console.log(err)
+			})
 	}, [token, userId, showChildModal])
 
 	const childChangeHandler = e => {
@@ -60,6 +61,21 @@ const DashBoard = () => {
 
 	const toggleModal = () => {
 		setShowChildModal(!showChildModal)
+	}
+
+	const dataHandler = data => {
+		const sleepNum = data.filter(entry => entry.category === 'sleep').length
+		const feedingNum = data.filter(
+			entry => entry.category === 'feeding'
+		).length
+		const changingNum = data.filter(
+			entry => entry.category === 'changing'
+		).length
+		setEntryNums({
+			sleepNum,
+			feedingNum,
+			changingNum,
+		})
 	}
 
 	const filterOptions = [
@@ -123,9 +139,16 @@ const DashBoard = () => {
 								onChange={dateChangeHandler}
 							/>
 						</div>
-						<LogContainer selectedDate={date} />
+						<LogContainer
+							selectedDate={date}
+							sendData={dataHandler}
+						/>
 					</div>
-					<DailySummary />
+					<DailySummary
+						sleeps={entryNums.sleepNum}
+						feedings={entryNums.feedingNum}
+						changings={entryNums.changingNum}
+					/>
 				</section>
 			</main>
 		</>
