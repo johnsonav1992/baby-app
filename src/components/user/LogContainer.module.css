@@ -1,5 +1,5 @@
 .container {
-  height: 500px;
+  height: 100%;
   overflow: scroll;
   display: flex;
   flex-direction: column;

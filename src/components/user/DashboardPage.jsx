@@ -103,7 +103,9 @@ const DashBoard = () => {
 						</div>
 						<LogContainer selectedDate={date} filter={currentFilter}/>
 					</div>
+					<div className={classes["summary-container"]}>
 					<DailySummary selectedDate={date} />
+					</div>
 				</section>
 			</main>
 		</>

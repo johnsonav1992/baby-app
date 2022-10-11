@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
@@ -9,10 +9,12 @@ import Error from '../UI/Error'
 import BlueButton from '../UI/BlueButton'
 import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import classes from './CreateChildModal.module.css'
+import { getChildren } from '../../store/childSlice'
 
 const CreateChildModal = ({ toggle }) => {
 	const userId = useSelector(state => state.auth.userId)
 	const token = useSelector(state => state.auth.token)
+	const dispatch = useDispatch()
 
 	const formInitialValues = {
 		name: '',
@@ -36,8 +38,7 @@ const CreateChildModal = ({ toggle }) => {
 		const birthday = new Date(values.birthday)
 		const age = Math.floor((Date.now() - birthday.getTime()) / 31556952000)
 		axios
-			.post(
-				`http://localhost:4000/children/${userId}`,
+			.post(`/children/${userId}`,
 				{ age: age, name: values.name, gender: values.gender },
 				{
 					headers: {
@@ -45,7 +46,7 @@ const CreateChildModal = ({ toggle }) => {
 					},
 				}
 			)
-			.then()
+			.then(dispatch(getChildren(userId, token)))
 			.catch(err => console.log(err))
 	}
 
