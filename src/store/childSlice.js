@@ -4,6 +4,7 @@ import axios from 'axios'
 //^ INITIAL STATE //
 const initialState = {
 	childId: '',
+	childName: '',
 	children: [],
 	feedings: [],
 	sleeps: [],
@@ -17,6 +18,9 @@ const childSlice = createSlice({
 	reducers: {
 		setChildren(state, action) {
 			state.children = action.payload
+		},
+		setChildName(state, action) {
+			state.childName = action.payload
 		},
 		setChildId(state, action) {
 			state.childId = action.payload

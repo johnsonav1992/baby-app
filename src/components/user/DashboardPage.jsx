@@ -29,6 +29,7 @@ const DashBoard = () => {
 		const child = children.filter(child => child.name === selectedChild)
 		const id = child[0].id
 		dispatch(childActions.setChildId(id))
+		dispatch(childActions.setChildName(child[0].name))
 		isInitial = false
 	}
 

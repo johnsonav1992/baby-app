@@ -12,6 +12,7 @@ const DailySummary = ({ selectedDate }) => {
 	const sleeps = useSelector(state => state.child.sleeps)
 	const feedings = useSelector(state => state.child.feedings)
 	const changings = useSelector(state => state.child.changings)
+	const childName = useSelector(state => state.child.childName)
 
 	const sleepNumber = sleeps.filter(sleep => sleep.day === selectedDate).length
 	const feedNumber = feedings.filter(feed => feed.day === selectedDate).length
@@ -20,7 +21,7 @@ const DailySummary = ({ selectedDate }) => {
 	return (
 		<Card addClass='daily-summary'>
 			<div className={classes.container}>
-        <h1>Daily Summary</h1>
+        <h1>Daily Summary {childName && `- ${childName}`}</h1>
 				<div className={classes.row}>
 					<div className={classes['img-wrapper']}>
 						<img src={bottle} alt="bottle icon" />
