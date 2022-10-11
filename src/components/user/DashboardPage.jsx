@@ -145,9 +145,7 @@ const DashBoard = () => {
 						/>
 					</div>
 					<DailySummary
-						sleeps={entryNums.sleepNum}
-						feedings={entryNums.feedingNum}
-						changings={entryNums.changingNum}
+						selectedDate={date}
 					/>
 				</section>
 			</main>

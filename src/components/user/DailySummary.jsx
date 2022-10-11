@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 import Card from '../UI/Card'
 import PlusButton from '../UI/PlusButton'
@@ -7,7 +8,14 @@ import sleepMoon from '../../assets/sleep.svg'
 import diaper from '../../assets/diaper.svg'
 import classes from './DailySummary.module.css'
 
-const DailySummary = ({ sleeps, feedings, changings }) => {
+const DailySummary = ({ selectedDate }) => {
+	const sleeps = useSelector(state => state.child.sleeps)
+	const feedings = useSelector(state => state.child.feedings)
+	const changings = useSelector(state => state.child.changings)
+
+	const sleepNumber = sleeps.filter(sleep => sleep.day === selectedDate).length
+	const feedNumber = feedings.filter(feed => feed.day === selectedDate).length
+	const changingNumber = changings.filter(changing => changing.day === selectedDate).length
 
 	return (
 		<Card addClass='daily-summary'>
@@ -19,7 +27,7 @@ const DailySummary = ({ sleeps, feedings, changings }) => {
 					</div>
 					<div className={classes.text}>
 						<p>Feedings</p>
-						<p>{feedings ? feedings : '-'}</p>
+						<p>{feedings ? feedNumber : '-'}</p>
 					</div>
 					<PlusButton color="blue" />
 				</div>
@@ -29,7 +37,7 @@ const DailySummary = ({ sleeps, feedings, changings }) => {
 					</div>
 					<div className={classes.text}>
 						<p>Sleep</p>
-						<p>{sleeps ? sleeps : '-'}</p>
+						<p>{sleeps ? sleepNumber : '-'}</p>
 					</div>
 					<PlusButton color="purple" />
 				</div>
@@ -39,7 +47,7 @@ const DailySummary = ({ sleeps, feedings, changings }) => {
 					</div>
 					<div className={classes.text}>
 						<p>Diapers</p>
-						<p>{changings ? changings : '-'}</p>
+						<p>{changings ? changingNumber : '-'}</p>
 					</div>
 					<PlusButton color="orange" />
 				</div>
