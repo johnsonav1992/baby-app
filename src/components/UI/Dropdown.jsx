@@ -14,7 +14,7 @@ const Dropdown = ({ name, value, onChange, data, addClass }) => {
 						id={dataObj.id}
 						value={dataObj.name}
 					>
-						{dataObj.name}
+						{dataObj.value || dataObj.name}
 					</option>
 				)
 			})}

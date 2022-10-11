@@ -8,20 +8,20 @@ import {
 	longDateCreator,
 	shortDateCreator,
 } from '../../helper-functions/helperFunctions'
-import { useEffect } from 'react'
 
-const LogContainer = ({ selectedDate, sendData }) => {
+const LogContainer = ({ selectedDate, filter }) => {
 	const sleeps = useSelector(state => state.child.sleeps)
 	const feedings = useSelector(state => state.child.feedings)
 	const changings = useSelector(state => state.child.changings)
 
 	const combinedData = [...sleeps, ...feedings, ...changings]
-	const filtered = combinedData.filter(entry => entry.day === selectedDate)
+	const filtered = combinedData.filter(entry =>
+		filter
+			? entry.category === filter.toLowerCase() &&
+			  entry.day === selectedDate
+			: entry.day === selectedDate
+	)
 	const loadData = filtered.sort((a, b) => a.time - b.time)
-
-	useEffect(() => {
-		sendData(loadData)
-	}, [])
 
 	const logData = loadData.map(entry => {
 		return entry.category === 'sleep' ? (

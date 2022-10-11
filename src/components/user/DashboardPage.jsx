@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios'
 
 import classes from './DashboardPage.module.css'
-import { childActions, getChildData } from '../../store/childSlice'
+import { childActions, getChildren, getChildData } from '../../store/childSlice'
 import DropDown from '../UI/Dropdown'
 import BlueButton from '../UI/BlueButton'
 import LogContainer from '../user/LogContainer'
@@ -13,35 +12,17 @@ import DailySummary from './DailySummary'
 let isInitial = true
 
 const DashBoard = () => {
-	const [children, setChildren] = useState([])
 	const [showChildModal, setShowChildModal] = useState(false)
+	const [currentFilter, setCurrentFilter] = useState(null)
 	const [date, setDate] = useState(
 		new Date(Date.now()).toISOString().split('T')[0]
 	)
-	const [entryNums, setEntryNums] = useState({})
 	const dispatch = useDispatch()
 
+	const children = useSelector(state => state.child.children)
 	const childId = useSelector(state => state.child.childId)
 	const userId = useSelector(state => state.auth.userId)
 	const token = useSelector(state => state.auth.token)
-
-	const url = 'http://localhost:4000'
-
-	useEffect(() => {
-		console.log('getting child data')
-		axios
-			.get(`${url}/children/${userId}`, {
-				headers: {
-					authorization: token,
-				},
-			})
-			.then(({ data }) => {
-				setChildren(data)
-			})
-			.catch(err => {
-				console.log(err)
-			})
-	}, [token, userId, showChildModal])
 
 	const childChangeHandler = e => {
 		const selectedChild = e.target.value
@@ -51,38 +32,17 @@ const DashBoard = () => {
 		isInitial = false
 	}
 
-	const filterChangeHandler = () => {
-		console.log('filter')
-	}
-
-	const dateChangeHandler = e => {
-		setDate(e.target.value)
-	}
-
-	const toggleModal = () => {
-		setShowChildModal(!showChildModal)
-	}
-
-	const dataHandler = data => {
-		const sleepNum = data.filter(entry => entry.category === 'sleep').length
-		const feedingNum = data.filter(
-			entry => entry.category === 'feeding'
-		).length
-		const changingNum = data.filter(
-			entry => entry.category === 'changing'
-		).length
-		setEntryNums({
-			sleepNum,
-			feedingNum,
-			changingNum,
-		})
-	}
-
 	const filterOptions = [
-		{ id: 1, name: 'Feedings' },
-		{ id: 2, name: 'Sleep' },
-		{ id: 3, name: 'Diapers' },
+		{ id: 1, name: '', value: 'All' },
+		{ id: 2, name: 'feeding', value: 'Feedings' },
+		{ id: 3, name: 'sleep', value: 'Sleep' },
+		{ id: 4, name: 'changing', value: 'Diapers' },
 	]
+
+	useEffect(() => {
+		console.log('getting child data')
+		dispatch(getChildren(userId, token))
+	}, [token, userId, dispatch])
 
 	useEffect(() => {
 		if (isInitial) {
@@ -95,7 +55,9 @@ const DashBoard = () => {
 	return (
 		<>
 			{showChildModal && (
-				<CreateChildModal toggle={toggleModal}></CreateChildModal>
+				<CreateChildModal
+					toggle={() => setShowChildModal(!showChildModal)}
+				></CreateChildModal>
 			)}
 			<main className={classes.main}>
 				<section className={classes.top}>
@@ -126,7 +88,7 @@ const DashBoard = () => {
 							<DropDown
 								name={'filter'}
 								value={'filter'}
-								onChange={filterChangeHandler}
+								onChange={(e) => setCurrentFilter(e.target.value)}
 								data={filterOptions}
 								addClass={'small'}
 							/>
@@ -136,17 +98,12 @@ const DashBoard = () => {
 								name="date"
 								id="date"
 								value={date}
-								onChange={dateChangeHandler}
+								onChange={e => setDate(e.target.value)}
 							/>
 						</div>
-						<LogContainer
-							selectedDate={date}
-							sendData={dataHandler}
-						/>
+						<LogContainer selectedDate={date} filter={currentFilter}/>
 					</div>
-					<DailySummary
-						selectedDate={date}
-					/>
+					<DailySummary selectedDate={date} />
 				</section>
 			</main>
 		</>
