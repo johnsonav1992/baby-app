@@ -8,7 +8,7 @@ import sleepMoon from '../../assets/sleep.svg'
 import diaper from '../../assets/diaper.svg'
 import classes from './DailySummary.module.css'
 
-const DailySummary = ({ selectedDate }) => {
+const DailySummary = ({ selectedDate, toggle }) => {
 	const sleeps = useSelector(state => state.child.sleeps)
 	const feedings = useSelector(state => state.child.feedings)
 	const changings = useSelector(state => state.child.changings)
@@ -30,7 +30,7 @@ const DailySummary = ({ selectedDate }) => {
 						<p>Feedings</p>
 						<p>{feedings ? feedNumber : '-'}</p>
 					</div>
-					<PlusButton color="blue" />
+					<PlusButton color="blue" onClick={() => toggle('feeding')}/>
 				</div>
 				<div className={classes.row}>
         <div className={classes['img-wrapper']}>
@@ -40,7 +40,7 @@ const DailySummary = ({ selectedDate }) => {
 						<p>Sleep</p>
 						<p>{sleeps ? sleepNumber : '-'}</p>
 					</div>
-					<PlusButton color="purple" />
+					<PlusButton color="purple" onClick={() => toggle('sleep')}/>
 				</div>
 				<div className={classes.row}>
         <div className={classes['img-wrapper']}>
@@ -50,7 +50,7 @@ const DailySummary = ({ selectedDate }) => {
 						<p>Diapers</p>
 						<p>{changings ? changingNumber : '-'}</p>
 					</div>
-					<PlusButton color="orange" />
+					<PlusButton color="orange" onClick={() => toggle('changing')} />
 				</div>
 			</div>
 		</Card>

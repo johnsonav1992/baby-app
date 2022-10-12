@@ -8,11 +8,14 @@ import BlueButton from '../UI/BlueButton'
 import LogContainer from '../user/LogContainer'
 import CreateChildModal from './CreateChildModal'
 import DailySummary from './DailySummary'
+import CreateEntry from './CreateEntry'
 
 let isInitial = true
 
 const DashBoard = () => {
 	const [showChildModal, setShowChildModal] = useState(false)
+	const [showEntryModal, setShowEntryModal] = useState(false)
+	const [entryType, setEntryType] = useState('')
 	const [currentFilter, setCurrentFilter] = useState(null)
 	const [date, setDate] = useState(
 		new Date(Date.now()).toISOString().split('T')[0]
@@ -33,6 +36,11 @@ const DashBoard = () => {
 		isInitial = false
 	}
 
+	const entryHandler = entryType => {
+		setEntryType(entryType)
+		setShowEntryModal(!showEntryModal)
+	}
+
 	const filterOptions = [
 		{ id: 1, name: '', value: 'All' },
 		{ id: 2, name: 'feeding', value: 'Feedings' },
@@ -41,7 +49,6 @@ const DashBoard = () => {
 	]
 
 	useEffect(() => {
-		console.log('getting child data')
 		dispatch(getChildren(userId, token))
 	}, [token, userId, dispatch])
 
@@ -59,6 +66,12 @@ const DashBoard = () => {
 				<CreateChildModal
 					toggle={() => setShowChildModal(!showChildModal)}
 				></CreateChildModal>
+			)}
+			{showEntryModal && (
+				<CreateEntry
+					entry={entryType}
+					toggle={() => setShowEntryModal(!showEntryModal)}
+				/>
 			)}
 			<main className={classes.main}>
 				<section className={classes.top}>
@@ -89,7 +102,7 @@ const DashBoard = () => {
 							<DropDown
 								name={'filter'}
 								value={'filter'}
-								onChange={(e) => setCurrentFilter(e.target.value)}
+								onChange={e => setCurrentFilter(e.target.value)}
 								data={filterOptions}
 								addClass={'small'}
 							/>
@@ -102,10 +115,16 @@ const DashBoard = () => {
 								onChange={e => setDate(e.target.value)}
 							/>
 						</div>
-						<LogContainer selectedDate={date} filter={currentFilter}/>
+						<LogContainer
+							selectedDate={date}
+							filter={currentFilter}
+						/>
 					</div>
-					<div className={classes["summary-container"]}>
-					<DailySummary selectedDate={date} />
+					<div className={classes['summary-container']}>
+						<DailySummary
+							selectedDate={date}
+							toggle={entryHandler}
+						/>
 					</div>
 				</section>
 			</main>
