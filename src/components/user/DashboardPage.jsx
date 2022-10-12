@@ -53,12 +53,13 @@ const DashBoard = () => {
 	}, [token, userId, dispatch])
 
 	useEffect(() => {
+		console.log('useEffect running')
 		if (isInitial) {
 			return
 		} else {
 			dispatch(getChildData(childId, token, date))
 		}
-	}, [childId, token, date, dispatch])
+	}, [childId, token, date, dispatch, showEntryModal])
 
 	return (
 		<>

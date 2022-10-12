@@ -61,7 +61,7 @@ const CreateChildModal = ({ toggle }) => {
 					toggle()
 				}}
 			>
-				{({ errors, touched, values }) => (
+				{({ errors, touched }) => (
 					<Form action="submit" className={classes.form}>
 						<h1>Add new child</h1>
 						<div className={classes['group-container']}>

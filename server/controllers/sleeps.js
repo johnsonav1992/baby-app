@@ -40,13 +40,14 @@ module.exports = {
 	},
 
 	addSleep: async (req, res) => {
-		const { day, startTime, endTime } = req.body
+		const { category, day, startTime, endTime } = req.body
 
 		const calculatedDuration = calculateTimeDifference(startTime, endTime)
 
 		const { childId } = req.params
 		try {
 			const newSleep = await Sleep.create({
+				category,
 				day,
 				time: startTime,
 				start_time: startTime,
