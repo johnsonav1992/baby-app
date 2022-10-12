@@ -6,7 +6,7 @@ import classes from './SleepCard.module.css'
 import sleepIcon from '../../assets/sleep.svg'
 import { timeConverter } from '../../helper-functions/helperFunctions'
 
-const SleepCard = ({ startTime, endTime, day, duration }) => {
+const SleepCard = ({ id, entryType, startTime, endTime, day, duration, deleteEntry }) => {
 	duration = duration / 60 / 1000
 
 	return (
@@ -41,7 +41,7 @@ const SleepCard = ({ startTime, endTime, day, duration }) => {
 				</div>
 				<div className={classes['btn-container']}>
 					<EditButton />
-					<RedDeleteButton />
+					<RedDeleteButton onClick={() => deleteEntry(id, entryType)}/>
 				</div>
 			</div>
 		</Card>

@@ -20,18 +20,18 @@ module.exports = app => {
     app.post('/feedings/:childId', isAuthenticated, addFeeding)
     app.get('/feedings/:childId', isAuthenticated, getAllFeedings)
     app.put('/feedings/:feedingId', isAuthenticated, editFeeding)
-    app.delete('/feedings/:childId', isAuthenticated, deleteFeeding)
+    app.delete('/feedings/:feedingId', isAuthenticated, deleteFeeding)
 
     //changings
     app.post('/changings/:childId', isAuthenticated, addChanging)
     app.get('/changings/:childId', isAuthenticated, getAllChangings)
     app.put('/changings/:changingId', isAuthenticated, editChanging)
-    app.delete('/changings/:childId', isAuthenticated, deleteChanging)
+    app.delete('/changings/:changingId', isAuthenticated, deleteChanging)
 
     //sleep
     app.post('/sleeps/:childId', isAuthenticated, addSleep)
     app.get('/sleeps/:childId', isAuthenticated, getAllSleeps)
     app.put('/sleeps/:sleepId', isAuthenticated, editSleep)
-    app.delete('/sleeps/:childId', isAuthenticated, deleteSleep)
+    app.delete('/sleeps/:sleepId', isAuthenticated, deleteSleep)
 
 }

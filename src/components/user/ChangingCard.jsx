@@ -6,7 +6,7 @@ import classes from './FeedingCard.module.css'
 import diaperIcon from '../../assets/diaper.svg'
 import { timeConverter } from '../../helper-functions/helperFunctions'
 
-const ChangingCard = ({ type, day, time }) => {
+const ChangingCard = ({ id, entryType, type, day, time, deleteEntry }) => {
 	return (
 		<Card addClass="entry">
 			<div className={classes.container}>
@@ -28,7 +28,7 @@ const ChangingCard = ({ type, day, time }) => {
 				</div>
 				<div className={classes['btn-container']}>
 					<EditButton />
-					<RedDeleteButton />
+					<RedDeleteButton onClick={() => deleteEntry(id, entryType)}/>
 				</div>
 			</div>
 		</Card>

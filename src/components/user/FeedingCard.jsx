@@ -6,7 +6,7 @@ import classes from './FeedingCard.module.css'
 import bottleIcon from '../../assets/bottle.svg'
 import { timeConverter } from '../../helper-functions/helperFunctions'
 
-const FeedingCard = ({ type, food, amount, day, time }) => {
+const FeedingCard = ({ id, entryType, deleteEntry, type, food, amount, day, time }) => {
 	return (
 		<Card addClass="entry">
 			<div className={classes.container}>
@@ -29,7 +29,7 @@ const FeedingCard = ({ type, food, amount, day, time }) => {
 				</div>
 				<div className={classes['btn-container']}>
 					<EditButton />
-					<RedDeleteButton />
+					<RedDeleteButton onClick={() => deleteEntry(id, entryType)}/>
 				</div>
 			</div>
 		</Card>
