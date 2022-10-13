@@ -5,7 +5,7 @@ const Dropdown = ({ name, value, onChange, data, addClass }) => {
 	return (
 		<select className={`${classes.dropdown} ${classes[addClass]}`} name={name} onChange={onChange}>
 			<option selected disabled>
-				{value}
+				{name === 'child' ? 'select child' : value}
 			</option>
 			{data.map(dataObj => {
 				return (
