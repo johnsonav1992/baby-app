@@ -14,14 +14,18 @@ const DailySummary = ({ selectedDate, toggle }) => {
 	const changings = useSelector(state => state.child.changings)
 	const childName = useSelector(state => state.child.childName)
 
-	const sleepNumber = sleeps.filter(sleep => sleep.day === selectedDate).length
+	const sleepNumber = sleeps.filter(
+		sleep => sleep.day === selectedDate
+	).length
 	const feedNumber = feedings.filter(feed => feed.day === selectedDate).length
-	const changingNumber = changings.filter(changing => changing.day === selectedDate).length
+	const changingNumber = changings.filter(
+		changing => changing.day === selectedDate
+	).length
 
 	return (
-		<Card addClass='daily-summary'>
+		<Card addClass="daily-summary">
 			<div className={classes.container}>
-        <h1>Daily Summary {childName && `- ${childName}`}</h1>
+				<h1>Daily Summary {childName && `- ${childName}`}</h1>
 				<div className={classes.row}>
 					<div className={classes['img-wrapper']}>
 						<img src={bottle} alt="bottle icon" />
@@ -30,27 +34,48 @@ const DailySummary = ({ selectedDate, toggle }) => {
 						<p>Feedings</p>
 						<p>{feedings ? feedNumber : '-'}</p>
 					</div>
-					<PlusButton color="blue" onClick={() => toggle('feeding')}/>
+					<PlusButton
+						color="blue"
+						onClick={() =>
+							childName !== ''
+								? toggle('feeding')
+								: alert('you must select a child first')
+						}
+					/>
 				</div>
 				<div className={classes.row}>
-        <div className={classes['img-wrapper']}>
+					<div className={classes['img-wrapper']}>
 						<img src={sleepMoon} alt="sleep icon" />
 					</div>
 					<div className={classes.text}>
 						<p>Sleep</p>
 						<p>{sleeps ? sleepNumber : '-'}</p>
 					</div>
-					<PlusButton color="purple" onClick={() => toggle('sleep')}/>
+					<PlusButton
+						color="purple"
+						onClick={() =>
+							childName !== ''
+								? toggle('sleep')
+								: alert('you must select a child first')
+						}
+					/>
 				</div>
 				<div className={classes.row}>
-        <div className={classes['img-wrapper']}>
+					<div className={classes['img-wrapper']}>
 						<img src={diaper} alt="diaper icon" />
 					</div>
 					<div className={classes.text}>
 						<p>Diapers</p>
 						<p>{changings ? changingNumber : '-'}</p>
 					</div>
-					<PlusButton color="orange" onClick={() => toggle('changing')} />
+					<PlusButton
+						color="orange"
+						onClick={() =>
+							childName !== ''
+								? toggle('changing')
+								: alert('you must select a child first')
+						}
+					/>
 				</div>
 			</div>
 		</Card>

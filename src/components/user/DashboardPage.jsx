@@ -53,7 +53,6 @@ const DashBoard = () => {
 	}, [token, userId, dispatch])
 
 	useEffect(() => {
-		console.log('useEffect running')
 		if (isInitial) {
 			return
 		} else {

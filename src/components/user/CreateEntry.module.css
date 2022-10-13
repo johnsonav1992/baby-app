@@ -1,0 +1,43 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.fieldset {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	border: none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+.group-container {
+	display: flex;
+  flex-direction: column;
+	gap: 1.5rem;
+}
+
+.group {
+	display: flex;
+	width: 100%;
+	gap: 2rem;
+}
+
+.input {
+	padding: 0.5rem;
+	border: 1px solid black;
+	border-radius: 0.25rem;
+}
+
+.btn-container {
+	display: flex;
+	justify-content: flex-end;
+	gap: .5rem;
+}
+
+.error {
+	border: 1px solid red;
+}

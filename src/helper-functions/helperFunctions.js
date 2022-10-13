@@ -2,7 +2,7 @@ export const timeConverter = (time) => {
   const check = time.substring(0, 2)
 
   if (+check < 12) {
-    time = time.substring(1, 5) + ' AM'
+    time = time.substring(0, 5) + ' AM'
   } else if(+check === 12) {
     time = time.substring(0, 2) + time.substring(2, 5) + ' PM'
   } else {
