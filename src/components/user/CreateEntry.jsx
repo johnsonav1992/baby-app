@@ -1,11 +1,13 @@
 import React from 'react'
 import { useSelector, useDispatch} from 'react-redux'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
 import axios from 'axios'
 
 import FormModal from '../general/FormModal'
 import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import BlueButton from '../UI/BlueButton'
+import Error from '../UI/Error'
 import classes from './CreateEntry.module.css'
 import { getChildData } from '../../store/childSlice'
 
@@ -15,6 +17,19 @@ const CreateEntry = ({ entry, toggle }) => {
 	const childId = useSelector(state => state.child.childId)
 
   const dispatch = useDispatch()
+
+	const sleepValid = Yup.object({
+		day: Yup.date().required('You must input a date.'),
+		startTime: Yup.string().required('Required'),
+		endTime: Yup.string().required('Required'),
+	})
+
+	const feedingValid = {
+		time: Yup.mixed().required('Required'),
+		type: Yup.string().required('Required'),
+		food: Yup.string().max(100, 'Too many characters.').required('Required'),
+		amount: Yup.string().required('Required')
+	}
 
 	const handleSubmit = (values) => {
     axios.post(`/sleeps/${childId}`, values, {
@@ -32,7 +47,7 @@ const CreateEntry = ({ entry, toggle }) => {
         startTime: '',
         endTime: '',
       }}
-			// validationSchema={validationSchema}
+			validationSchema={sleepValid}
 			onSubmit={(values, { resetForm }) => {
 				handleSubmit(values)
 				resetForm({ values: '' })
@@ -43,7 +58,6 @@ const CreateEntry = ({ entry, toggle }) => {
 				<Form action="submit" className={classes.form}>
 					<h1>Add sleep entry</h1>
 					<div className={classes['group-container']}>
-						<div className={classes.group}>
 							<fieldset className={classes.fieldset}>
 								<label htmlFor="day">Day</label>
 								<Field
@@ -57,7 +71,6 @@ const CreateEntry = ({ entry, toggle }) => {
 								/>
 								<ErrorMessage component={Error} name="day" />
 							</fieldset>
-						</div>
 						<div className={classes.group}>
 							<fieldset className={classes.fieldset}>
 								<label htmlFor="startTime">Start Time</label>
@@ -114,7 +127,7 @@ const CreateEntry = ({ entry, toggle }) => {
         day: '',
         time: '',
       }}
-			// validationSchema={validationSchema}
+			validationSchema={feedingValid}
 			onSubmit={(values, { resetForm }) => {
 				handleSubmit(values, 'feeding')
 				resetForm({ values: '' })
