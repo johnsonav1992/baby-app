@@ -1,6 +1,6 @@
 .main {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -13,6 +13,12 @@
     justify-content: space-between;
 }
 
+.child-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .child-select {
     display: flex;
     flex-direction: column;
@@ -20,7 +26,7 @@
 }
 
 .child-select h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 .log-container {
@@ -57,9 +63,8 @@
 .summary-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 100%;
     flex-grow: 1;
-    padding: 2rem;
-    padding-top: 3rem;
-    padding-right: 1rem;
+    padding: 1rem;
 }

@@ -40,25 +40,6 @@ const CreateEntry = ({ entry, toggle, selectedDate }) => {
 		type: Yup.string().required('Type required'),
 	})
 
-	const handleSubmit = values => {
-		console.log(values)
-		axios
-			.post(
-				values.category === 'sleep'
-					? `/sleeps/${childId}`
-					: values.category === 'feeding'
-					? `/feedings/${childId}`
-					: `/changings/${childId}`,
-				values,
-				{
-					headers: {
-						authorization: token,
-					},
-				}
-			)
-			.then(dispatch(getChildData(childId, token)))
-	}
-
 	const sleepEntry = (
 		<Formik
 			initialValues={{
@@ -318,6 +299,25 @@ const CreateEntry = ({ entry, toggle, selectedDate }) => {
 			)}
 		</Formik>
 	)
+
+	const handleSubmit = values => {
+		console.log(values)
+		axios
+			.post(
+				values.category === 'sleep'
+					? `/sleeps/${childId}`
+					: values.category === 'feeding'
+					? `/feedings/${childId}`
+					: `/changings/${childId}`,
+				values,
+				{
+					headers: {
+						authorization: token,
+					},
+				}
+			)
+			.then(dispatch(getChildData(childId, token)))
+	}
 
 	return (
 		<FormModal>

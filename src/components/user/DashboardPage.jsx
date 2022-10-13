@@ -79,12 +79,15 @@ const DashBoard = () => {
 				<section className={classes.top}>
 					<div className={classes['child-select']}>
 						<h1>Dashboard</h1>
-						<DropDown
-							name={'child'}
-							value={childName ? childName : 'select child'}
-							onChange={childChangeHandler}
-							data={children}
-						/>
+						<div className={classes['child-container']}>
+							<h2>Child</h2>
+							<DropDown
+								name={'child'}
+								value={childName ? childName : 'select child'}
+								onChange={childChangeHandler}
+								data={children}
+							/>
+						</div>
 					</div>
 					<div className={classes['btn-container']}>
 						<BlueButton
