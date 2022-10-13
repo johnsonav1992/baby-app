@@ -28,3 +28,10 @@ export const shortDateCreator = (date) => {
   return converted
 }
 
+export const timestringToNumeric = (time) => {
+  const converted = time.split(':').reduce((seconds, v) => {
+    return +v + seconds * 60;
+  }, 0) / 60;
+  return converted
+}
+

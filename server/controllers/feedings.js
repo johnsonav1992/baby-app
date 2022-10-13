@@ -23,10 +23,11 @@ module.exports = {
 	},
 
 	addFeeding: async (req, res) => {
-		const { type, food, amount, day, time } = req.body
+		const { category, type, food, amount, day, time } = req.body
 		const { childId } = req.params
 		try {
 			const newFeeding = await Feeding.create({
+				category,
 				feed_type: type,
 				food,
 				amount,

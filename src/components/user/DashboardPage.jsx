@@ -24,6 +24,7 @@ const DashBoard = () => {
 
 	const children = useSelector(state => state.child.children)
 	const childId = useSelector(state => state.child.childId)
+	const childName = useSelector(state => state.child.childName)
 	const userId = useSelector(state => state.auth.userId)
 	const token = useSelector(state => state.auth.token)
 
@@ -71,6 +72,7 @@ const DashBoard = () => {
 				<CreateEntry
 					entry={entryType}
 					toggle={() => setShowEntryModal(!showEntryModal)}
+					selectedDate={date}
 				/>
 			)}
 			<main className={classes.main}>
@@ -79,7 +81,7 @@ const DashBoard = () => {
 						<h1>Dashboard</h1>
 						<DropDown
 							name={'child'}
-							value={'select child'}
+							value={childName ? childName : 'select child'}
 							onChange={childChangeHandler}
 							data={children}
 						/>

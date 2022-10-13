@@ -23,10 +23,11 @@ module.exports = {
 	},
 
 	addChanging: async (req, res) => {
-		const { type, day, time } = req.body
+		const { category, type, day, time } = req.body
 		const { childId } = req.params
 		try {
 			const newChanging = await Changing.create({
+				category,
 				type,
 				day,
 				time,

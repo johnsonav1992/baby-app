@@ -8,6 +8,7 @@ import ChangingCard from './ChangingCard'
 import {
 	longDateCreator,
 	shortDateCreator,
+	timestringToNumeric,
 } from '../../helper-functions/helperFunctions'
 import { getChildData } from '../../store/childSlice'
 
@@ -27,7 +28,9 @@ const LogContainer = ({ selectedDate, filter }) => {
 			  entry.day === selectedDate
 			: entry.day === selectedDate
 	)
-	const loadData = filtered.sort((a, b) => a.time - b.time)
+	const loadData = filtered.sort(
+		(a, b) => timestringToNumeric(a.time) - timestringToNumeric(b.time)
+	)
 
 	const deleteEntry = (entryId, entryType) => {
 		axios
