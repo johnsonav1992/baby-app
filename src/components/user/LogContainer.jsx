@@ -12,7 +12,7 @@ import {
 } from '../../helper-functions/helperFunctions'
 import { getChildData } from '../../store/childSlice'
 
-const LogContainer = ({ selectedDate, filter }) => {
+const LogContainer = ({ selectedDate, filter, editValues }) => {
 	const dispatch = useDispatch()
 	const childId = useSelector(state => state.child.childId)
 	const token = useSelector(state => state.auth.token)
@@ -47,6 +47,22 @@ const LogContainer = ({ selectedDate, filter }) => {
 			})
 	}
 
+	const editEntry = (entryId, entryType , values) => {
+		console.log(`Type: ${entryType} Id: ${entryId} Values: ${values}`)
+		// axios
+		// 	.put(`/${entryType}s/${entryId}`, values, {
+		// 		headers: {
+		// 			authorization: token,
+		// 		},
+		// 	})
+		// 	.then(() => {
+		// 		dispatch(getChildData(childId, token, selectedDate))
+		// 	})
+		// 	.catch(err => {
+		// 		console.log(err)
+		// 	})
+	}
+
 	const logData = loadData.map(entry => {
 		return entry.category === 'sleep' ? (
 			<SleepCard
@@ -57,6 +73,8 @@ const LogContainer = ({ selectedDate, filter }) => {
 				endTime={entry.end_time}
 				day={shortDateCreator(entry.day)}
 				duration={entry.duration}
+				editEntry={editEntry}
+				editValues={editValues}
 				deleteEntry={deleteEntry}
 			></SleepCard>
 		) : entry.category === 'feeding' ? (
@@ -69,6 +87,8 @@ const LogContainer = ({ selectedDate, filter }) => {
 				amount={entry.amount}
 				day={shortDateCreator(entry.day)}
 				time={entry.time}
+				editEntry={editEntry}
+				editValues={editValues}
 				deleteEntry={deleteEntry}
 			/>
 		) : (
@@ -79,6 +99,8 @@ const LogContainer = ({ selectedDate, filter }) => {
 				type={entry.type}
 				day={shortDateCreator(entry.day)}
 				time={entry.time}
+				editEntry={editEntry}
+				editValues={editValues}
 				deleteEntry={deleteEntry}
 			/>
 		)

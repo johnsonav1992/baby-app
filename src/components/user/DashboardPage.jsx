@@ -16,6 +16,7 @@ const DashBoard = () => {
 	const [showChildModal, setShowChildModal] = useState(false)
 	const [showEntryModal, setShowEntryModal] = useState(false)
 	const [entryType, setEntryType] = useState('')
+	const [editValues, setEditValues] = useState({})
 	const [currentFilter, setCurrentFilter] = useState(null)
 	const [date, setDate] = useState(
 		new Date(Date.now()).toISOString().split('T')[0]
@@ -61,6 +62,10 @@ const DashBoard = () => {
 		}
 	}, [childId, token, date, dispatch, showEntryModal])
 
+	const edit = (values) => {
+		setEditValues(values)
+	}
+
 	return (
 		<>
 			{showChildModal && (
@@ -73,6 +78,7 @@ const DashBoard = () => {
 					entry={entryType}
 					toggle={() => setShowEntryModal(!showEntryModal)}
 					selectedDate={date}
+					send={edit}
 				/>
 			)}
 			<main className={classes.main}>
@@ -123,6 +129,7 @@ const DashBoard = () => {
 						<LogContainer
 							selectedDate={date}
 							filter={currentFilter}
+							editValues={editValues}
 						/>
 					</div>
 					<div className={classes['summary-container']}>

@@ -6,7 +6,18 @@ import classes from './FeedingCard.module.css'
 import bottleIcon from '../../assets/bottle.svg'
 import { timeConverter } from '../../helper-functions/helperFunctions'
 
-const FeedingCard = ({ id, entryType, deleteEntry, type, food, amount, day, time }) => {
+const FeedingCard = ({
+	id,
+	entryType,
+	editEntry,
+	editValues,
+	deleteEntry,
+	type,
+	food,
+	amount,
+	day,
+	time,
+}) => {
 	return (
 		<Card addClass="entry">
 			<div className={classes.container}>
@@ -19,7 +30,9 @@ const FeedingCard = ({ id, entryType, deleteEntry, type, food, amount, day, time
 				</div>
 				<div className={classes['info-wrapper']}>
 					<div className={classes.type}>
-						<h3 className={classes.heading}>{type} - {food}</h3>
+						<h3 className={classes.heading}>
+							{type} - {food}
+						</h3>
 						<h3 className={classes.heading}>{amount}</h3>
 					</div>
 					<div className={classes['day-time']}>
@@ -28,8 +41,12 @@ const FeedingCard = ({ id, entryType, deleteEntry, type, food, amount, day, time
 					</div>
 				</div>
 				<div className={classes['btn-container']}>
-					<EditButton />
-					<RedDeleteButton onClick={() => deleteEntry(id, entryType)}/>
+					<EditButton
+						onClick={() => editEntry(id, entryType, editValues)}
+					/>
+					<RedDeleteButton
+						onClick={() => deleteEntry(id, entryType)}
+					/>
 				</div>
 			</div>
 		</Card>
