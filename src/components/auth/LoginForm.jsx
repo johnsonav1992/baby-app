@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Formik, Form, Field } from 'formik'
+import axios from 'axios'
 
 import BlueButton from '../UI/BlueButton'
-import classes from './LoginForm.module.css'
 import { authActions } from '../../store/authSlice'
-
-import axios from 'axios'
+import classes from './LoginForm.module.css'
 
 const LoginForm = () => {
 	const [error, setError] = useState('')
@@ -15,17 +14,10 @@ const LoginForm = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
-	const url = 'http://localhost:4000'
-
-	const formInitialValues = {
-		username: '',
-		password: '',
-	}
-
 	const handleSubmit = async values => {
 		try {
 			const response = await axios.post(
-				register ? `${url}/register` : `${url}/login`,
+				register ? `/register` : `/login`,
 				values
 			)
 			const data = response.data
@@ -33,7 +25,7 @@ const LoginForm = () => {
 				authActions.login({
 					token: data.token,
 					sessionExp: data.expirationTime,
-					userId: data.userId
+					userId: data.userId,
 				})
 			)
 			navigate('/dashboard')
@@ -55,9 +47,11 @@ const LoginForm = () => {
 	return (
 		<div className={classes['outer-form-wrapper']}>
 			<h1>{!register ? 'Login' : 'Register for an account'}</h1>
-
 			<Formik
-				initialValues={formInitialValues}
+				initialValues={{
+					username: '',
+					password: '',
+				}}
 				onSubmit={(values, { resetForm }) => {
 					handleSubmit(values)
 					resetForm({ values: '' })
@@ -91,7 +85,9 @@ const LoginForm = () => {
 							<button
 								className={classes['action-link']}
 								type="button"
-								onClick={() => dispatch(authActions.toggleRegister())}
+								onClick={() =>
+									dispatch(authActions.toggleRegister())
+								}
 							>
 								{register ? 'Login here.' : 'Register here.'}
 							</button>

@@ -1,36 +1,36 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import classes from './DashboardPage.module.css'
-import { childActions, getChildren, getChildData } from '../../store/childSlice'
 import DropDown from '../UI/Dropdown'
 import BlueButton from '../UI/BlueButton'
 import LogContainer from '../user/LogContainer'
 import CreateChildModal from './CreateChildModal'
 import DailySummary from './DailySummary'
 import CreateEntry from './CreateEntry'
+import { childActions, getChildren, getChildData } from '../../store/childSlice'
+import classes from './DashboardPage.module.css'
 
 let isInitial = true
 
 const DashBoard = () => {
-	const tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 	const [showChildModal, setShowChildModal] = useState(false)
 	const [showEntryModal, setShowEntryModal] = useState(false)
+	const [entryId, setEntryId] = useState('')
 	const [entryType, setEntryType] = useState('')
 	const [status, setStatus] = useState('Add')
-	const [entryId, setEntryId] = useState('')
 	const [currentFilter, setCurrentFilter] = useState(null)
+
+	const tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 	const [date, setDate] = useState(
 		(new Date(Date.now() - tzoffset)).toISOString().split('T')[0]
 	)
-
-	const dispatch = useDispatch()
 
 	const children = useSelector(state => state.child.children)
 	const childId = useSelector(state => state.child.childId)
 	const childName = useSelector(state => state.child.childName)
 	const userId = useSelector(state => state.auth.userId)
 	const token = useSelector(state => state.auth.token)
+	const dispatch = useDispatch()
 
 	const childChangeHandler = e => {
 		const selectedChild = e.target.value

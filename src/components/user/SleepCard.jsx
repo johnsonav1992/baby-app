@@ -1,10 +1,11 @@
 import React from 'react'
+
 import Card from '../UI/Card'
 import EditButton from '../UI/EditButton'
 import RedDeleteButton from '../UI/RedDeleteButton'
-import classes from './SleepCard.module.css'
 import sleepIcon from '../../assets/sleep.svg'
 import { timeConverter } from '../../helper-functions/helperFunctions'
+import classes from './SleepCard.module.css'
 
 const SleepCard = ({
 	id,

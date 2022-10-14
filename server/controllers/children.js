@@ -1,4 +1,3 @@
-const colors = require('colors')
 const { Child } = require('../models/child')
 
 module.exports = {

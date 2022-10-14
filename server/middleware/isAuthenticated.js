@@ -27,9 +27,9 @@ module.exports = {
 				throw error
 			}
 		} catch (err) {
-            console.error('ERROR in authentication: ', err)
-            res.status(500).send(err)
-        }
+			console.error('ERROR in authentication: ', err)
+			res.status(500).send(err)
+		}
 
 		next()
 	},

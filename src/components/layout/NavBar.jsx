@@ -2,9 +2,9 @@ import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import classes from './NavBar.module.css'
 import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import { authActions } from '../../store/authSlice'
+import classes from './NavBar.module.css'
 
 const NavBar = () => {
 	const token = useSelector(state => state.auth.token)

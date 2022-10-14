@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
-import classes from './LogContainer.module.css'
+
 import SleepCard from './SleepCard'
 import FeedingCard from './FeedingCard'
 import ChangingCard from './ChangingCard'
@@ -11,6 +11,7 @@ import {
 	timestringToNumeric,
 } from '../../helper-functions/helperFunctions'
 import { getChildData } from '../../store/childSlice'
+import classes from './LogContainer.module.css'
 
 const LogContainer = ({ selectedDate, filter, status, toggle, setEntryId }) => {
 	const dispatch = useDispatch()

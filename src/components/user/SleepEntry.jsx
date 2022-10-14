@@ -2,9 +2,9 @@ import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
-import classes from './Entry.module.css'
 import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import BlueButton from '../UI/BlueButton'
+import classes from './Entry.module.css'
 
 const SleepEntry = ({ handleSubmit, toggle, status, id }) => {
 	const sleepValid = Yup.object({

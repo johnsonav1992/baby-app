@@ -2,9 +2,9 @@ import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
-import classes from './Entry.module.css'
 import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import BlueButton from '../UI/BlueButton'
+import classes from './Entry.module.css'
 
 const ChangingEntry = ({ handleSubmit, toggle, status, id }) => {
   const changingValid = Yup.object({
@@ -23,7 +23,6 @@ const ChangingEntry = ({ handleSubmit, toggle, status, id }) => {
 			}}
 			validationSchema={changingValid}
 			onSubmit={(values, { resetForm }) => {
-				// send(values)
 				handleSubmit(values, status, id)
 				resetForm({ values: '' })
 				toggle()

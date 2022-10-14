@@ -2,9 +2,9 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
+import PurpleButton from '../UI/PurpleButton'
 import { authActions } from '../../store/authSlice'
 import classes from './WelcomePage.module.css'
-import PurpleButton from '../UI/PurpleButton'
 
 const WelcomePage = () => {
 	const dispatch = useDispatch()

@@ -1,7 +1,6 @@
 require('dotenv').config()
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const colors = require('colors')
 
 const { User } = require('../models/user')
 const { SECRET } = process.env
@@ -56,7 +55,6 @@ module.exports = {
 			}
 		} catch (err) {
 			console.error('Error in register: ', err)
-			// err.errors[0].message <-- will need this for username error display
 			res.status(400).send(err)
 		}
 	},

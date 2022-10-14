@@ -8,8 +8,8 @@ import FormModal from '../general/FormModal'
 import Error from '../UI/Error'
 import BlueButton from '../UI/BlueButton'
 import PurpleButtonSmall from '../UI/PurpleButtonSmall'
-import classes from './CreateChildModal.module.css'
 import { getChildren } from '../../store/childSlice'
+import classes from './CreateChildModal.module.css'
 
 const CreateChildModal = ({ toggle }) => {
 	const userId = useSelector(state => state.auth.userId)

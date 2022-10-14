@@ -1,10 +1,10 @@
 import React from 'react'
-import classes from './Header.module.css'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import NavBar from './NavBar.jsx'
 import logo from '../../assets/logo.svg'
+import classes from './Header.module.css'
 
 const Header = () => {
 	const token = useSelector(state => state.auth.token)

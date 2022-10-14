@@ -1,10 +1,11 @@
 import React from 'react'
+
 import Card from '../UI/Card'
 import EditButton from '../UI/EditButton'
 import RedDeleteButton from '../UI/RedDeleteButton'
-import classes from './FeedingCard.module.css'
 import bottleIcon from '../../assets/bottle.svg'
 import { timeConverter } from '../../helper-functions/helperFunctions'
+import classes from './FeedingCard.module.css'
 
 const FeedingCard = ({
 	id,

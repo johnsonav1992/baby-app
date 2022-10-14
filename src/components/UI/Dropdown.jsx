@@ -3,7 +3,11 @@ import classes from './Dropdown.module.css'
 
 const Dropdown = ({ name, value, onChange, data, addClass }) => {
 	return (
-		<select className={`${classes.dropdown} ${classes[addClass]}`} name={name} onChange={onChange}>
+		<select
+			className={`${classes.dropdown} ${classes[addClass]}`}
+			name={name}
+			onChange={onChange}
+		>
 			<option selected disabled>
 				{name === 'child' ? 'select child' : value}
 			</option>
