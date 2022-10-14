@@ -13,9 +13,8 @@ const SleepCard = ({
 	endTime,
 	day,
 	duration,
-	editEntry,
-	editValues,
 	deleteEntry,
+	status,
 	toggle
 }) => {
 	duration = duration / 60 / 1000
@@ -53,8 +52,8 @@ const SleepCard = ({
 				<div className={classes['btn-container']}>
 					<EditButton
 						onClick={() => {
+							status('edit')
 							toggle('sleep')
-							editEntry(id, entryType, editValues)
 						}}
 					/>
 					<RedDeleteButton

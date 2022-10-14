@@ -8,7 +8,7 @@ import sleepMoon from '../../assets/sleep.svg'
 import diaper from '../../assets/diaper.svg'
 import classes from './DailySummary.module.css'
 
-const DailySummary = ({ selectedDate, toggle }) => {
+const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 	const sleeps = useSelector(state => state.child.sleeps)
 	const feedings = useSelector(state => state.child.feedings)
 	const changings = useSelector(state => state.child.changings)
@@ -36,11 +36,12 @@ const DailySummary = ({ selectedDate, toggle }) => {
 					</div>
 					<PlusButton
 						color="blue"
-						onClick={() =>
+						onClick={() => {
 							childName !== ''
 								? toggle('feeding')
 								: alert('you must select a child first')
-						}
+							setStatus('Add')
+						}}
 					/>
 				</div>
 				<div className={classes.row}>
@@ -53,11 +54,12 @@ const DailySummary = ({ selectedDate, toggle }) => {
 					</div>
 					<PlusButton
 						color="purple"
-						onClick={() =>
+						onClick={() => {
 							childName !== ''
 								? toggle('sleep')
 								: alert('you must select a child first')
-						}
+							setStatus('Add')
+						}}
 					/>
 				</div>
 				<div className={classes.row}>
@@ -70,11 +72,12 @@ const DailySummary = ({ selectedDate, toggle }) => {
 					</div>
 					<PlusButton
 						color="orange"
-						onClick={() =>
+						onClick={() => {
 							childName !== ''
 								? toggle('changing')
 								: alert('you must select a child first')
-						}
+							setStatus('Add')
+						}}
 					/>
 				</div>
 			</div>

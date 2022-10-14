@@ -8,15 +8,14 @@ import FeedingEntry from './FeedingEntry'
 import ChangingEntry from './ChangingEntry'
 import { getChildData } from '../../store/childSlice'
 
-const CreateEntry = ({ entry, toggle }) => {
+const CreateEntry = ({ entry, toggle, status }) => {
 	const token = useSelector(state => state.auth.token)
 	const childId = useSelector(state => state.child.childId)
 
 	const dispatch = useDispatch()
 
-	const handleSubmit = values => {
-		axios
-			.post(
+	const handleSubmit = (values, statMethod) => {
+		axios.post(
 				values.category === 'sleep'
 					? `/sleeps/${childId}`
 					: values.category === 'feeding'
@@ -24,6 +23,7 @@ const CreateEntry = ({ entry, toggle }) => {
 					: `/changings/${childId}`,
 				values,
 				{
+					method: statMethod === 'Add' ? 'post' : 'put',
 					headers: {
 						authorization: token,
 					},
@@ -35,11 +35,11 @@ const CreateEntry = ({ entry, toggle }) => {
 	return (
 		<FormModal>
 			{entry === 'sleep' ? (
-				<SleepEntry toggle={toggle} handleSubmit={handleSubmit} />
+				<SleepEntry toggle={toggle} status={status} handleSubmit={handleSubmit} />
 			) : entry === 'feeding' ? (
-				<FeedingEntry toggle={toggle} handleSubmit={handleSubmit} />
+				<FeedingEntry toggle={toggle} status={status} handleSubmit={handleSubmit} />
 			) : (
-				<ChangingEntry toggle={toggle} handleSubmit={handleSubmit} />
+				<ChangingEntry toggle={toggle} status={status} handleSubmit={handleSubmit} />
 			)}
 		</FormModal>
 	)

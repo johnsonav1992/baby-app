@@ -12,7 +12,7 @@ import {
 } from '../../helper-functions/helperFunctions'
 import { getChildData } from '../../store/childSlice'
 
-const LogContainer = ({ selectedDate, filter, editValues, toggle }) => {
+const LogContainer = ({ selectedDate, filter, status, toggle }) => {
 	const dispatch = useDispatch()
 	const childId = useSelector(state => state.child.childId)
 	const token = useSelector(state => state.auth.token)
@@ -73,9 +73,8 @@ const LogContainer = ({ selectedDate, filter, editValues, toggle }) => {
 				endTime={entry.end_time}
 				day={shortDateCreator(entry.day)}
 				duration={entry.duration}
-				editEntry={editEntry}
-				editValues={editValues}
 				deleteEntry={deleteEntry}
+				status={status}
 				toggle={toggle}
 			></SleepCard>
 		) : entry.category === 'feeding' ? (
@@ -88,9 +87,8 @@ const LogContainer = ({ selectedDate, filter, editValues, toggle }) => {
 				amount={entry.amount}
 				day={shortDateCreator(entry.day)}
 				time={entry.time}
-				editEntry={editEntry}
-				editValues={editValues}
 				deleteEntry={deleteEntry}
+				status={status}
 				toggle={() => toggle('feeding')}
 			/>
 		) : (
@@ -101,9 +99,8 @@ const LogContainer = ({ selectedDate, filter, editValues, toggle }) => {
 				type={entry.type}
 				day={shortDateCreator(entry.day)}
 				time={entry.time}
-				editEntry={editEntry}
-				editValues={editValues}
 				deleteEntry={deleteEntry}
+				status={status}
 				toggle={() => toggle('changing')}
 			/>
 		)

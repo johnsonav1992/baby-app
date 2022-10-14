@@ -6,7 +6,7 @@ import classes from './Entry.module.css'
 import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import BlueButton from '../UI/BlueButton'
 
-const ChangingEntry = ({ handleSubmit, toggle, send }) => {
+const ChangingEntry = ({ handleSubmit, toggle, status }) => {
   const changingValid = Yup.object({
 		day: Yup.date().required('Date required'),
 		time: Yup.string().required('Time required'),
@@ -24,14 +24,14 @@ const ChangingEntry = ({ handleSubmit, toggle, send }) => {
 			validationSchema={changingValid}
 			onSubmit={(values, { resetForm }) => {
 				// send(values)
-				handleSubmit(values)
+				handleSubmit(values, status)
 				resetForm({ values: '' })
 				toggle()
 			}}
 		>
 			{({ errors, touched }) => (
 				<Form action="submit" className={classes.form}>
-					<h1>Add diaper change</h1>
+					<h1>{status === 'edit' ? 'Edit' : 'Add'} diaper change</h1>
 					<div className={classes['group-container']}>
 						<fieldset className={classes.fieldset}>
 							<label htmlFor="day">Day</label>

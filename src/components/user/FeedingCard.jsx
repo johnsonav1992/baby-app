@@ -9,14 +9,13 @@ import { timeConverter } from '../../helper-functions/helperFunctions'
 const FeedingCard = ({
 	id,
 	entryType,
-	editEntry,
-	editValues,
 	deleteEntry,
 	type,
 	food,
 	amount,
 	day,
 	time,
+	status,
 	toggle
 }) => {
 	return (
@@ -44,8 +43,8 @@ const FeedingCard = ({
 				<div className={classes['btn-container']}>
 					<EditButton
 						onClick={() => {
+							status('edit')
 							toggle()
-							editEntry(id, entryType, editValues)
 						}}
 					/>
 					<RedDeleteButton

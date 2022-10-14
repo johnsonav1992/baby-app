@@ -17,7 +17,7 @@ const DashBoard = () => {
 	const [showChildModal, setShowChildModal] = useState(false)
 	const [showEntryModal, setShowEntryModal] = useState(false)
 	const [entryType, setEntryType] = useState('')
-	const [editValues, setEditValues] = useState({})
+	const [status, setStatus] = useState('Add')
 	const [currentFilter, setCurrentFilter] = useState(null)
 	const [date, setDate] = useState(
 		(new Date(Date.now() - tzoffset)).toISOString().split('T')[0]
@@ -43,10 +43,6 @@ const DashBoard = () => {
 	const entryHandler = entryType => {
 		setEntryType(entryType)
 		setShowEntryModal(!showEntryModal)
-	}
-
-	const edit = (values) => {
-		setEditValues(values)
 	}
 
 	const filterOptions = [
@@ -79,7 +75,7 @@ const DashBoard = () => {
 				<CreateEntry
 					entry={entryType}
 					toggle={() => setShowEntryModal(!showEntryModal)}
-					send={edit}
+					status={status}
 				/>
 			)}
 			<main className={classes.main}>
@@ -130,7 +126,7 @@ const DashBoard = () => {
 						<LogContainer
 							selectedDate={date}
 							filter={currentFilter}
-							editValues={editValues}
+							status={setStatus}
 							toggle={entryHandler}
 						/>
 					</div>
@@ -138,6 +134,7 @@ const DashBoard = () => {
 						<DailySummary
 							selectedDate={date}
 							toggle={entryHandler}
+							setStatus={setStatus}
 						/>
 					</div>
 				</section>

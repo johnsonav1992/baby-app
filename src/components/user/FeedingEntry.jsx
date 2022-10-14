@@ -6,7 +6,7 @@ import classes from './Entry.module.css'
 import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import BlueButton from '../UI/BlueButton'
 
-const FeedingEntry = ({ handleSubmit, toggle }) => {
+const FeedingEntry = ({ handleSubmit, toggle, status }) => {
 	const feedingValid = Yup.object({
 		day: Yup.date().required('Date required'),
 		time: Yup.string().required('Time required'),
@@ -29,14 +29,14 @@ const FeedingEntry = ({ handleSubmit, toggle }) => {
 			}}
 			validationSchema={feedingValid}
 			onSubmit={(values, { resetForm }) => {
-				handleSubmit(values)
+				handleSubmit(values, status)
 				resetForm({ values: '' })
 				toggle()
 			}}
 		>
 			{({ errors, touched }) => (
 				<Form action="submit" className={classes.form}>
-					<h1>Add feeding entry</h1>
+					<h1>{status === 'edit' ? 'Edit' : 'Add'} feeding entry</h1>
 					<div className={classes['group-container']}>
 						<fieldset className={classes.fieldset}>
 							<label htmlFor="day">Day</label>

@@ -9,12 +9,11 @@ import { timeConverter } from '../../helper-functions/helperFunctions'
 const ChangingCard = ({
 	id,
 	entryType,
-	editEntry,
-	editValues,
 	type,
 	day,
 	time,
 	deleteEntry,
+	status,
 	toggle
 }) => {
 	return (
@@ -39,8 +38,8 @@ const ChangingCard = ({
 				<div className={classes['btn-container']}>
 					<EditButton
 						onClick={() => {
+							status('edit')
 							toggle('changing')
-							editEntry(id, entryType, editValues)
 						}}
 					/>
 					<RedDeleteButton
