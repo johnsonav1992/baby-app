@@ -13,7 +13,9 @@ export const timeConverter = (time) => {
 }
 
 export const longDateCreator = (date) => {
-  const converted = new Date(date.replace(/-/g, '/')).toLocaleDateString(
+  const importedDate = new Date(date)
+  const minusTzone = importedDate - importedDate.getTimezoneOffset()
+  const converted = new Date(minusTzone).toLocaleDateString(
 		'us-EN',
 		{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 	)
@@ -21,10 +23,11 @@ export const longDateCreator = (date) => {
 }
 
 export const shortDateCreator = (date) => {
-  const converted = new Date(date.replace(/-/g, '/')).toLocaleDateString(
+  const importedDate = new Date(date)
+  const minusTzone = importedDate - importedDate.getTimezoneOffset()
+  const converted = new Date(minusTzone).toLocaleDateString(
 		'us-EN',
 		{ year: 'numeric', month: 'short', day: 'numeric' })
-
   return converted
 }
 

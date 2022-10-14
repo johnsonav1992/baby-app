@@ -17,6 +17,7 @@ const FeedingCard = ({
 	amount,
 	day,
 	time,
+	toggle
 }) => {
 	return (
 		<Card addClass="entry">
@@ -42,7 +43,10 @@ const FeedingCard = ({
 				</div>
 				<div className={classes['btn-container']}>
 					<EditButton
-						onClick={() => editEntry(id, entryType, editValues)}
+						onClick={() => {
+							toggle()
+							editEntry(id, entryType, editValues)
+						}}
 					/>
 					<RedDeleteButton
 						onClick={() => deleteEntry(id, entryType)}

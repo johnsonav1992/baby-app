@@ -23,7 +23,7 @@ const ChangingEntry = ({ handleSubmit, toggle, send }) => {
 			}}
 			validationSchema={changingValid}
 			onSubmit={(values, { resetForm }) => {
-				send(values)
+				// send(values)
 				handleSubmit(values)
 				resetForm({ values: '' })
 				toggle()
