@@ -13,14 +13,16 @@ import CreateEntry from './CreateEntry'
 let isInitial = true
 
 const DashBoard = () => {
+	const tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 	const [showChildModal, setShowChildModal] = useState(false)
 	const [showEntryModal, setShowEntryModal] = useState(false)
 	const [entryType, setEntryType] = useState('')
 	const [editValues, setEditValues] = useState({})
 	const [currentFilter, setCurrentFilter] = useState(null)
 	const [date, setDate] = useState(
-		new Date(Date.now()).toISOString().split('T')[0]
+		(new Date(Date.now() - tzoffset)).toISOString().split('T')[0]
 	)
+
 	const dispatch = useDispatch()
 
 	const children = useSelector(state => state.child.children)
@@ -43,6 +45,10 @@ const DashBoard = () => {
 		setShowEntryModal(!showEntryModal)
 	}
 
+	const edit = (values) => {
+		setEditValues(values)
+	}
+
 	const filterOptions = [
 		{ id: 1, name: '', value: 'All' },
 		{ id: 2, name: 'feeding', value: 'Feedings' },
@@ -62,10 +68,6 @@ const DashBoard = () => {
 		}
 	}, [childId, token, date, dispatch, showEntryModal])
 
-	const edit = (values) => {
-		setEditValues(values)
-	}
-
 	return (
 		<>
 			{showChildModal && (
@@ -77,7 +79,6 @@ const DashBoard = () => {
 				<CreateEntry
 					entry={entryType}
 					toggle={() => setShowEntryModal(!showEntryModal)}
-					selectedDate={date}
 					send={edit}
 				/>
 			)}
@@ -130,6 +131,7 @@ const DashBoard = () => {
 							selectedDate={date}
 							filter={currentFilter}
 							editValues={editValues}
+							toggle={entryHandler}
 						/>
 					</div>
 					<div className={classes['summary-container']}>

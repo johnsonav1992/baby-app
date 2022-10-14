@@ -16,6 +16,7 @@ const SleepCard = ({
 	editEntry,
 	editValues,
 	deleteEntry,
+	toggle
 }) => {
 	duration = duration / 60 / 1000
 
@@ -51,7 +52,10 @@ const SleepCard = ({
 				</div>
 				<div className={classes['btn-container']}>
 					<EditButton
-						onClick={() => editEntry(id, entryType, editValues)}
+						onClick={() => {
+							toggle('sleep')
+							editEntry(id, entryType, editValues)
+						}}
 					/>
 					<RedDeleteButton
 						onClick={() => deleteEntry(id, entryType)}

@@ -12,7 +12,7 @@ import {
 } from '../../helper-functions/helperFunctions'
 import { getChildData } from '../../store/childSlice'
 
-const LogContainer = ({ selectedDate, filter, editValues }) => {
+const LogContainer = ({ selectedDate, filter, editValues, toggle }) => {
 	const dispatch = useDispatch()
 	const childId = useSelector(state => state.child.childId)
 	const token = useSelector(state => state.auth.token)
@@ -76,6 +76,7 @@ const LogContainer = ({ selectedDate, filter, editValues }) => {
 				editEntry={editEntry}
 				editValues={editValues}
 				deleteEntry={deleteEntry}
+				toggle={toggle}
 			></SleepCard>
 		) : entry.category === 'feeding' ? (
 			<FeedingCard
@@ -90,6 +91,7 @@ const LogContainer = ({ selectedDate, filter, editValues }) => {
 				editEntry={editEntry}
 				editValues={editValues}
 				deleteEntry={deleteEntry}
+				toggle={() => toggle('feeding')}
 			/>
 		) : (
 			<ChangingCard
@@ -102,6 +104,7 @@ const LogContainer = ({ selectedDate, filter, editValues }) => {
 				editEntry={editEntry}
 				editValues={editValues}
 				deleteEntry={deleteEntry}
+				toggle={() => toggle('changing')}
 			/>
 		)
 	})
