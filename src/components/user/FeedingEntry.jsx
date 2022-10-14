@@ -6,7 +6,7 @@ import classes from './Entry.module.css'
 import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import BlueButton from '../UI/BlueButton'
 
-const FeedingEntry = ({ handleSubmit, toggle, status }) => {
+const FeedingEntry = ({ handleSubmit, toggle, status, id }) => {
 	const feedingValid = Yup.object({
 		day: Yup.date().required('Date required'),
 		time: Yup.string().required('Time required'),
@@ -29,7 +29,7 @@ const FeedingEntry = ({ handleSubmit, toggle, status }) => {
 			}}
 			validationSchema={feedingValid}
 			onSubmit={(values, { resetForm }) => {
-				handleSubmit(values, status)
+				handleSubmit(values, status, id)
 				resetForm({ values: '' })
 				toggle()
 			}}

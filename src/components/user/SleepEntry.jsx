@@ -6,7 +6,7 @@ import classes from './Entry.module.css'
 import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import BlueButton from '../UI/BlueButton'
 
-const SleepEntry = ({ handleSubmit, toggle, status }) => {
+const SleepEntry = ({ handleSubmit, toggle, status, id }) => {
 	const sleepValid = Yup.object({
 		day: Yup.date().required('Date required'),
 		startTime: Yup.string().required('Start time required'),
@@ -23,7 +23,7 @@ const SleepEntry = ({ handleSubmit, toggle, status }) => {
 			}}
 			validationSchema={sleepValid}
 			onSubmit={(values, { resetForm }) => {
-				handleSubmit(values, status)
+				handleSubmit(values, status, id)
 				resetForm({ values: '' })
 				toggle()
 			}}

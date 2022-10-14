@@ -18,6 +18,7 @@ const DashBoard = () => {
 	const [showEntryModal, setShowEntryModal] = useState(false)
 	const [entryType, setEntryType] = useState('')
 	const [status, setStatus] = useState('Add')
+	const [entryId, setEntryId] = useState('')
 	const [currentFilter, setCurrentFilter] = useState(null)
 	const [date, setDate] = useState(
 		(new Date(Date.now() - tzoffset)).toISOString().split('T')[0]
@@ -76,6 +77,7 @@ const DashBoard = () => {
 					entry={entryType}
 					toggle={() => setShowEntryModal(!showEntryModal)}
 					status={status}
+					entryId={entryId}
 				/>
 			)}
 			<main className={classes.main}>
@@ -128,6 +130,7 @@ const DashBoard = () => {
 							filter={currentFilter}
 							status={setStatus}
 							toggle={entryHandler}
+							setEntryId={setEntryId}
 						/>
 					</div>
 					<div className={classes['summary-container']}>

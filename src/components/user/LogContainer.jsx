@@ -12,7 +12,7 @@ import {
 } from '../../helper-functions/helperFunctions'
 import { getChildData } from '../../store/childSlice'
 
-const LogContainer = ({ selectedDate, filter, status, toggle }) => {
+const LogContainer = ({ selectedDate, filter, status, toggle, setEntryId }) => {
 	const dispatch = useDispatch()
 	const childId = useSelector(state => state.child.childId)
 	const token = useSelector(state => state.auth.token)
@@ -47,22 +47,6 @@ const LogContainer = ({ selectedDate, filter, status, toggle }) => {
 			})
 	}
 
-	const editEntry = (entryId, entryType , values) => {
-		console.log(`Type: ${entryType} Id: ${entryId} Values: ${values}`)
-		// axios
-		// 	.put(`/${entryType}s/${entryId}`, values, {
-		// 		headers: {
-		// 			authorization: token,
-		// 		},
-		// 	})
-		// 	.then(() => {
-		// 		dispatch(getChildData(childId, token, selectedDate))
-		// 	})
-		// 	.catch(err => {
-		// 		console.log(err)
-		// 	})
-	}
-
 	const logData = loadData.map(entry => {
 		return entry.category === 'sleep' ? (
 			<SleepCard
@@ -76,6 +60,7 @@ const LogContainer = ({ selectedDate, filter, status, toggle }) => {
 				deleteEntry={deleteEntry}
 				status={status}
 				toggle={toggle}
+				setEntryId={setEntryId}
 			></SleepCard>
 		) : entry.category === 'feeding' ? (
 			<FeedingCard

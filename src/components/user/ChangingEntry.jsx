@@ -6,7 +6,7 @@ import classes from './Entry.module.css'
 import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import BlueButton from '../UI/BlueButton'
 
-const ChangingEntry = ({ handleSubmit, toggle, status }) => {
+const ChangingEntry = ({ handleSubmit, toggle, status, id }) => {
   const changingValid = Yup.object({
 		day: Yup.date().required('Date required'),
 		time: Yup.string().required('Time required'),
@@ -24,7 +24,7 @@ const ChangingEntry = ({ handleSubmit, toggle, status }) => {
 			validationSchema={changingValid}
 			onSubmit={(values, { resetForm }) => {
 				// send(values)
-				handleSubmit(values, status)
+				handleSubmit(values, status, id)
 				resetForm({ values: '' })
 				toggle()
 			}}

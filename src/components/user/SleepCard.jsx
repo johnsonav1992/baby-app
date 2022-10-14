@@ -15,7 +15,8 @@ const SleepCard = ({
 	duration,
 	deleteEntry,
 	status,
-	toggle
+	toggle,
+	setEntryId
 }) => {
 	duration = duration / 60 / 1000
 
@@ -54,6 +55,7 @@ const SleepCard = ({
 						onClick={() => {
 							status('edit')
 							toggle('sleep')
+							setEntryId(id)
 						}}
 					/>
 					<RedDeleteButton
