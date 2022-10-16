@@ -4,6 +4,7 @@ import * as Yup from 'yup'
 
 import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import BlueButton from '../UI/BlueButton'
+import Error from '../UI/Error'
 import classes from './Entry.module.css'
 
 const SleepEntry = ({ handleSubmit, toggle, status, id }) => {
