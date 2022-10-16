@@ -13,3 +13,7 @@
     cursor: pointer;
     background-color: #c477ff;
 }
+
+.change-pw {
+    padding: .5rem .5rem;
+}
