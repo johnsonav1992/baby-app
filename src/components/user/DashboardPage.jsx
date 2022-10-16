@@ -19,6 +19,7 @@ const DashBoard = () => {
 	const [entryType, setEntryType] = useState('')
 	const [status, setStatus] = useState('Add')
 	const [currentFilter, setCurrentFilter] = useState(null)
+	const [currentSort, setCurrentSort] = useState('asc')
 
 	const tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 	const [date, setDate] = useState(
@@ -51,6 +52,11 @@ const DashBoard = () => {
 		{ id: 2, name: 'feeding', value: 'Feedings' },
 		{ id: 3, name: 'sleep', value: 'Sleep' },
 		{ id: 4, name: 'changing', value: 'Diapers' },
+	]
+
+	const sortOptions = [
+		{ id: 1, name: 'asc', value: 'Ascending' },
+		{ id: 2, name: 'desc', value: 'Descending'}
 	]
 
 	useEffect(() => {
@@ -116,6 +122,12 @@ const DashBoard = () => {
 								data={filterOptions}
 								addClass={'small'}
 							/>
+							<DropDown
+								name={'sort'}
+								value={'sort'}
+								onChange={e => setCurrentSort(e.target.value)}
+								data={sortOptions}
+							/>
 							<input
 								className={classes['date-picker']}
 								type="date"
@@ -128,6 +140,7 @@ const DashBoard = () => {
 						<LogContainer
 							selectedDate={date}
 							filter={currentFilter}
+							sort={currentSort}
 							status={setStatus}
 							toggle={entryHandler}
 							setEntryId={setEntryId}

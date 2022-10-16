@@ -14,15 +14,13 @@ const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 	const changings = useSelector(state => state.child.changings)
 	const childName = useSelector(state => state.child.childName)
 
-	console.log(feedings)
-
 	const sleepNumber = sleeps.filter(
 		sleep => sleep.day === selectedDate
 	).length
 	const feedNumber = feedings.filter(feed => feed.day === selectedDate).length
-	const feedAmt = feedings
+	const feedTotal = feedings
 		.filter(feed => feed.day === selectedDate)
-		.map(feed => +feed.amount.slice(0, 1))
+		.map(feed => +feed.amount.match(/(\d+)/)[0])
 		.reduce((prev, curr) => prev + curr, 0)
 	const changingNumber = changings.filter(
 		changing => changing.day === selectedDate
@@ -40,8 +38,8 @@ const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 						<p>Feedings</p>
 						<p>
 							{feedNumber !== 0
-								? `${feedNumber} feedings - Total: ${feedAmt} oz`
-								: feedNumber}
+								? `${feedNumber}X - Total: ${feedTotal} oz`
+								: '-'}
 						</p>
 					</div>
 					<PlusButton
@@ -60,7 +58,7 @@ const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 					</div>
 					<div className={classes.text}>
 						<p>Sleep</p>
-						<p>{sleeps ? sleepNumber : '-'}</p>
+						<p>{sleepNumber !== 0 ? `${sleepNumber}X` : '-'}</p>
 					</div>
 					<PlusButton
 						color="purple"
@@ -78,7 +76,7 @@ const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 					</div>
 					<div className={classes.text}>
 						<p>Diapers</p>
-						<p>{changings ? changingNumber : '-'}</p>
+						<p>{changingNumber !== 0 ? `${changingNumber}X` : '-'}</p>
 					</div>
 					<PlusButton
 						color="orange"

@@ -13,7 +13,14 @@ import {
 import { getChildData } from '../../store/childSlice'
 import classes from './LogContainer.module.css'
 
-const LogContainer = ({ selectedDate, filter, status, toggle, setEntryId }) => {
+const LogContainer = ({
+	selectedDate,
+	filter,
+	sort,
+	status,
+	toggle,
+	setEntryId,
+}) => {
 	const dispatch = useDispatch()
 	const childId = useSelector(state => state.child.childId)
 	const token = useSelector(state => state.auth.token)
@@ -29,9 +36,11 @@ const LogContainer = ({ selectedDate, filter, status, toggle, setEntryId }) => {
 			  entry.day === selectedDate
 			: entry.day === selectedDate
 	)
-	const loadData = filtered.sort(
-		(a, b) => timestringToNumeric(a.time) - timestringToNumeric(b.time)
-	)
+	const loadData = filtered.sort((a, b) => {
+		return sort === 'asc'
+			? timestringToNumeric(b.time) - timestringToNumeric(a.time)
+			: timestringToNumeric(a.time) - timestringToNumeric(b.time)
+	})
 
 	const deleteEntry = (entryId, entryType) => {
 		axios
