@@ -14,10 +14,16 @@ const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 	const changings = useSelector(state => state.child.changings)
 	const childName = useSelector(state => state.child.childName)
 
+	console.log(feedings)
+
 	const sleepNumber = sleeps.filter(
 		sleep => sleep.day === selectedDate
 	).length
 	const feedNumber = feedings.filter(feed => feed.day === selectedDate).length
+	const feedAmt = feedings
+		.filter(feed => feed.day === selectedDate)
+		.map(feed => +feed.amount.slice(0, 1))
+		.reduce((prev, curr) => prev + curr, 0)
 	const changingNumber = changings.filter(
 		changing => changing.day === selectedDate
 	).length
@@ -32,7 +38,11 @@ const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 					</div>
 					<div className={classes.text}>
 						<p>Feedings</p>
-						<p>{feedings ? feedNumber : '-'}</p>
+						<p>
+							{feedNumber !== 0
+								? `${feedNumber} feedings - Total: ${feedAmt} oz`
+								: feedNumber}
+						</p>
 					</div>
 					<PlusButton
 						color="blue"

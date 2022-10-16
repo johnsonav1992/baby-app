@@ -62,7 +62,7 @@ module.exports = {
 
 	editSleep: async (req, res) => {
 		const { sleepId } = req.params
-		const { day, time, startTime, endTime } = req.body
+		const { day, startTime, endTime } = req.body
 
         const calculatedDuration = calculateTimeDifference(startTime, endTime)
 
