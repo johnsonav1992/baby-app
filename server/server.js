@@ -17,14 +17,14 @@ app.use(express.json())
 app.use(cors())
 
 ///DB relations///
-User.hasMany(Child)
-Child.belongsTo(User) 
-Child.hasMany(Sleep)
-Sleep.belongsTo(Child)
-Child.hasMany(Feeding)
-Feeding.belongsTo(Child) 
-Child.hasMany(Changing)
-Changing.belongsTo(Child)
+User.hasMany(Child, { onDelete: 'CASCADE', hooks: true })
+Child.belongsTo(User, { onDelete: 'CASCADE' }) 
+Child.hasMany(Sleep, { onDelete: 'CASCADE', hooks: true })
+Sleep.belongsTo(Child, { onDelete: 'CASCADE' })
+Child.hasMany(Feeding, { onDelete: 'CASCADE', hooks: true })
+Feeding.belongsTo(Child, { onDelete: 'CASCADE' }) 
+Child.hasMany(Changing, { onDelete: 'CASCADE', hooks: true })
+Changing.belongsTo(Child, { onDelete: 'CASCADE' })
 
 ///Routes/// 
 require('./routes/routes')(app)

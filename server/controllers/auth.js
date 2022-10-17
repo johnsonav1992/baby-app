@@ -166,7 +166,7 @@ module.exports = {
 			if (foundUser) {
 				const updatedPassword = await User.update(
 					{
-						hashed_pass: hash
+						hashed_pass: hash,
 					},
 					{
 						where: {
@@ -177,10 +177,23 @@ module.exports = {
 				)
 				res.status(200).send(updatedPassword)
 			}
-
 		} catch (err) {
 			console.log(err)
 			res.status(400).send(err)
 		}
-	}
+	},
+
+	deleteUser: async (req, res) => {
+		const { userId } = req.params
+		try {
+			await User.destroy({
+				where: {
+					id: +userId,
+				},
+			})
+			res.sendStatus(200)
+		} catch (err) {
+			console.log(err)
+		}
+	},
 }

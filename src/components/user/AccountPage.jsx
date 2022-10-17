@@ -9,11 +9,13 @@ import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import RedButton from '../UI/RedButton'
 import Error from '../UI/Error'
 import ChangePass from '../user/ChangePass'
+import DeleteUser from './DeleteUser'
 import classes from './AccountPage.module.css'
 
 const AccountPage = () => {
 	const [error, setError] = useState('')
-	const [showModal, setShowModal] = useState(false)
+	const [showPWModal, setShowPWModal] = useState(false)
+	const [showDeleteModal, setShowDeleteModal] = useState(false)
 	const userId = useSelector(state => state.auth.userId)
 	const userName = useSelector(state => state.auth.userName)
 	const token = useSelector(state => state.auth.token)
@@ -116,13 +118,14 @@ const AccountPage = () => {
 			<div className={classes['btn-container']}>
 				<div className={classes['edit-buttons']}>
 					<BlueButton>Edit Children</BlueButton>
-					<PurpleButtonSmall addClass={'change-pw'} onClick={() => setShowModal(!showModal)}>
+					<PurpleButtonSmall addClass={'change-pw'} onClick={() => setShowPWModal(!showPWModal)}>
 						Change Password
 					</PurpleButtonSmall>
-					{showModal && <ChangePass toggle={() => setShowModal(!showModal)} />}
+					{showPWModal && <ChangePass toggle={() => setShowPWModal(!showPWModal)} />}
 				</div>
 				<div className={classes['delete']}>
-					<RedButton addClass={'small'}>Delete Account</RedButton>
+					<RedButton addClass={'small'} onClick={() => setShowDeleteModal(!showDeleteModal)}>Delete Account</RedButton>
+					{showDeleteModal && <DeleteUser toggle={() => setShowDeleteModal(!showDeleteModal)} />}
 				</div>
 			</div>
 		</main>

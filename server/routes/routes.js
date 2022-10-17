@@ -1,4 +1,4 @@
-const { register, login, editUserInfo, checkOldPassword, changePassword } = require('../controllers/auth')
+const { register, login, editUserInfo, checkOldPassword, changePassword, deleteUser } = require('../controllers/auth')
 const { getAllChildren, addChild, editChild, deleteChild } = require('../controllers/children')
 const { addFeeding, getAllFeedings, editFeeding, deleteFeeding } = require('../controllers/feedings')
 const { addChanging, getAllChangings, editChanging, deleteChanging } = require('../controllers/changings')
@@ -12,6 +12,7 @@ module.exports = app => {
     app.put('/users/:userId', isAuthenticated, editUserInfo)
     app.put('/users/password/:userId', isAuthenticated, changePassword)
     app.post('/users/password/:userId', isAuthenticated, checkOldPassword)
+    app.delete('/users/:userId', isAuthenticated, deleteUser)
 
     //children
     app.post('/children/:userId', isAuthenticated, addChild)
