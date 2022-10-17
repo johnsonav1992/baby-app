@@ -120,4 +120,67 @@ module.exports = {
 			console.log(err)
 		}
 	},
+
+	checkOldPassword: async (req, res) => {
+		try {
+			const { oldPassword } = req.body
+			const { userId } = req.params
+			const foundUser = await User.findOne({
+				where: { id: +userId },
+			})
+
+			if (foundUser) {
+				const oldPasswordMatches = bcrypt.compareSync(
+					oldPassword,
+					foundUser.hashed_pass
+				)
+
+				if (oldPasswordMatches) {
+					res.status(200).send(oldPasswordMatches)
+				} else {
+					throw 'Old password incorrect'
+				}
+			}
+		} catch (err) {
+			console.log(err)
+			res.status(400).send(err)
+		}
+	},
+
+	changePassword: async (req, res) => {
+		try {
+			const { newPassword, newPasswordConfirm } = req.body
+
+			if (newPassword !== newPasswordConfirm) {
+				throw 'Passwords do not match'
+			}
+
+			const { userId } = req.params
+			const salt = bcrypt.genSaltSync(10)
+			const hash = bcrypt.hashSync(newPassword, salt)
+
+			const foundUser = await User.findOne({
+				where: { id: +userId },
+			})
+
+			if (foundUser) {
+				const updatedPassword = await User.update(
+					{
+						hashed_pass: hash
+					},
+					{
+						where: {
+							id: +userId,
+						},
+						returning: true,
+					}
+				)
+				res.status(200).send(updatedPassword)
+			}
+
+		} catch (err) {
+			console.log(err)
+			res.status(400).send(err)
+		}
+	}
 }

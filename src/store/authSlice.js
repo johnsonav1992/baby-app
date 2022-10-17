@@ -59,7 +59,7 @@ const authSlice = createSlice({
 		login(state, action) {
 			state.token += action.payload.token
 			state.userId += action.payload.userId
-			state.userName += action.payload.userName
+			state.userName = action.payload.userName
 			const sessionExp = action.payload.sessionExp
 
 			localStorage.setItem('exp', sessionExp)
@@ -74,6 +74,7 @@ const authSlice = createSlice({
 		logout(state) {
 			state.token = ''
 			state.userId = ''
+			state.userName = ''
 
 			localStorage.removeItem('exp')
 			localStorage.removeItem('token')

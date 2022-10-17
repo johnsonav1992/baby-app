@@ -40,6 +40,7 @@
   width: 100%;
   padding: 0;
   gap: 1rem;
+  position: relative;
 }
 
 .btn-wrapper {
@@ -68,4 +69,8 @@
   gap: 2rem;
   padding-top: 1rem;
   border-top: 1px solid black;
+}
+
+.error {
+	border: 1px solid red;
 }
