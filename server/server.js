@@ -17,13 +17,13 @@ app.use(express.json())
 app.use(cors())
 
 ///DB relations///
-User.hasMany(Child, { onDelete: 'CASCADE', hooks: true })
+User.hasMany(Child, { onDelete: 'CASCADE' })
 Child.belongsTo(User, { onDelete: 'CASCADE' }) 
-Child.hasMany(Sleep, { onDelete: 'CASCADE', hooks: true })
+Child.hasMany(Sleep, { onDelete: 'CASCADE' })
 Sleep.belongsTo(Child, { onDelete: 'CASCADE' })
-Child.hasMany(Feeding, { onDelete: 'CASCADE', hooks: true })
+Child.hasMany(Feeding, { onDelete: 'CASCADE' })
 Feeding.belongsTo(Child, { onDelete: 'CASCADE' }) 
-Child.hasMany(Changing, { onDelete: 'CASCADE', hooks: true })
+Child.hasMany(Changing, { onDelete: 'CASCADE' })
 Changing.belongsTo(Child, { onDelete: 'CASCADE' })
 
 ///Routes/// 
@@ -32,7 +32,7 @@ require('./routes/routes')(app)
 const port = process.env.PORT || 4000
 
 sequelize
-	.sync()
+	.sync({alter: true})
 	.then(() => {
 		app.listen(port, () =>
 			console.log(`DB synced and server running on port ${port}`.magenta.bold)
