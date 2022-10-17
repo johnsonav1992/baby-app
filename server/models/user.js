@@ -9,6 +9,14 @@ module.exports = {
             allowNull: false,
             primaryKey: true
         },
+        first_name: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        last_name: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         username: {
             type: DataTypes.STRING,
             allowNull: false,

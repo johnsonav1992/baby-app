@@ -18,9 +18,11 @@ module.exports = {
 				throw 'Please provide a username and password'
 			}
 
-			const passRegex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')
+			const passRegex = new RegExp(
+				'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'
+			)
 
-			if(!passRegex.test(password)) {
+			if (!passRegex.test(password)) {
 				throw 'Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one digit, and one special character.'
 			}
 
@@ -91,6 +93,31 @@ module.exports = {
 		} catch (err) {
 			console.error('ERROR in login', err)
 			res.status(400).send(err)
+		}
+	},
+
+	editUserInfo: async (req, res) => {
+		const { firstName, lastName, username } = req.body
+		const { userId } = req.params
+
+		try {
+			const updatedUser = await User.update(
+				{
+					first_name: firstName,
+					last_name: lastName,
+					username: username,
+				},
+				{
+					where: {
+						id: +userId,
+					},
+					returning: true,
+				}
+			)
+
+			res.status(200).send(updatedUser)
+		} catch (err) {
+			console.log(err)
 		}
 	},
 }

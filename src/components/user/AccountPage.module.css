@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
   margin-top: 20px;
 }
 
@@ -13,12 +13,23 @@
 .form {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 90%;
   gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.input {
+  padding: .5rem;
+  border: 1px solid black;
+  border-radius: .25rem;
 }
 
 .group {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
   gap: 3.5rem;
 }
 
@@ -26,13 +37,12 @@
   border: none;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  width: 100%;
   padding: 0;
   gap: 1rem;
 }
 
 .btn-wrapper {
-  width: 100%;
   height: 100%;
   display: flex;
   align-items: flex-end;
@@ -42,7 +52,20 @@
 .edit-buttons {
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 3.5rem;
+}
+
+.delete {
+  align-self: flex-end;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  width: 90%;
+  gap: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid black;
 }

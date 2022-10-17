@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 //^ INITIAL STATE AND TIMER //
 const initialState = {
 	token: '',
+	userName: '',
 	userId: '',
 	isRegister: false
 }
@@ -21,6 +22,7 @@ const calculateRemainingTime = exp => {
 const getLocalData = () => {
 	const storedToken = localStorage.getItem('token')
 	const storedExp = localStorage.getItem('exp')
+	const storedUserName = localStorage.getItem('userName')
 	const storedUserId = localStorage.getItem('userId')
 
 	const remainingTime = calculateRemainingTime(storedExp)
@@ -28,6 +30,7 @@ const getLocalData = () => {
 	if (remainingTime <= 1000 * 60 * 30) {
 		localStorage.removeItem('token')
 		localStorage.removeItem('exp')
+		localStorage.removeItem('userName')
 		localStorage.removeItem('userId')
 		return null
 	}
@@ -35,6 +38,7 @@ const getLocalData = () => {
 	return {
 		token: storedToken,
 		duration: remainingTime,
+		userName: storedUserName,
 		userId: storedUserId
 	}
 }
@@ -44,6 +48,7 @@ const localData = getLocalData()
 if (localData) {
     initialState.token = localData.token
     initialState.userId = localData.userId
+		initialState.userName = localData.userName
 } 
 
 //* AUTH SLICE //
@@ -54,10 +59,12 @@ const authSlice = createSlice({
 		login(state, action) {
 			state.token += action.payload.token
 			state.userId += action.payload.userId
+			state.userName += action.payload.userName
 			const sessionExp = action.payload.sessionExp
 
 			localStorage.setItem('exp', sessionExp)
 			localStorage.setItem('token', state.token)
+			localStorage.setItem('userName', state.userName)
 			localStorage.setItem('userId', state.userId)
 
 			const remainingTime = calculateRemainingTime(sessionExp)
@@ -70,6 +77,7 @@ const authSlice = createSlice({
 
 			localStorage.removeItem('exp')
 			localStorage.removeItem('token')
+			localStorage.removeItem('userName')
 			localStorage.removeItem('userId')
 
             if (logoutTimer) {

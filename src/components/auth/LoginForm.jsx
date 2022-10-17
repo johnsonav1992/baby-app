@@ -26,6 +26,7 @@ const LoginForm = () => {
 					token: data.token,
 					sessionExp: data.expirationTime,
 					userId: data.userId,
+					userName: data.username
 				})
 			)
 			navigate('/dashboard')
