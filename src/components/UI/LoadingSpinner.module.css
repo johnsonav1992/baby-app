@@ -1,0 +1,19 @@
+@import '../../../src/App.css';
+
+.loading-spinner {
+  border: 3px solid var(--purple);
+  border-left: 3px solid transparent;
+  border-radius: 50%;
+  width: 3vw;
+  height: 3vw;
+  animation: spin 750ms linear infinite;
+}
+
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
