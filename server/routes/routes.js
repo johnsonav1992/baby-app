@@ -8,9 +8,9 @@ const path = require('path')
 
 module.exports = app => {
     //static frontend
-    app.get('/dashboard', (req, res) => {
+    app.get('/', (req, res) => {
         res.sendFile(path.join(__dirname, '../build', 'index.html'));
-      })
+    })
 
     //auth
     app.post('/api/register', register)
