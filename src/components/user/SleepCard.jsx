@@ -4,7 +4,7 @@ import Card from '../UI/Card'
 import EditButton from '../UI/EditButton'
 import RedDeleteButton from '../UI/RedDeleteButton'
 import sleepIcon from '../../assets/sleep.svg'
-import { timeConverter } from '../../helper-functions/helperFunctions'
+import { timeConverter, shortDateCreator } from '../../helper-functions/helperFunctions'
 import classes from './SleepCard.module.css'
 
 const SleepCard = ({
@@ -17,7 +17,8 @@ const SleepCard = ({
 	deleteEntry,
 	status,
 	toggle,
-	setEntryId
+	setEntryId,
+	sendBack
 }) => {
 	duration = duration / 60 / 1000
 
@@ -47,7 +48,7 @@ const SleepCard = ({
 						</div>
 					</div>
 					<div className={classes['day-duration']}>
-						<p>{day}</p>
+						<p>{shortDateCreator(day)}</p>
 						<p>{duration} min.</p>
 					</div>
 				</div>
@@ -56,6 +57,7 @@ const SleepCard = ({
 						onClick={() => {
 							status('edit')
 							toggle('sleep')
+							sendBack({category: 'sleep', startTime, endTime, day, duration})
 							setEntryId(id)
 						}}
 					/>

@@ -4,7 +4,7 @@ import Card from '../UI/Card'
 import EditButton from '../UI/EditButton'
 import RedDeleteButton from '../UI/RedDeleteButton'
 import bottleIcon from '../../assets/bottle.svg'
-import { timeConverter } from '../../helper-functions/helperFunctions'
+import { timeConverter, shortDateCreator } from '../../helper-functions/helperFunctions'
 import classes from './FeedingCard.module.css'
 
 const FeedingCard = ({
@@ -17,7 +17,9 @@ const FeedingCard = ({
 	day,
 	time,
 	status,
-	toggle
+	toggle,
+	setEntryId,
+	sendBack
 }) => {
 	return (
 		<Card addClass="entry">
@@ -37,7 +39,7 @@ const FeedingCard = ({
 						<h3 className={classes.heading}>{amount}</h3>
 					</div>
 					<div className={classes['day-time']}>
-						<p>{day}</p>
+						<p>{shortDateCreator(day)}</p>
 						<p>{timeConverter(time)}</p>
 					</div>
 				</div>
@@ -45,6 +47,8 @@ const FeedingCard = ({
 					<EditButton
 						onClick={() => {
 							status('edit')
+							sendBack({category: 'feeding', type, food, amount, day, time})
+							setEntryId(id)
 							toggle()
 						}}
 					/>

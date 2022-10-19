@@ -7,7 +7,6 @@ import FeedingCard from './FeedingCard'
 import ChangingCard from './ChangingCard'
 import {
 	longDateCreator,
-	shortDateCreator,
 	timestringToNumeric,
 } from '../../helper-functions/helperFunctions'
 import { getChildData } from '../../store/childSlice'
@@ -20,6 +19,7 @@ const LogContainer = ({
 	status,
 	toggle,
 	setEntryId,
+	sendBack
 }) => {
 	const dispatch = useDispatch()
 	const childId = useSelector(state => state.child.childId)
@@ -65,12 +65,13 @@ const LogContainer = ({
 				entryType={entry.category}
 				startTime={entry.start_time}
 				endTime={entry.end_time}
-				day={shortDateCreator(entry.day)}
+				day={entry.day}
 				duration={entry.duration}
 				deleteEntry={deleteEntry}
 				status={status}
 				toggle={toggle}
 				setEntryId={setEntryId}
+				sendBack={sendBack}
 			></SleepCard>
 		) : entry.category === 'feeding' ? (
 			<FeedingCard
@@ -80,11 +81,13 @@ const LogContainer = ({
 				type={entry.feed_type}
 				food={entry.food}
 				amount={entry.amount}
-				day={shortDateCreator(entry.day)}
+				day={entry.day}
 				time={entry.time}
 				deleteEntry={deleteEntry}
 				status={status}
 				toggle={() => toggle('feeding')}
+				setEntryId={setEntryId}
+				sendBack={sendBack}
 			/>
 		) : (
 			<ChangingCard
@@ -92,11 +95,13 @@ const LogContainer = ({
 				id={entry.id}
 				entryType={entry.category}
 				type={entry.type}
-				day={shortDateCreator(entry.day)}
+				day={entry.day}
 				time={entry.time}
 				deleteEntry={deleteEntry}
 				status={status}
 				toggle={() => toggle('changing')}
+				setEntryId={setEntryId}
+				sendBack={sendBack}
 			/>
 		)
 	})
