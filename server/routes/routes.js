@@ -4,6 +4,7 @@ const { addFeeding, getAllFeedings, editFeeding, deleteFeeding } = require('../c
 const { addChanging, getAllChangings, editChanging, deleteChanging } = require('../controllers/changings')
 const { addSleep, getAllSleeps, editSleep, deleteSleep } = require('../controllers/sleeps')
 const { isAuthenticated } = require('../middleware/isAuthenticated')
+const path = require('path')
 
 module.exports = app => {
     //static frontend
