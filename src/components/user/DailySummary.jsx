@@ -6,6 +6,7 @@ import PlusButton from '../UI/PlusButton'
 import bottle from '../../assets/bottle.svg'
 import sleepMoon from '../../assets/sleep.svg'
 import diaper from '../../assets/diaper.svg'
+import { toHoursAndMinutes } from '../../helper-functions/helperFunctions'
 import classes from './DailySummary.module.css'
 
 const DailySummary = ({ selectedDate, setStatus, toggle }) => {
@@ -14,12 +15,16 @@ const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 	const changings = useSelector(state => state.child.changings)
 	const childName = useSelector(state => state.child.childName)
 
-	const sleepNumber = sleeps.filter(
-		sleep => sleep.day === selectedDate
-	).length
-	const feedNumber = feedings.filter(feed => feed.day === selectedDate).length
-	const feedTotal = feedings
-		.filter(feed => feed.day === selectedDate)
+	const sleepNumber = sleeps.filter(sleep => sleep.day === selectedDate)
+	const sleepTotal =
+		sleepNumber
+			.map(sleep => sleep.duration)
+			.reduce((prev, curr) => prev + curr, 0) /
+		60 /
+		1000
+	const { hours, minutes } = toHoursAndMinutes(sleepTotal)
+	const feedNumber = feedings.filter(feed => feed.day === selectedDate)
+	const feedTotal = feedNumber
 		.map(feed => +feed.amount.match(/(\d+)/)[0])
 		.reduce((prev, curr) => prev + curr, 0)
 	const changingNumber = changings.filter(
@@ -37,8 +42,8 @@ const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 					<div className={classes.text}>
 						<p>Feedings</p>
 						<p>
-							{feedNumber !== 0
-								? `${feedNumber}X - Total: ${feedTotal} oz`
+							{feedNumber.length !== 0
+								? `${feedNumber.length}X - Total: ${feedTotal} oz`
 								: '-'}
 						</p>
 					</div>
@@ -58,7 +63,11 @@ const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 					</div>
 					<div className={classes.text}>
 						<p>Sleep</p>
-						<p>{sleepNumber !== 0 ? `${sleepNumber}X` : '-'}</p>
+						<p>
+							{sleepNumber.length !== 0
+								? `${sleepNumber.length}X - Total: ${hours} hrs. ${minutes} mins.`
+								: '-'}
+						</p>
 					</div>
 					<PlusButton
 						color="purple"
@@ -76,7 +85,9 @@ const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 					</div>
 					<div className={classes.text}>
 						<p>Diapers</p>
-						<p>{changingNumber !== 0 ? `${changingNumber}X` : '-'}</p>
+						<p>
+							{changingNumber !== 0 ? `${changingNumber}X` : '-'}
+						</p>
 					</div>
 					<PlusButton
 						color="orange"
