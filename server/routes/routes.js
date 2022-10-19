@@ -6,6 +6,11 @@ const { addSleep, getAllSleeps, editSleep, deleteSleep } = require('../controlle
 const { isAuthenticated } = require('../middleware/isAuthenticated')
 
 module.exports = app => {
+    //static frontend
+    app.get('/*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../build', 'index.html'));
+      })
+
     //auth
     app.post('/register', register)
     app.post('/login', login)

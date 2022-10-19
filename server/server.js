@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const path = require('path')
 require('dotenv').config()
 const colors = require('colors')
 
@@ -15,6 +16,8 @@ const app = express()
 ///Middleware///
 app.use(express.json())
 app.use(cors())
+
+app.use(express.static(path.resolve(__dirname, '../build')))
 
 ///DB relations///
 User.hasMany(Child, { onDelete: 'CASCADE' })
