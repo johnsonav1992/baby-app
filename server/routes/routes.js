@@ -22,7 +22,7 @@ module.exports = app => {
 
     //children
     app.post('/api/children/:userId', isAuthenticated, addChild)
-    app.get('/api/children/:userId', isAuthenticated, getAllChildren)
+    app.get('/api/children/:userId', getAllChildren)
     app.put('/api/children/:userId/:childName', isAuthenticated, editChild)
     app.delete('/api/children/:userId', isAuthenticated, deleteChild)
 
