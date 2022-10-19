@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
 import axios from 'axios'
 
 import FormModal from '../general/FormModal'
@@ -13,6 +14,12 @@ const ChangePass = ({ toggle }) => {
 	const [error, setError] = useState('')
 	const userId = useSelector(state => state.auth.userId)
 	const token = useSelector(state => state.auth.token)
+
+	const validation = Yup.object({
+		oldPassword: Yup.string().required('Required'),
+		newPassword: Yup.string().required('Required'),
+		newPasswordConfirm: Yup.string().required('Required')
+	})
 
 	const handleSubmit = values => {
 		axios
@@ -68,6 +75,7 @@ const ChangePass = ({ toggle }) => {
 					newPassword: '',
 					newPasswordConfirm: '',
 				}}
+				validationSchema={validation}
 				onSubmit={(values, { resetForm }) => {
 					handleSubmit(values)
 					resetForm({ values: '' })

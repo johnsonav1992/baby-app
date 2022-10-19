@@ -7,21 +7,22 @@ import BlueButton from '../UI/BlueButton'
 import Error from '../UI/Error'
 import classes from './Entry.module.css'
 
-const ChangingEntry = ({ handleSubmit, toggle, status, id }) => {
-  const changingValid = Yup.object({
+const ChangingEntry = ({ handleSubmit, toggle, status, id, editValues }) => {
+	const changingValid = Yup.object({
 		day: Yup.date().required('Date required'),
 		time: Yup.string().required('Time required'),
 		type: Yup.string().required('Type required'),
 	})
 
-  return (
-    <Formik
-			initialValues={{
+	return (
+		<Formik
+			initialValues={status === 'edit' ? editValues : {
 				category: 'changing',
 				type: '',
 				day: '',
 				time: '',
 			}}
+			enableReinitialize
 			validationSchema={changingValid}
 			onSubmit={(values, { resetForm }) => {
 				handleSubmit(values, status, id)
@@ -87,13 +88,13 @@ const ChangingEntry = ({ handleSubmit, toggle, status, id }) => {
 							Cancel
 						</PurpleButtonSmall>
 						<BlueButton addClass={'modal-btn'} type={'submit'}>
-							Add
+							{status === 'edit' ? 'Edit' : 'Add'}
 						</BlueButton>
 					</div>
 				</Form>
 			)}
 		</Formik>
-  )
+	)
 }
 
 export default ChangingEntry

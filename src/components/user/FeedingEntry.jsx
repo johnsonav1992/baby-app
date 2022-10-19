@@ -7,7 +7,7 @@ import BlueButton from '../UI/BlueButton'
 import Error from '../UI/Error'
 import classes from './Entry.module.css'
 
-const FeedingEntry = ({ handleSubmit, toggle, status, id }) => {
+const FeedingEntry = ({ handleSubmit, toggle, status, id, editValues }) => {
 	const feedingValid = Yup.object({
 		day: Yup.date().required('Date required'),
 		time: Yup.string().required('Time required'),
@@ -20,14 +20,19 @@ const FeedingEntry = ({ handleSubmit, toggle, status, id }) => {
 
 	return (
 		<Formik
-			initialValues={{
-				category: 'feeding',
-				type: '',
-				food: '',
-				amount: '',
-				day: '',
-				time: '',
-			}}
+			initialValues={
+				status === 'edit'
+					? editValues
+					: {
+							category: 'feeding',
+							type: '',
+							food: '',
+							amount: '',
+							day: '',
+							time: '',
+					  }
+			}
+			enableReinitialize
 			validationSchema={feedingValid}
 			onSubmit={(values, { resetForm }) => {
 				handleSubmit(values, status, id)
@@ -111,7 +116,7 @@ const FeedingEntry = ({ handleSubmit, toggle, status, id }) => {
 							Cancel
 						</PurpleButtonSmall>
 						<BlueButton addClass={'modal-btn'} type={'submit'}>
-							Add
+							{status === 'edit' ? 'Edit' : 'Add'}
 						</BlueButton>
 					</div>
 				</Form>

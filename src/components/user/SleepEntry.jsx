@@ -7,7 +7,7 @@ import BlueButton from '../UI/BlueButton'
 import Error from '../UI/Error'
 import classes from './Entry.module.css'
 
-const SleepEntry = ({ handleSubmit, toggle, status, id }) => {
+const SleepEntry = ({ handleSubmit, toggle, status, id, editValues }) => {
 	const sleepValid = Yup.object({
 		day: Yup.date().required('Date required'),
 		startTime: Yup.string().required('Start time required'),
@@ -16,12 +16,13 @@ const SleepEntry = ({ handleSubmit, toggle, status, id }) => {
 
 	return (
 		<Formik
-			initialValues={{
+			initialValues={status === 'edit' ? editValues : {
 				category: 'sleep',
 				day: '',
 				startTime: '',
 				endTime: '',
 			}}
+			enableReinitialize
 			validationSchema={sleepValid}
 			onSubmit={(values, { resetForm }) => {
 				handleSubmit(values, status, id)
@@ -86,7 +87,7 @@ const SleepEntry = ({ handleSubmit, toggle, status, id }) => {
 							Cancel
 						</PurpleButtonSmall>
 						<BlueButton addClass={'modal-btn'} type={'submit'}>
-							Add
+							{status === 'edit' ? 'Edit' : 'Add' }
 						</BlueButton>
 					</div>
 				</Form>

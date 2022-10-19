@@ -20,6 +20,7 @@ const DashBoard = () => {
 	const [status, setStatus] = useState('Add')
 	const [currentFilter, setCurrentFilter] = useState(null)
 	const [currentSort, setCurrentSort] = useState('asc')
+	const [editValues, setEditValues] = useState({})
 
 	const tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 	const [date, setDate] = useState(
@@ -45,6 +46,10 @@ const DashBoard = () => {
 	const entryHandler = entryType => {
 		setEntryType(entryType)
 		setShowEntryModal(!showEntryModal)
+	}
+
+	const handleEditValues = values => {
+		setEditValues(values)
 	}
 
 	const filterOptions = [
@@ -84,6 +89,7 @@ const DashBoard = () => {
 					toggle={() => setShowEntryModal(!showEntryModal)}
 					status={status}
 					entryId={entryId}
+					editValues={editValues}
 				/>
 			)}
 			<main className={classes.main}>
@@ -144,6 +150,7 @@ const DashBoard = () => {
 							status={setStatus}
 							toggle={entryHandler}
 							setEntryId={setEntryId}
+							sendBack={handleEditValues}
 						/>
 					</div>
 					<div className={classes['summary-container']}>
