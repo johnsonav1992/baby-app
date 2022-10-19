@@ -8,7 +8,7 @@ const path = require('path')
 
 module.exports = app => {
     //static frontend
-    app.get('/', (req, res) => {
+    app.get('/dashboard', (req, res) => {
         res.sendFile(path.join(__dirname, '../build', 'index.html'));
       })
 
