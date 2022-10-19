@@ -10,7 +10,6 @@ import RedButton from '../UI/RedButton'
 import Error from '../UI/Error'
 import ChangePass from '../user/ChangePass'
 import DeleteUser from './DeleteUser'
-import LoadingSpinner from '../UI/LoadingSpinner'
 import classes from './AccountPage.module.css'
 
 const AccountPage = () => {
@@ -52,7 +51,6 @@ const AccountPage = () => {
 
 	return (
 		<main className={classes['account-main']}>
-			<LoadingSpinner />
 			<h1>Account</h1>
 			<p>
 				Fill out your profile details below to change information about
