@@ -7,10 +7,10 @@ const { isAuthenticated } = require('../middleware/isAuthenticated')
 const path = require('path')
 
 module.exports = app => {
-    // //static frontend
-    // app.get('/*', (req, res) => {
-    //     res.sendFile(path.join(__dirname, '../build', 'index.html'));
-    // })
+    //static frontend
+    app.get('/', (req, res) => {
+        res.sendFile(path.join(__dirname, '../build', 'index.html'));
+    })
 
     //auth
     app.post('/api/register', register)
@@ -44,9 +44,5 @@ module.exports = app => {
     app.put('/api/sleeps/:sleepId', isAuthenticated, editSleep)
     app.delete('/api/sleeps/:sleepId', isAuthenticated, deleteSleep)
 
-    //static frontend
-    app.get('/*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../build', 'index.html'));
-    })
 
 }
