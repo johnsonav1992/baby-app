@@ -8,7 +8,7 @@ const path = require('path')
 
 module.exports = app => {
     //static frontend
-    app.get('/*', (req, res) => {
+    app.get('/', (req, res) => {
         res.sendFile(path.join(__dirname, '../build', 'index.html'));
       })
 
@@ -22,7 +22,7 @@ module.exports = app => {
 
     //children
     app.post('/api/children/:userId', isAuthenticated, addChild)
-    app.get('/api/children/:userId', getAllChildren)
+    app.get('/api/children/:userId', isAuthenticated, getAllChildren)
     app.put('/api/children/:userId/:childName', isAuthenticated, editChild)
     app.delete('/api/children/:userId', isAuthenticated, deleteChild)
 
