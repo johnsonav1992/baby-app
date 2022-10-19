@@ -44,7 +44,7 @@ const LogContainer = ({
 
 	const deleteEntry = (entryId, entryType) => {
 		axios
-			.delete(`/${entryType}s/${entryId}`, {
+			.delete(`/api/${entryType}s/${entryId}`, {
 				headers: {
 					authorization: token,
 				},

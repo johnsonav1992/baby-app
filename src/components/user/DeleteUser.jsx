@@ -19,7 +19,7 @@ const DeleteUser = ({ toggle }) => {
 		console.log('deleting account....')
 
 		axios
-			.delete(`/users/${userId}`, {
+			.delete(`/api/users/${userId}`, {
         headers: {
           authorization: token,
         }

@@ -17,16 +17,16 @@ const CreateEntry = ({ entry, toggle, status, entryId, editValues }) => {
 	const handleSubmit = (values, statMethod, id) => {
 		const postURL =
 			values.category === 'sleep'
-				? `/sleeps/${childId}`
+				? `/api/sleeps/${childId}`
 				: values.category === 'feeding'
-				? `/feedings/${childId}`
-				: `/changings/${childId}` 
+				? `/api/feedings/${childId}`
+				: `/api/changings/${childId}` 
 		const putURL =
 			values.category === 'sleep'
-				? `/sleeps/${id}`
+				? `/api/sleeps/${id}`
 				: values.category === 'feeding'
-				? `/feedings/${id}`
-				: `/changings/${id}`
+				? `/api/feedings/${id}`
+				: `/api/changings/${id}`
 		axios({
 			method: statMethod === 'Add' ? 'post' : 'put',
 			url: statMethod === 'Add' ? postURL : putURL,

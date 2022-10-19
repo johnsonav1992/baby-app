@@ -38,7 +38,7 @@ const CreateChildModal = ({ toggle }) => {
 		const birthday = new Date(values.birthday)
 		const age = Math.floor((Date.now() - birthday.getTime()) / 31556952000)
 		axios
-			.post(`/children/${userId}`,
+			.post(`/api/children/${userId}`,
 				{ age: age, name: values.name, gender: values.gender },
 				{
 					headers: {

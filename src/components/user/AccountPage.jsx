@@ -26,7 +26,7 @@ const AccountPage = () => {
 		if (username == null) {
 			username = userName
 		}
-		axios.put(`/users/${userId}`, {
+		axios.put(`/api/users/${userId}`, {
 			firstName,
 			lastName,
 			username

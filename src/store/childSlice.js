@@ -41,7 +41,7 @@ const childSlice = createSlice({
 export const getChildren = (userId, token) => {
 	return (dispatch) => {
 		axios
-			.get(`/children/${userId}`, {
+			.get(`/api/children/${userId}`, {
 				headers: {
 					authorization: token,
 				},
@@ -63,9 +63,9 @@ export const getChildData = (childId, token) => {
 				authorization: token,
 			},
 		}
-		const sleepsReq = axios.get(`/sleeps/${childId}`, headers)
-		const feedingsReq = axios.get(`/feedings/${childId}`, headers)
-		const changingsReq = axios.get(`/changings/${childId}`, headers)
+		const sleepsReq = axios.get(`/api/sleeps/${childId}`, headers)
+		const feedingsReq = axios.get(`/api/feedings/${childId}`, headers)
+		const changingsReq = axios.get(`/api/changings/${childId}`, headers)
 
 		axios.all([sleepsReq, feedingsReq, changingsReq]).then(
 			axios.spread(({data: sleeps}, {data: feedings}, {data: changings}) => {

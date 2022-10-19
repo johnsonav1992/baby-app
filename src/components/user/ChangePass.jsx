@@ -24,7 +24,7 @@ const ChangePass = ({ toggle }) => {
 	const handleSubmit = values => {
 		axios
 			.post(
-				`/users/password/${userId}`,
+				`/api/users/password/${userId}`,
 				{ oldPassword: values.oldPassword },
 				{
 					headers: {
@@ -36,7 +36,7 @@ const ChangePass = ({ toggle }) => {
 				if (data) {
 					axios
 						.put(
-							`/users/password/${userId}`,
+							`/api/users/password/${userId}`,
 							{
 								newPassword: values.newPassword,
 								newPasswordConfirm: values.newPasswordConfirm,
