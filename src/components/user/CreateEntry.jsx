@@ -20,7 +20,7 @@ const CreateEntry = ({ entry, toggle, status, entryId }) => {
 				? `/sleeps/${childId}`
 				: values.category === 'feeding'
 				? `/feedings/${childId}`
-				: `/changings/${childId}`
+				: `/changings/${childId}` 
 		const putURL =
 			values.category === 'sleep'
 				? `/sleeps/${id}`
