@@ -1,5 +1,11 @@
 @import '../../../src/App.css';
 
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .loading-spinner {
   border: 3px solid var(--purple);
   border-left: 3px solid transparent;

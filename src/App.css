@@ -23,7 +23,7 @@ h1, h2 {
   margin: 0;
 }
 
-.main-content {
+.main-content-container {
   display: flex;
   justify-content: center;
 }

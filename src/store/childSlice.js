@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { uiActions } from './uiSlice'
 import axios from 'axios'
 
 //^ INITIAL STATE //
@@ -8,7 +9,7 @@ const initialState = {
 	children: [],
 	feedings: [],
 	sleeps: [],
-	changings: []
+	changings: [],
 }
 
 //* CHILD SLICE //
@@ -25,21 +26,22 @@ const childSlice = createSlice({
 		setChildId(state, action) {
 			state.childId = action.payload
 		},
-    setFeedings(state, action) {
-      state.feedings = action.payload
-    },
+		setFeedings(state, action) {
+			state.feedings = action.payload
+		},
 		setSleeps(state, action) {
 			state.sleeps = action.payload
 		},
 		setChangings(state, action) {
 			state.changings = action.payload
-		}
-    }
+		},
+	},
 })
 
 // * THUNKS //
 export const getChildren = (userId, token) => {
-	return (dispatch) => {
+	return dispatch => {
+		dispatch(uiActions.setIsLoading(true))
 		axios
 			.get(`/api/children/${userId}`, {
 				headers: {
@@ -52,12 +54,13 @@ export const getChildren = (userId, token) => {
 			.catch(err => {
 				console.log(err)
 			})
+		dispatch(uiActions.setIsLoading(false))
 	}
 }
 
-
 export const getChildData = (childId, token) => {
-	return (dispatch) => {
+	return dispatch => {
+		dispatch(uiActions.setIsLoading(true))
 		const headers = {
 			headers: {
 				authorization: token,
@@ -67,15 +70,25 @@ export const getChildData = (childId, token) => {
 		const feedingsReq = axios.get(`/api/feedings/${childId}`, headers)
 		const changingsReq = axios.get(`/api/changings/${childId}`, headers)
 
-		axios.all([sleepsReq, feedingsReq, changingsReq]).then(
-			axios.spread(({data: sleeps}, {data: feedings}, {data: changings}) => {
-				dispatch(childActions.setSleeps(sleeps))
-				dispatch(childActions.setFeedings(feedings))
-				dispatch(childActions.setChangings(changings))
+		axios
+			.all([sleepsReq, feedingsReq, changingsReq])
+			.then(
+				axios.spread(
+					(
+						{ data: sleeps },
+						{ data: feedings },
+						{ data: changings }
+					) => {
+						dispatch(childActions.setSleeps(sleeps))
+						dispatch(childActions.setFeedings(feedings))
+						dispatch(childActions.setChangings(changings))
+					}
+				)
+			)
+			.catch(errors => {
+				console.log(errors)
 			})
-		).catch(errors => {
-			console.log(errors)
-		})
+		dispatch(uiActions.setIsLoading(false))
 	}
 }
 

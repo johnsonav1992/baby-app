@@ -16,9 +16,9 @@ function App() {
 	return (
 		<>
 			<Header />
-			<main className="main-content">
+			<div className="main-content-container">
 				<Routes>
-					<Route index element={<WelcomePage />}></Route>
+					<Route index element={<WelcomePage />} />
 					<Route path="/login" element={<LoginForm />} />
 					{token && (
 						<>
@@ -30,7 +30,7 @@ function App() {
 						</>
 					)}
 				</Routes>
-			</main>
+			</div>
 		</>
 	)
 }

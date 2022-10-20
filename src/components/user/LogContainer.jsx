@@ -5,12 +5,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import SleepCard from './SleepCard'
 import FeedingCard from './FeedingCard'
 import ChangingCard from './ChangingCard'
+import LoadingSpinner from '../UI/LoadingSpinner'
 import {
 	longDateCreator,
 	timestringToNumeric,
 } from '../../helper-functions/helperFunctions'
 import { getChildData } from '../../store/childSlice'
 import classes from './LogContainer.module.css'
+
 
 const LogContainer = ({
 	selectedDate,
@@ -24,6 +26,7 @@ const LogContainer = ({
 	const dispatch = useDispatch()
 	const childId = useSelector(state => state.child.childId)
 	const token = useSelector(state => state.auth.token)
+	const isLoading = useSelector(state => state.ui.isLoading)
 
 	const sleeps = useSelector(state => state.child.sleeps)
 	const feedings = useSelector(state => state.child.feedings)
@@ -106,16 +109,17 @@ const LogContainer = ({
 		)
 	})
 
-	return (
+
+	return isLoading ? <LoadingSpinner /> : (
 		<section className={classes.container}>
 			<p className={classes.date}>{longDateCreator(selectedDate)}</p>
-			{logData.length > 0 ? (
+			{logData.length > 0 ?
 				logData
-			) : (
+			:
 				<p className={classes['no-entries']}>
 					There are no entries today!
 				</p>
-			)}
+			}
 		</section>
 	)
 }
