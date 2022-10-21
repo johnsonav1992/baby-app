@@ -8,6 +8,7 @@ import CreateChildModal from './CreateChildModal'
 import DailySummary from './DailySummary'
 import CreateEntry from './CreateEntry'
 import { childActions, getChildren, getChildData } from '../../store/childSlice'
+import { uiActions } from '../../store/uiSlice'
 import classes from './DashboardPage.module.css'
 
 let isInitial = true
@@ -65,6 +66,7 @@ const DashBoard = () => {
 	]
 
 	useEffect(() => {
+		dispatch(uiActions.setLoading('loading'))
 		dispatch(getChildren(userId, token))
 	}, [token, userId, dispatch])
 
@@ -72,6 +74,7 @@ const DashBoard = () => {
 		if (isInitial) {
 			return
 		} else {
+			dispatch(uiActions.setLoading('loading'))
 			dispatch(getChildData(childId, token, date))
 		}
 	}, [childId, token, date, dispatch, showEntryModal])

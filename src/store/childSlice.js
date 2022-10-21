@@ -41,7 +41,6 @@ const childSlice = createSlice({
 // * THUNKS //
 export const getChildren = (userId, token) => {
 	return dispatch => {
-		dispatch(uiActions.setIsLoading(true))
 		axios
 			.get(`/api/children/${userId}`, {
 				headers: {
@@ -49,18 +48,18 @@ export const getChildren = (userId, token) => {
 				},
 			})
 			.then(({ data }) => {
+				dispatch(uiActions.setLoading('loaded'))
 				dispatch(childActions.setChildren(data))
 			})
 			.catch(err => {
+				dispatch(uiActions.setLoading('loaded'))
 				console.log(err)
 			})
-		dispatch(uiActions.setIsLoading(false))
 	}
 }
 
 export const getChildData = (childId, token) => {
 	return dispatch => {
-		dispatch(uiActions.setIsLoading(true))
 		const headers = {
 			headers: {
 				authorization: token,
@@ -79,6 +78,7 @@ export const getChildData = (childId, token) => {
 						{ data: feedings },
 						{ data: changings }
 					) => {
+						dispatch(uiActions.setLoading('loaded'))
 						dispatch(childActions.setSleeps(sleeps))
 						dispatch(childActions.setFeedings(feedings))
 						dispatch(childActions.setChangings(changings))
@@ -86,9 +86,9 @@ export const getChildData = (childId, token) => {
 				)
 			)
 			.catch(errors => {
+				dispatch(uiActions.setLoading('loaded'))
 				console.log(errors)
 			})
-		dispatch(uiActions.setIsLoading(false))
 	}
 }
 

@@ -13,7 +13,6 @@ import {
 import { getChildData } from '../../store/childSlice'
 import classes from './LogContainer.module.css'
 
-
 const LogContainer = ({
 	selectedDate,
 	filter,
@@ -21,12 +20,12 @@ const LogContainer = ({
 	status,
 	toggle,
 	setEntryId,
-	sendBack
+	sendBack,
 }) => {
 	const dispatch = useDispatch()
 	const childId = useSelector(state => state.child.childId)
 	const token = useSelector(state => state.auth.token)
-	const isLoading = useSelector(state => state.ui.isLoading)
+	const loading = useSelector(state => state.ui.loading)
 
 	const sleeps = useSelector(state => state.child.sleeps)
 	const feedings = useSelector(state => state.child.feedings)
@@ -109,17 +108,22 @@ const LogContainer = ({
 		)
 	})
 
-
-	return isLoading ? <LoadingSpinner /> : (
+	return loading === 'loading' ? (
+		<LoadingSpinner />
+	) : (
 		<section className={classes.container}>
 			<p className={classes.date}>{longDateCreator(selectedDate)}</p>
-			{logData.length > 0 ?
+			{logData.length > 0 ? (
 				logData
-			:
+			) : childId === '' ? (
+				<p className={classes['no-entries']}>
+					Select a child to see entries!
+				</p>
+			) : (
 				<p className={classes['no-entries']}>
 					There are no entries today!
 				</p>
-			}
+			)}
 		</section>
 	)
 }
