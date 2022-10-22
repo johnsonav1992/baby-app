@@ -9,6 +9,7 @@ import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import RedButton from '../UI/RedButton'
 import Error from '../UI/Error'
 import ChangePass from '../user/ChangePass'
+import ChildEdit from '../user/ChildEdit'
 import DeleteUser from './DeleteUser'
 import classes from './AccountPage.module.css'
 
@@ -16,6 +17,7 @@ const AccountPage = () => {
 	const [error, setError] = useState('')
 	const [showPWModal, setShowPWModal] = useState(false)
 	const [showDeleteModal, setShowDeleteModal] = useState(false)
+	const [showChildEditModal, setShowChildEditModal] = useState(false)
 	const userId = useSelector(state => state.auth.userId)
 	const userName = useSelector(state => state.auth.userName)
 	const token = useSelector(state => state.auth.token)
@@ -26,22 +28,28 @@ const AccountPage = () => {
 		if (username == null) {
 			username = userName
 		}
-		axios.put(`/api/users/${userId}`, {
-			firstName,
-			lastName,
-			username
-		}, {
-		headers: {
-			authorization: token,
-		}})
-		.then(({data}) => console.log(data))
-		.catch(err => {
-			console.log(err)
-			setError(err.response.data)
-			setTimeout(() => {
-				setError('')
-			}, 2000)
-		})
+		axios
+			.put(
+				`/api/users/${userId}`,
+				{
+					firstName,
+					lastName,
+					username,
+				},
+				{
+					headers: {
+						authorization: token,
+					},
+				}
+			)
+			.then(({ data }) => console.log(data))
+			.catch(err => {
+				console.log(err)
+				setError(err.response.data)
+				setTimeout(() => {
+					setError('')
+				}, 2000)
+			})
 	}
 
 	const validation = Yup.object({
@@ -60,7 +68,7 @@ const AccountPage = () => {
 				initialValues={{
 					firstName: '',
 					lastName: '',
-					username: null
+					username: null,
 				}}
 				validationSchema={validation}
 				onSubmit={(values, { resetForm }) => {
@@ -82,7 +90,10 @@ const AccountPage = () => {
 									}`}
 									placeholder="First"
 								/>
-								<ErrorMessage component={Error} name="firstName" />
+								<ErrorMessage
+									component={Error}
+									name="firstName"
+								/>
 							</fieldset>
 							<fieldset>
 								<label htmlFor="lastName">Last name</label>
@@ -95,7 +106,10 @@ const AccountPage = () => {
 									}`}
 									placeholder="Last"
 								/>
-								<ErrorMessage component={Error} name="lastName" />
+								<ErrorMessage
+									component={Error}
+									name="lastName"
+								/>
 							</fieldset>
 						</div>
 						<div className={classes.group}>
@@ -117,15 +131,44 @@ const AccountPage = () => {
 			</Formik>
 			<div className={classes['btn-container']}>
 				<div className={classes['edit-buttons']}>
-					<BlueButton>Edit Children</BlueButton>
-					<PurpleButtonSmall addClass={'change-pw'} onClick={() => setShowPWModal(!showPWModal)}>
+					<BlueButton
+						onClick={() =>
+							setShowChildEditModal(!showChildEditModal)
+						}
+					>
+						Edit Children
+					</BlueButton>
+					{showChildEditModal && (
+						<ChildEdit
+							toggle={() =>
+								setShowChildEditModal(!showChildEditModal)
+							}
+						/>
+					)}
+					<PurpleButtonSmall
+						addClass={'change-pw'}
+						onClick={() => setShowPWModal(!showPWModal)}
+					>
 						Change Password
 					</PurpleButtonSmall>
-					{showPWModal && <ChangePass toggle={() => setShowPWModal(!showPWModal)} />}
+					{showPWModal && (
+						<ChangePass
+							toggle={() => setShowPWModal(!showPWModal)}
+						/>
+					)}
 				</div>
 				<div className={classes['delete']}>
-					<RedButton addClass={'small'} onClick={() => setShowDeleteModal(!showDeleteModal)}>Delete Account</RedButton>
-					{showDeleteModal && <DeleteUser toggle={() => setShowDeleteModal(!showDeleteModal)} />}
+					<RedButton
+						addClass={'small'}
+						onClick={() => setShowDeleteModal(!showDeleteModal)}
+					>
+						Delete Account
+					</RedButton>
+					{showDeleteModal && (
+						<DeleteUser
+							toggle={() => setShowDeleteModal(!showDeleteModal)}
+						/>
+					)}
 				</div>
 			</div>
 		</main>
