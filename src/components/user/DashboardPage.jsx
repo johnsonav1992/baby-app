@@ -69,7 +69,7 @@ const DashBoard = () => {
 	useEffect(() => {
 		dispatch(uiActions.setLoading('loading'))
 		dispatch(getChildren(userId, token))
-	}, [token, userId, dispatch])
+	}, [token, userId, refresh, dispatch])
 
 	useEffect(() => {
 		if (isInitial) {
@@ -78,7 +78,7 @@ const DashBoard = () => {
 			dispatch(uiActions.setLoading('loading'))
 			dispatch(getChildData(childId, token, date))
 		}
-	}, [childId, token, date, dispatch, showEntryModal])
+	}, [childId, token, date, dispatch, refresh])
 
 	return (
 		<>
@@ -95,6 +95,7 @@ const DashBoard = () => {
 					status={status}
 					entryId={entryId}
 					editValues={editValues}
+					handleRefresh={() => setRefresh(prev => !prev)}
 				/>
 			)}
 			<main className={classes.main}>

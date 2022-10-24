@@ -7,7 +7,7 @@ import BlueButton from '../UI/BlueButton'
 import Error from '../UI/Error'
 import classes from './Entry.module.css'
 
-const SleepEntry = ({ handleSubmit, toggle, status, id, editValues }) => {
+const SleepEntry = ({ handleSubmit, toggle, status, id, editValues, handleRefresh }) => {
 	const sleepValid = Yup.object({
 		day: Yup.date().required('Date required'),
 		startTime: Yup.string().required('Start time required'),
@@ -86,7 +86,7 @@ const SleepEntry = ({ handleSubmit, toggle, status, id, editValues }) => {
 						<PurpleButtonSmall type={'button'} onClick={toggle}>
 							Cancel
 						</PurpleButtonSmall>
-						<BlueButton addClass={'modal-btn'} type={'submit'}>
+						<BlueButton addClass={'modal-btn'} type={'submit'} onClick={handleRefresh}>
 							{status === 'edit' ? 'Edit' : 'Add' }
 						</BlueButton>
 					</div>

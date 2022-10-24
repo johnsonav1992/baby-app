@@ -8,7 +8,7 @@ import FeedingEntry from './FeedingEntry'
 import ChangingEntry from './ChangingEntry'
 import { getChildData } from '../../store/childSlice'
 
-const CreateEntry = ({ entry, toggle, status, entryId, editValues }) => {
+const CreateEntry = ({ entry, toggle, status, entryId, editValues, handleRefresh }) => {
 	const token = useSelector(state => state.auth.token)
 	const childId = useSelector(state => state.child.childId)
 
@@ -46,6 +46,7 @@ const CreateEntry = ({ entry, toggle, status, entryId, editValues }) => {
 					handleSubmit={handleSubmit}
 					id={entryId}
 					editValues={editValues}
+					handleRefresh={handleRefresh}
 				/>
 			) : entry === 'feeding' ? (
 				<FeedingEntry
@@ -54,6 +55,7 @@ const CreateEntry = ({ entry, toggle, status, entryId, editValues }) => {
 					handleSubmit={handleSubmit}
 					id={entryId}
 					editValues={editValues}
+					handleRefresh={handleRefresh}
 				/>
 			) : (
 				<ChangingEntry
@@ -62,6 +64,7 @@ const CreateEntry = ({ entry, toggle, status, entryId, editValues }) => {
 					handleSubmit={handleSubmit}
 					id={entryId}
 					editValues={editValues}
+					handleRefresh={handleRefresh}
 				/>
 			)}
 		</FormModal>

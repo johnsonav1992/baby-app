@@ -7,7 +7,7 @@ import BlueButton from '../UI/BlueButton'
 import Error from '../UI/Error'
 import classes from './Entry.module.css'
 
-const ChangingEntry = ({ handleSubmit, toggle, status, id, editValues }) => {
+const ChangingEntry = ({ handleSubmit, toggle, status, id, editValues, handleRefresh }) => {
 	const changingValid = Yup.object({
 		day: Yup.date().required('Date required'),
 		time: Yup.string().required('Time required'),
@@ -87,7 +87,7 @@ const ChangingEntry = ({ handleSubmit, toggle, status, id, editValues }) => {
 						<PurpleButtonSmall type={'button'} onClick={toggle}>
 							Cancel
 						</PurpleButtonSmall>
-						<BlueButton addClass={'modal-btn'} type={'submit'}>
+						<BlueButton addClass={'modal-btn'} type={'submit'} onClick={handleRefresh}>
 							{status === 'edit' ? 'Edit' : 'Add'}
 						</BlueButton>
 					</div>
