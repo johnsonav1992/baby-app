@@ -11,7 +11,7 @@ import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import { getChildren } from '../../store/childSlice'
 import classes from './CreateChildModal.module.css'
 
-const CreateChildModal = ({ toggle }) => {
+const CreateChildModal = ({ toggle, handleRefresh }) => {
 	const userId = useSelector(state => state.auth.userId)
 	const token = useSelector(state => state.auth.token)
 	const dispatch = useDispatch()
@@ -136,7 +136,7 @@ const CreateChildModal = ({ toggle }) => {
 							<PurpleButtonSmall type={'button'} onClick={toggle}>
 								Cancel
 							</PurpleButtonSmall>
-							<BlueButton addClass={'modal-btn'} type={'submit'}>
+							<BlueButton addClass={'modal-btn'} type={'submit'} onClick={handleRefresh}>
 								Add
 							</BlueButton>
 						</div>

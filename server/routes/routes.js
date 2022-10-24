@@ -23,8 +23,8 @@ module.exports = app => {
     //children
     app.post('/api/children/:userId', isAuthenticated, addChild)
     app.get('/api/children/:userId', isAuthenticated, getAllChildren)
-    app.put('/api/children/:userId/:childName', isAuthenticated, editChild)
-    app.delete('/api/children/:userId', isAuthenticated, deleteChild)
+    app.put('/api/children/:childId', isAuthenticated, editChild)
+    app.delete('/api/children/:childId', isAuthenticated, deleteChild)
 
     //feedings
     app.post('/api/feedings/:childId', isAuthenticated, addFeeding)

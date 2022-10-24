@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
@@ -6,10 +6,12 @@ import axios from 'axios'
 
 import FormModal from '../general/FormModal'
 import BlueButton from '../UI/BlueButton'
+import PurpleButton from '../UI/PurpleButton'
 import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import RedButton from '../UI/RedButton'
 import DropDown from '../UI/Dropdown'
 import Error from '../UI/Error'
+import { getChildren } from '../../store/childSlice'
 import classes from './ChildEdit.module.css'
 
 const ChildEdit = ({ toggle }) => {
@@ -17,42 +19,81 @@ const ChildEdit = ({ toggle }) => {
 	const token = useSelector(state => state.auth.token)
 	const children = useSelector(state => state.child.children)
 	const [selectedChild, setSelectedChild] = useState(null)
+	const [refresh, setRefresh] = useState(false)
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(getChildren(userId, token))
+	}, [token, userId, dispatch, refresh])
 
 	const editValues = {
 		name: selectedChild?.name,
-		age: selectedChild?.age, 
-		gender: selectedChild?.gender
+		age: selectedChild?.age,
+		gender: selectedChild?.gender,
 	}
 
 	const validSchema = Yup.object({
 		name: Yup.string()
-			.max(100, 'Max of 100 characters.')
-			.required('You must input a name.'),
+			.max(100)
+			.required(),
 		age: Yup.number()
-			.max(13, 'Age must be less than 13.')
-			.required('You must input an age'),
+			.max(13)
+			.required(),
 	})
 
-	const dispatch = useDispatch()
+	const handleSubmit = values => {
+		axios
+			.put(`/api/children/${selectedChild.id}`, values, {
+				headers: {
+					authorization: token,
+				},
+			})
+			.then(({ data }) => {
+				console.log(data)
+				setRefresh((prev) => !prev)
+			})
+			.catch(err => console.log(err))
+	}
 
-	const handleSubmit = () => {}
+	const deleteChildHandler = () => {
+		axios
+			.delete(`/api/children/${selectedChild.id}`, {
+				headers: {
+					authorization: token,
+				},
+			})
+			.then(({ data }) => {
+				console.log(data)
+				setRefresh((prev) => !prev)
+			})
+			.catch(err => console.log(err))
+	}
 
 	return (
 		<FormModal>
-			{!selectedChild ? (
+			{children.length === 0 ? (
+				<p>
+					You have no children added yet! Please go back to the
+					dashboard to add a child.
+				</p>
+			) : !selectedChild ? (
 				<>
 					<h1>Select Child to Edit</h1>
 					<DropDown
 						name={'child'}
 						value={'select child'}
-						onChange={e => { 
-							setSelectedChild(children.filter(child => child.name === e.target.value)[0])
+						onChange={e => {
+							setSelectedChild(
+								children.filter(
+									child => child.name === e.target.value
+								)[0]
+							)
 						}}
 						data={children}
 					/>
-					<PurpleButtonSmall type={'button'} onClick={toggle}>
+					<PurpleButton type={'button'} onClick={toggle}>
 						Cancel
-					</PurpleButtonSmall>
+					</PurpleButton>
 				</>
 			) : (
 				<Formik
@@ -101,7 +142,9 @@ const ChildEdit = ({ toggle }) => {
 											name="gender"
 											className={classes.input}
 										>
-											<option disabled>Select gender</option>
+											<option disabled>
+												Select gender
+											</option>
 											<option value="male">Male</option>
 											<option value="female">
 												Female
@@ -128,20 +171,22 @@ const ChildEdit = ({ toggle }) => {
 											name="age"
 										/>
 									</fieldset>
+									<BlueButton
+										addClass={'modal-btn'}
+										type={'submit'}
+									>
+										Edit
+									</BlueButton>
 								</div>
 							</div>
-							<BlueButton
-								addClass={'modal-btn'}
-								type={'button'}
-								onClick={() => setSelectedChild(null)}
-							>
-								Back
-							</BlueButton>
-							<BlueButton addClass={'modal-btn'} type={'submit'}>
-								Edit
-							</BlueButton>
-							<RedButton>Delete Child</RedButton>
 							<div className={classes['btn-container']}>
+								<BlueButton
+									addClass={'modal-btn'}
+									type={'button'}
+									onClick={() => setSelectedChild(null)}
+								>
+									Back
+								</BlueButton>
 								<PurpleButtonSmall
 									type={'button'}
 									onClick={toggle}
@@ -149,6 +194,15 @@ const ChildEdit = ({ toggle }) => {
 									Cancel
 								</PurpleButtonSmall>
 							</div>
+							<RedButton
+								type={'button'}
+								onClick={() => {
+									deleteChildHandler()
+									toggle()
+								}}
+							>
+								Delete Child
+							</RedButton>
 						</Form>
 					)}
 				</Formik>

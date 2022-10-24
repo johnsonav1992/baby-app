@@ -22,6 +22,7 @@ const DashBoard = () => {
 	const [currentFilter, setCurrentFilter] = useState(null)
 	const [currentSort, setCurrentSort] = useState('asc')
 	const [editValues, setEditValues] = useState({})
+	const [refresh, setRefresh] = useState(false)
 
 	const tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 	const [date, setDate] = useState(
@@ -84,6 +85,7 @@ const DashBoard = () => {
 			{showChildModal && (
 				<CreateChildModal
 					toggle={() => setShowChildModal(!showChildModal)}
+					handleRefresh={() => setRefresh(prev => !prev)}
 				></CreateChildModal>
 			)}
 			{showEntryModal && (

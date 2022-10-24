@@ -32,7 +32,7 @@ module.exports = {
 	},
 
 	editChild: async (req, res) => {
-		const { userId, childName } = req.params
+		const { childId } = req.params
 		const { name, gender, age } = req.body
 		try {
 			const updatedChild = await Child.update(
@@ -43,8 +43,7 @@ module.exports = {
 				},
 				{
 					where: {
-						name: childName,
-						userId: +userId,
+						id: +childId
 					},
 					returning: true,
 				}
@@ -57,13 +56,11 @@ module.exports = {
 	},
 
 	deleteChild: async (req, res) => {
-		const { userId } = req.params
-		const { name } = req.body
+		const { childId } = req.params
 		try {
 			const deletedChild = await Child.destroy({
 				where: {
-					userId,
-					name,
+					id: +childId
 				},
 			})
 			res.sendStatus(200)
