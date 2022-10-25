@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './Dropdown.module.css'
 
-const Dropdown = ({ name, value, onChange, data, addClass }) => {
+const Dropdown = ({ name, value, onChange, data, addClass, selectValue }) => {
 	return (
 			<select
 				className={`${classes.dropdown} ${classes[addClass]}`}
@@ -17,6 +17,7 @@ const Dropdown = ({ name, value, onChange, data, addClass }) => {
 							key={dataObj.id}
 							id={dataObj.id}
 							value={dataObj.name}
+							selected={dataObj.name === selectValue}
 						>
 							{dataObj.value || dataObj.name}
 						</option>

@@ -1,27 +1,55 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
 import PurpleButtonSmall from '../UI/PurpleButtonSmall'
 import BlueButton from '../UI/BlueButton'
 import Error from '../UI/Error'
+import { toMilliseconds } from '../../helper-functions/helperFunctions'
 import classes from './Entry.module.css'
 
-const SleepEntry = ({ handleSubmit, toggle, status, id, editValues, handleRefresh }) => {
+const SleepEntry = ({
+	handleSubmit,
+	toggle,
+	status,
+	id,
+	editValues,
+	handleRefresh,
+}) => {
+	const startRef = useRef(null)
 	const sleepValid = Yup.object({
 		day: Yup.date().required('Date required'),
 		startTime: Yup.string().required('Start time required'),
 		endTime: Yup.string().required('End time required'),
 	})
 
+	const validateEndTime = value => {
+		const splitStart = startRef.current.value.split(':')
+		const splitEnd = value.split(':')
+		const numericStart = toMilliseconds(splitStart[0], splitStart[1], 0)
+		const numericEnd = toMilliseconds(splitEnd[0], splitEnd[1], 0)
+
+		let error
+
+		if (numericStart >= numericEnd) {
+			error = 'End time must be after start time!'
+		}
+		console.log({error})
+		return error
+	}
+
 	return (
 		<Formik
-			initialValues={status === 'edit' ? editValues : {
-				category: 'sleep',
-				day: '',
-				startTime: '',
-				endTime: '',
-			}}
+			initialValues={
+				status === 'edit'
+					? editValues
+					: {
+							category: 'sleep',
+							day: '',
+							startTime: '',
+							endTime: '',
+					  }
+			}
 			enableReinitialize
 			validationSchema={sleepValid}
 			onSubmit={(values, { resetForm }) => {
@@ -53,6 +81,7 @@ const SleepEntry = ({ handleSubmit, toggle, status, id, editValues, handleRefres
 								<Field
 									type="time"
 									name="startTime"
+									innerRef={startRef}
 									className={`${classes.input} ${
 										touched.startTime && errors.startTime
 											? classes.error
@@ -69,6 +98,7 @@ const SleepEntry = ({ handleSubmit, toggle, status, id, editValues, handleRefres
 								<Field
 									type="time"
 									name="endTime"
+									validate={validateEndTime}
 									className={`${classes.input} ${
 										touched.endTime && errors.endTime
 											? classes.error
@@ -86,8 +116,12 @@ const SleepEntry = ({ handleSubmit, toggle, status, id, editValues, handleRefres
 						<PurpleButtonSmall type={'button'} onClick={toggle}>
 							Cancel
 						</PurpleButtonSmall>
-						<BlueButton addClass={'modal-btn'} type={'submit'} onClick={handleRefresh}>
-							{status === 'edit' ? 'Edit' : 'Add' }
+						<BlueButton
+							addClass={'modal-btn'}
+							type={'submit'}
+							onClick={handleRefresh}
+						>
+							{status === 'edit' ? 'Edit' : 'Add'}
 						</BlueButton>
 					</div>
 				</Form>

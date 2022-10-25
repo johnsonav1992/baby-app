@@ -86,7 +86,7 @@ const DashBoard = () => {
 				<CreateChildModal
 					toggle={() => setShowChildModal(!showChildModal)}
 					handleRefresh={() => setRefresh(prev => !prev)}
-				></CreateChildModal>
+				/>
 			)}
 			{showEntryModal && (
 				<CreateEntry
@@ -106,9 +106,10 @@ const DashBoard = () => {
 							<h2>Child</h2>
 							<DropDown
 								name={'child'}
-								value={childName ? childName : 'select child'}
+								value={'select child'}
 								onChange={childChangeHandler}
 								data={children}
+								selectValue={childName}
 							/>
 						</div>
 					</div>
