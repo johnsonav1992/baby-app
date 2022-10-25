@@ -59,6 +59,7 @@ const CreateChildModal = ({ toggle, handleRefresh }) => {
 					handleSubmit(values)
 					resetForm({ values: '' })
 					toggle()
+					handleRefresh()
 				}}
 			>
 				{({ errors, touched }) => (
@@ -136,7 +137,7 @@ const CreateChildModal = ({ toggle, handleRefresh }) => {
 							<PurpleButtonSmall type={'button'} onClick={toggle}>
 								Cancel
 							</PurpleButtonSmall>
-							<BlueButton addClass={'modal-btn'} type={'submit'} onClick={handleRefresh}>
+							<BlueButton addClass={'modal-btn'} type={'submit'}>
 								Add
 							</BlueButton>
 						</div>
