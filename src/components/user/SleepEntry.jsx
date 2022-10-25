@@ -32,7 +32,7 @@ const SleepEntry = ({
 		let error
 
 		if (numericStart >= numericEnd) {
-			error = 'End time must be after start time!'
+			error = 'End must be after start!'
 		}
 		console.log({error})
 		return error
@@ -56,6 +56,7 @@ const SleepEntry = ({
 				handleSubmit(values, status, id)
 				resetForm({ values: '' })
 				toggle()
+				handleRefresh()
 			}}
 		>
 			{({ errors, touched }) => (
@@ -119,7 +120,6 @@ const SleepEntry = ({
 						<BlueButton
 							addClass={'modal-btn'}
 							type={'submit'}
-							onClick={handleRefresh}
 						>
 							{status === 'edit' ? 'Edit' : 'Add'}
 						</BlueButton>

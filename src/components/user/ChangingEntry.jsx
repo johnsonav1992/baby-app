@@ -28,6 +28,7 @@ const ChangingEntry = ({ handleSubmit, toggle, status, id, editValues, handleRef
 				handleSubmit(values, status, id)
 				resetForm({ values: '' })
 				toggle()
+				handleRefresh()
 			}}
 		>
 			{({ errors, touched }) => (
@@ -87,7 +88,7 @@ const ChangingEntry = ({ handleSubmit, toggle, status, id, editValues, handleRef
 						<PurpleButtonSmall type={'button'} onClick={toggle}>
 							Cancel
 						</PurpleButtonSmall>
-						<BlueButton addClass={'modal-btn'} type={'submit'} onClick={handleRefresh}>
+						<BlueButton addClass={'modal-btn'} type={'submit'}>
 							{status === 'edit' ? 'Edit' : 'Add'}
 						</BlueButton>
 					</div>

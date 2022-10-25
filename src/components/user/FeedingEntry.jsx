@@ -38,6 +38,7 @@ const FeedingEntry = ({ handleSubmit, toggle, status, id, editValues, handleRefr
 				handleSubmit(values, status, id)
 				resetForm({ values: '' })
 				toggle()
+				handleRefresh()
 			}}
 		>
 			{({ errors, touched }) => (
@@ -115,7 +116,7 @@ const FeedingEntry = ({ handleSubmit, toggle, status, id, editValues, handleRefr
 						<PurpleButtonSmall type={'button'} onClick={toggle}>
 							Cancel
 						</PurpleButtonSmall>
-						<BlueButton addClass={'modal-btn'} type={'submit'} onClick={handleRefresh}>
+						<BlueButton addClass={'modal-btn'} type={'submit'}>
 							{status === 'edit' ? 'Edit' : 'Add'}
 						</BlueButton>
 					</div>
