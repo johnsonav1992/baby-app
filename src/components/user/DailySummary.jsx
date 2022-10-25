@@ -31,6 +31,19 @@ const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 		changing => changing.day === selectedDate
 	).length
 
+	const currentChangings = changings.filter(
+		changing => changing.day === selectedDate
+	)
+	const wetNum = currentChangings.filter(
+		changing => changing.type === 'Wet'
+	).length
+	const dirtyNum = currentChangings.filter(
+		changing => changing.type === 'Dirty'
+	).length
+	const comboChangingNum = currentChangings.filter(
+		changing => changing.type === 'Dirty/Wet'
+	).length
+
 	return (
 		<Card addClass="daily-summary">
 			<div className={classes.container}>
@@ -86,7 +99,9 @@ const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 					<div className={classes.text}>
 						<p>Diapers</p>
 						<p>
-							{changingNumber !== 0 ? `${changingNumber}X` : '-'}
+							{changingNumber !== 0
+								? `${changingNumber}X - Wet: ${wetNum} | Dirty: ${dirtyNum} | Both: ${comboChangingNum}`
+								: '-'}
 						</p>
 					</div>
 					<PlusButton
