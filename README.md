@@ -26,3 +26,7 @@ User Can:
 - Go to an insights page where data can be interpreted in various ways (i.e. how many sleep hours this past month, average number of diaper changes per day, etc.)
 - App is fully mobile responsive
 
+## Screenshots
+
+![Landing Page](https://github.com/johnsonav1992/baby-app/blob/master/screenshots/landing-page.png)
+
