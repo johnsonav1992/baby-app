@@ -4,6 +4,8 @@
 
 BabyBright is an application that I am creating that is an idea that came from my wife’s and my recent experience with having a second child and keeping up with taking care of him during his first year of life (while also raising our now toddler). This app is built so that users can keep track of important daily events for raising an infant: sleep, feeding, and diapers. The app will store data that is created in a postgres database so user data persists. 
 
+Tech-Stack: React | ReactRouter | bcrypt | JWT | JavaScript | NodeJS | Express | PostgreSQL | CSS | HTML | 
+
 
 
 
