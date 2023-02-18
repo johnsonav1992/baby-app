@@ -57,8 +57,9 @@ const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 		const nonNumericFeedingDisplay = feedingsWithoutNumbers.map(
 			feed => `+ ${feed.amount} of ${feed.food}`
 		)
-
+		if (displayFeedTotal) {
 		return `${feedNumber.length}X - Total: ${displayFeedTotal} oz ${nonNumericFeedingDisplay}`
+		} else return `${nonNumericFeedingDisplay}`
 	}
 
 return (
