@@ -34,7 +34,7 @@ const SleepEntry = ({
 		if (numericStart >= numericEnd) {
 			error = 'End must be after start!'
 		}
-		console.log({error})
+		
 		return error
 	}
 

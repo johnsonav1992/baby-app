@@ -24,13 +24,13 @@ const FeedingEntry = ({ handleSubmit, toggle, status, id, editValues, handleRefr
 				status === 'edit'
 					? editValues
 					: {
-							category: 'feeding',
-							type: '',
-							food: '',
-							amount: '',
-							day: '',
-							time: '',
-					  }
+						category: 'feeding',
+						type: '',
+						food: '',
+						amount: '',
+						day: '',
+						time: '',
+					}
 			}
 			enableReinitialize
 			validationSchema={feedingValid}

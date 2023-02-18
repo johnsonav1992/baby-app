@@ -48,7 +48,6 @@ const ChangePass = ({ toggle }) => {
 							}
 						)
 						.then(({ data }) => {
-							console.log(data)
 							toggle()
 						})
 						.catch(err => {

@@ -23,14 +23,12 @@ const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 		60 /
 		1000
 	const { hours, minutes } = toHoursAndMinutes(sleepTotal)
+
 	const feedNumber = feedings.filter(feed => feed.day === selectedDate)
-	const feedTotal = feedNumber
-		.map(feed => +feed.amount.match(/(\d+)/)[0])
-		.reduce((prev, curr) => prev + curr, 0)
+	
 	const changingNumber = changings.filter(
 		changing => changing.day === selectedDate
 	).length
-
 	const currentChangings = changings.filter(
 		changing => changing.day === selectedDate
 	)
@@ -43,8 +41,27 @@ const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 	const comboChangingNum = currentChangings.filter(
 		changing => changing.type === 'Dirty/Wet'
 	).length
+					
+	const feedDisplay = () => {
+		const feedingsWithNumbers = feedNumber.filter(feed => feed.amount.match(/(\d+)/)) 
+		const feedAmounts = feedingsWithNumbers.map(feed => +feed.amount[0])
+		let displayFeedTotal
+		
+		if (feedAmounts.length > 0) {
+			displayFeedTotal = feedAmounts.reduce(
+				(prev, curr) => prev + curr
+			)
+		}
 
-	return (
+		const feedingsWithoutNumbers = feedNumber.filter(feed => !feed.amount.match(/(\d+)/))
+		const nonNumericFeedingDisplay = feedingsWithoutNumbers.map(
+			feed => `+ ${feed.amount} of ${feed.food}`
+		)
+
+		return `${feedNumber.length}X - Total: ${displayFeedTotal} oz ${nonNumericFeedingDisplay}`
+	}
+
+return (
 		<Card addClass="daily-summary">
 			<div className={classes.container}>
 				<h1>Daily Summary {childName && `- ${childName}`}</h1>
@@ -56,7 +73,7 @@ const DailySummary = ({ selectedDate, setStatus, toggle }) => {
 						<p>Feedings</p>
 						<p>
 							{feedNumber.length !== 0
-								? `${feedNumber.length}X - Total: ${feedTotal} oz`
+								? feedDisplay()
 								: '-'}
 						</p>
 					</div>

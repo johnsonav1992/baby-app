@@ -34,7 +34,7 @@ const FeedingCard = ({
 				<div className={classes['info-wrapper']}>
 					<div className={classes.type}>
 						<h3 className={classes.heading}>
-							{type} - {food}
+							{type} - {food}: 
 						</h3>
 						<h3 className={classes.heading}>{amount}</h3>
 					</div>

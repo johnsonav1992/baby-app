@@ -1,3 +1,6 @@
 {
-	"cSpell.words": ["changings"]
+	"cSpell.words": [
+		"changings"
+	],
+	"editor.formatOnSave": true
 }

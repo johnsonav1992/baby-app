@@ -27,7 +27,7 @@
 
 .type {
   display: flex;
-  gap: 1rem;
+  gap: .3rem;
 }
 
 .day-time {

@@ -16,8 +16,6 @@ const DeleteUser = ({ toggle }) => {
   const navigate = useNavigate()
 
 	const handleDelete = () => {
-		console.log('deleting account....')
-
 		axios
 			.delete(`/api/users/${userId}`, {
         headers: {

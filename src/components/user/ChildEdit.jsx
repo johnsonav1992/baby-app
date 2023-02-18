@@ -49,7 +49,6 @@ const ChildEdit = ({ toggle }) => {
 				},
 			})
 			.then(({ data }) => {
-				console.log(data)
 				setRefresh((prev) => !prev)
 			})
 			.catch(err => console.log(err))
@@ -63,7 +62,6 @@ const ChildEdit = ({ toggle }) => {
 				},
 			})
 			.then(({ data }) => {
-				console.log(data)
 				setRefresh((prev) => !prev)
 			})
 			.catch(err => console.log(err))
