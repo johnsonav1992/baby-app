@@ -19,15 +19,17 @@ app.use(cors())
 
 app.use(express.static(path.resolve(__dirname, '../build')))
 
+const cascadeDelete =  { onDelete: 'CASCADE' }
+
 ///DB relations///
-User.hasMany(Child, { onDelete: 'CASCADE' })
-Child.belongsTo(User, { onDelete: 'CASCADE' }) 
-Child.hasMany(Sleep, { onDelete: 'CASCADE' })
-Sleep.belongsTo(Child, { onDelete: 'CASCADE' })
-Child.hasMany(Feeding, { onDelete: 'CASCADE' })
-Feeding.belongsTo(Child, { onDelete: 'CASCADE' }) 
-Child.hasMany(Changing, { onDelete: 'CASCADE' })
-Changing.belongsTo(Child, { onDelete: 'CASCADE' })
+User.hasMany(Child, cascadeDelete)
+Child.belongsTo(User, cascadeDelete) 
+Child.hasMany(Sleep, cascadeDelete)
+Sleep.belongsTo(Child, cascadeDelete)
+Child.hasMany(Feeding, cascadeDelete)
+Feeding.belongsTo(Child, cascadeDelete) 
+Child.hasMany(Changing, cascadeDelete)
+Changing.belongsTo(Child, cascadeDelete)
 
 ///Routes/// 
 require('./routes/routes')(app)
