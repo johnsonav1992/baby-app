@@ -5,15 +5,15 @@ const calculateTimeDifference = (startTime, endTime) => {
 	const [startHour, startMinutes] = startTime.split(':')
 	const [endHour, endMinutes] = endTime.split(':')
 
-	startHourMilliSeconds = parseInt(startHour) * 60 * 60 * 1000
-	startMinutesMilliseconds = parseInt(startMinutes) * 60 * 1000
-	startFinalMilliseconds = startHourMilliSeconds + startMinutesMilliseconds
+	const startHourMilliSeconds = parseInt(startHour) * 60 * 60 * 1000
+	const startMinutesMilliseconds = parseInt(startMinutes) * 60 * 1000
+	const startFinalMilliseconds = startHourMilliSeconds + startMinutesMilliseconds
 
-	endHourMilliSeconds = parseInt(endHour) * 60 * 60 * 1000
-	endMinutesMilliseconds = parseInt(endMinutes) * 60 * 1000
-	endFinalMilliseconds = endHourMilliSeconds + endMinutesMilliseconds
+	const endHourMilliSeconds = parseInt(endHour) * 60 * 60 * 1000
+	const endMinutesMilliseconds = parseInt(endMinutes) * 60 * 1000
+	const endFinalMilliseconds = endHourMilliSeconds + endMinutesMilliseconds
 
-	calculatedDuration = Math.abs(endFinalMilliseconds - startFinalMilliseconds)
+	const calculatedDuration = Math.abs(endFinalMilliseconds - startFinalMilliseconds)
 
 	return calculatedDuration
 }
